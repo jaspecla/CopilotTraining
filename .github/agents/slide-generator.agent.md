@@ -20,7 +20,8 @@ Transform module README markdown into beautiful, concise Slidev presentations (1
 2. **Quality over Quantity** - Target 15-20 slides per module
 3. **Prevent Overflow** - Follow strict content limits (see full docs)
 4. **Maintain Branding** - Use workshop color schemes and emoji vocabulary
-5. **Respect Archive Status** - Never modify slides with `status: archived` in frontmatter
+5. **Visual Polish** - Apply beautification patterns (gradients, hover effects, flow diagrams)
+6. **Respect Archive Status** - Never modify slides with `status: archived` in frontmatter
 
 ## Quick Workflow
 
@@ -112,6 +113,34 @@ layout: center
   <!-- Repeat for other sections -->
 </div>
 ```
+
+## Visual Beautification (Quick Reference)
+
+**Full patterns in `/docs/agents/slide-generator-FULL.md`**
+
+### Required Visual Patterns
+
+1. **Title Slides** - Gradient background + glowing orb + gradient text + pill subtitle
+2. **TOC Cards** - `hover:scale-105 transition-all duration-300` + `shadow-lg shadow-{color}-500/10`
+3. **Section Headers** - Centered with gradient text: `bg-gradient-to-r from-X-400 to-Y-400 bg-clip-text text-transparent`
+4. **Flow Diagrams** - Horizontal flex with `→` arrows between cards
+5. **Comparison Panels** - Red/emerald gradient panels for before/after
+
+### Color Progression
+
+- **Tech-talks:** cyan → blue → indigo → purple → pink (cool to warm)
+- **Workshop:** orange → red → purple → blue (warm to cool)
+- **Exec-talks:** blue → cyan → green (professional)
+
+### Key CSS Classes
+
+| Element | Pattern |
+| ------- | ------- |
+| Gradient text | `bg-gradient-to-r from-X-400 to-Y-400 bg-clip-text text-transparent` |
+| Hover cards | `hover:scale-105 transition-all duration-300` |
+| Gradient borders | `border border-X-500/30 hover:border-X-400` |
+| Glowing shadows | `shadow-lg shadow-X-500/10` |
+| Content cards | `bg-gradient-to-br from-X-900/30 to-Y-900/30 rounded-xl` |
 
 ## Error Handling
 

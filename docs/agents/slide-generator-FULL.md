@@ -1294,6 +1294,275 @@ This is a very long paragraph that explains the concept in great detail with lot
 
 **Prevention:** Max 3 vertical sections. Use grids for 4+ items.
 
+## Visual Beautification Patterns (REQUIRED)
+
+**Every slide deck must follow these visual patterns for a polished, professional appearance.**
+
+Reference: `slides/tech-talks/agentic-workflows.md` for a complete example.
+
+### Color Progression Philosophy
+
+Slides should follow a **color flow** throughout the deck:
+
+| Progression | Colors                                        | Use For                         |
+| ----------- | --------------------------------------------- | ------------------------------- |
+| Cool→Warm   | cyan → blue → indigo → purple → pink          | Tech talks, building complexity |
+| Warm→Cool   | orange → red → purple → blue                  | Workshop modules                |
+| Professional| blue → cyan → green                           | Exec talks, strategic themes    |
+
+### Section Header Slides (REQUIRED for each major section)
+
+Use a centered layout with gradient text for visual impact:
+
+```html
+---
+layout: center
+name: sectionname
+---
+
+<div class="text-center mb-6">
+  <div class="text-5xl mb-4">{EMOJI}</div>
+  <h1 class="!text-4xl bg-gradient-to-r from-{COLOR1}-400 to-{COLOR2}-400 bg-clip-text text-transparent">{Section Title}</h1>
+  <p class="text-xl opacity-80 mt-2">{Subtitle}</p>
+</div>
+
+<div class="p-5 bg-gradient-to-r from-{COLOR1}-500/10 to-{COLOR2}-500/10 rounded-xl border border-{COLOR1}-500/30 mb-5 text-center max-w-3xl mx-auto">
+  <div class="text-lg">{Brief description or value proposition}</div>
+</div>
+```
+
+**Color pairings for sections:**
+- Section 1: `from-cyan-400 to-blue-400`
+- Section 2: `from-blue-400 to-indigo-400`
+- Section 3: `from-indigo-400 to-purple-400`
+- Section 4: `from-purple-400 to-pink-400`
+- Section 5: `from-pink-400 to-rose-400`
+
+### TOC Slide with Gradient Cards (REQUIRED)
+
+Replace plain TOC cards with gradient-bordered hover cards:
+
+```html
+---
+layout: center
+---
+
+# 📖 Table of Contents
+
+<div class="grid grid-cols-2 gap-6 mt-6">
+<div @click="$nav.go(5)" class="cursor-pointer group">
+<div class="p-5 bg-gradient-to-br from-cyan-900/40 to-blue-900/40 rounded-xl border-2 border-cyan-500/50 hover:border-cyan-400 hover:scale-105 transition-all duration-300 shadow-lg shadow-cyan-500/10">
+<div class="text-3xl mb-2">🎯</div>
+<div class="text-lg font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">Section 1</div>
+<div class="text-sm text-gray-300 mt-1">Brief description</div>
+<div class="text-xs text-cyan-400/70 mt-2">Key metric</div>
+</div>
+</div>
+
+<div @click="$nav.go(8)" class="cursor-pointer group">
+<div class="p-5 bg-gradient-to-br from-blue-900/40 to-indigo-900/40 rounded-xl border-2 border-blue-500/50 hover:border-blue-400 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/10">
+<div class="text-3xl mb-2">🔧</div>
+<div class="text-lg font-bold bg-gradient-to-r from-blue-300 to-indigo-300 bg-clip-text text-transparent">Section 2</div>
+<div class="text-sm text-gray-300 mt-1">Brief description</div>
+<div class="text-xs text-blue-400/70 mt-2">Key metric</div>
+</div>
+</div>
+</div>
+
+<div class="mt-8 text-center text-sm opacity-60">Click any section to jump directly there</div>
+```
+
+**Key elements:**
+- `hover:scale-105 transition-all duration-300` — Subtle hover zoom
+- `shadow-lg shadow-{color}-500/10` — Colored glow effect
+- `bg-gradient-to-r ... bg-clip-text text-transparent` — Gradient text for titles
+- Border with `/50` opacity that increases on hover
+
+### Flow Diagram Pattern (for processes)
+
+Use horizontal flexbox with arrow separators:
+
+```html
+<div class="flex items-center justify-center gap-3 flex-wrap">
+
+<div class="p-3 bg-gradient-to-br from-cyan-900/40 to-cyan-800/40 rounded-lg border border-cyan-500/30 text-center min-w-[120px] hover:scale-105 transition-transform">
+<div class="text-2xl mb-1">📝</div>
+<div class="text-sm font-semibold text-cyan-300">Step 1</div>
+<div class="text-xs opacity-70">Description</div>
+</div>
+
+<div class="text-2xl text-gray-500">→</div>
+
+<div class="p-3 bg-gradient-to-br from-blue-900/40 to-blue-800/40 rounded-lg border border-blue-500/30 text-center min-w-[120px] hover:scale-105 transition-transform">
+<div class="text-2xl mb-1">🎯</div>
+<div class="text-sm font-semibold text-blue-300">Step 2</div>
+<div class="text-xs opacity-70">Description</div>
+</div>
+
+<div class="text-2xl text-gray-500">→</div>
+
+<div class="p-3 bg-gradient-to-br from-indigo-900/40 to-indigo-800/40 rounded-lg border border-indigo-500/30 text-center min-w-[120px] hover:scale-105 transition-transform">
+<div class="text-2xl mb-1">✨</div>
+<div class="text-sm font-semibold text-indigo-300">Step 3</div>
+<div class="text-xs opacity-70">Description</div>
+</div>
+
+</div>
+```
+
+**Key elements:**
+- `flex-wrap` for responsive flow
+- Arrow separators (`→`) colored with `text-gray-500`
+- Consistent `min-w-[120px]` for uniform card width
+- `hover:scale-105 transition-transform` for interactivity
+
+### The Opportunity Slide Pattern (Replace "The Problem")
+
+**Never use "The Problem" — use "The Opportunity" instead:**
+
+```html
+---
+layout: center
+name: opportunity
+---
+
+# 🔓 The Opportunity
+
+<div class="grid grid-cols-2 gap-4 mt-4">
+
+<div class="p-4 bg-gradient-to-br from-amber-900/30 to-orange-900/30 rounded-lg border border-amber-500/30">
+<div class="text-xl mb-2">🎯</div>
+<div class="font-semibold text-amber-300">Opportunity 1</div>
+<div class="text-sm opacity-80 mt-1">Description of what becomes possible</div>
+</div>
+
+<div class="p-4 bg-gradient-to-br from-orange-900/30 to-red-900/30 rounded-lg border border-orange-500/30">
+<div class="text-xl mb-2">⚡</div>
+<div class="font-semibold text-orange-300">Opportunity 2</div>
+<div class="text-sm opacity-80 mt-1">Description of what becomes possible</div>
+</div>
+
+</div>
+```
+
+### Solution Flow Pattern
+
+Use a flow diagram with impact callout:
+
+```html
+# ✨ The Solution
+
+<div class="flex items-center justify-center gap-3 flex-wrap mt-4">
+<!-- 3-5 flow items using the Flow Diagram Pattern above -->
+</div>
+
+<div class="mt-6 p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl border border-green-500/30 text-center">
+<div class="text-lg font-semibold text-green-300">Result: {Clear outcome statement}</div>
+</div>
+```
+
+### Key Takeaways Slide Pattern
+
+Use numbered gradient cards with consistent styling:
+
+```html
+---
+layout: center
+---
+
+# ✅ Key Takeaways
+
+<div class="grid grid-cols-2 gap-4 mt-4 max-w-4xl mx-auto">
+
+<div class="p-4 bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-lg border border-cyan-500/30">
+<div class="flex items-center gap-3">
+<div class="text-2xl font-bold text-cyan-400">1</div>
+<div>
+<div class="font-semibold text-cyan-300">Takeaway Title</div>
+<div class="text-sm opacity-80">Brief explanation</div>
+</div>
+</div>
+</div>
+
+<div class="p-4 bg-gradient-to-br from-blue-900/30 to-indigo-900/30 rounded-lg border border-blue-500/30">
+<div class="flex items-center gap-3">
+<div class="text-2xl font-bold text-blue-400">2</div>
+<div>
+<div class="font-semibold text-blue-300">Takeaway Title</div>
+<div class="text-sm opacity-80">Brief explanation</div>
+</div>
+</div>
+</div>
+
+</div>
+```
+
+### End/Thank You Slide Pattern
+
+Use the title slide pattern with simplified content:
+
+```html
+---
+layout: center
+---
+
+<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20"></div>
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl"></div>
+
+<div class="text-6xl mb-6 relative z-10">🙏</div>
+<h1 class="!text-5xl !font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent relative z-10">Thank You</h1>
+<div class="mt-6 text-xl opacity-80 relative z-10">Questions?</div>
+<div class="mt-8 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
+</div>
+```
+
+### Comparison Panels Pattern (Before/After, Old/New)
+
+Use side-by-side gradient panels:
+
+```html
+<div class="grid grid-cols-2 gap-6 mt-4">
+
+<div class="p-4 bg-gradient-to-br from-red-900/30 to-red-800/20 rounded-xl border-2 border-red-500/30">
+<div class="text-center mb-3">
+<div class="text-2xl">❌</div>
+<div class="font-bold text-red-300">Before / Without</div>
+</div>
+<div class="space-y-2 text-sm">
+<div class="p-2 bg-red-900/30 rounded">Point 1</div>
+<div class="p-2 bg-red-900/30 rounded">Point 2</div>
+<div class="p-2 bg-red-900/30 rounded">Point 3</div>
+</div>
+</div>
+
+<div class="p-4 bg-gradient-to-br from-emerald-900/30 to-emerald-800/20 rounded-xl border-2 border-emerald-500/30">
+<div class="text-center mb-3">
+<div class="text-2xl">✨</div>
+<div class="font-bold text-emerald-300">After / With</div>
+</div>
+<div class="space-y-2 text-sm">
+<div class="p-2 bg-emerald-900/30 rounded">Point 1</div>
+<div class="p-2 bg-emerald-900/30 rounded">Point 2</div>
+<div class="p-2 bg-emerald-900/30 rounded">Point 3</div>
+</div>
+</div>
+
+</div>
+```
+
+### Visual Style Summary
+
+| Element | Pattern |
+| ------- | ------- |
+| Titles | `bg-gradient-to-r from-X-400 to-Y-400 bg-clip-text text-transparent` |
+| Cards | `bg-gradient-to-br from-X-900/30 to-Y-900/30 rounded-xl border border-X-500/30` |
+| Hover | `hover:scale-105 transition-all duration-300` |
+| Shadows | `shadow-lg shadow-X-500/10` |
+| Arrows | `<div class="text-2xl text-gray-500">→</div>` |
+| Glowing orbs | `bg-gradient-to-r ... rounded-full blur-3xl` |
+| Impact callouts | `bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl border` |
+
 ## Error Handling
 
 If you encounter:

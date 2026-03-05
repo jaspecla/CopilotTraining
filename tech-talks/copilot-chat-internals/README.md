@@ -1,23 +1,29 @@
 ---
 status: active
-updated: 2026-02-01
+updated: 2026-03-05
 section: "Copilot Surfaces"
 references:
+  - url: https://code.visualstudio.com/updates/v1_110
+    label: "VS Code release notes: February 2026 (v1.110)"
+    verified: 2026-03-05
   - url: https://code.visualstudio.com/docs/copilot/chat/chat-debug-view
     label: "Copilot Chat debug view"
-    verified: 2026-02-01
+    verified: 2026-03-05
   - url: https://code.visualstudio.com/docs/copilot/troubleshooting
     label: "Copilot troubleshooting guide"
-    verified: 2026-02-01
+    verified: 2026-03-05
   - url: https://code.visualstudio.com/docs/copilot/customization/mcp-servers
     label: "MCP server configuration in VS Code"
-    verified: 2026-02-01
+    verified: 2026-03-05
   - url: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
     label: "Custom instructions in VS Code"
-    verified: 2026-02-01
+    verified: 2026-03-05
   - url: https://code.visualstudio.com/docs/copilot/customization/custom-agents
     label: "Custom agents in VS Code"
-    verified: 2026-02-01
+    verified: 2026-03-05
+  - url: https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context#_context-compaction
+    label: "Context compaction documentation"
+    verified: 2026-03-05
 ---
 
 # Copilot Chat Internals: Debugging AI Interactions
@@ -67,8 +73,10 @@ references:
 ### Major Sections (TOC Entries)
 
 ```markdown
+<!-- 🎬 MAJOR SECTION: Agent Debug Panel -->
 <!-- 🎬 MAJOR SECTION: Chat Debug View -->
 <!-- 🎬 MAJOR SECTION: Thinking Tokens -->
+<!-- 🎬 MAJOR SECTION: Context Management -->
 <!-- 🎬 MAJOR SECTION: Diagnostics View -->
 <!-- 🎬 MAJOR SECTION: Extension Logs & MCP -->
 <!-- 🎬 MAJOR SECTION: Troubleshooting Patterns -->
@@ -108,21 +116,24 @@ VS Code provides complete observability into every AI interaction through the Ch
 
 ### What It Does
 
-VS Code includes four integrated diagnostic systems that provide complete transparency into AI interactions: **Chat Debug View** (request/response inspection), **Thinking Tokens** (model reasoning visibility), **Customization Diagnostics** (configuration validation), and **Extension Logs** (deep troubleshooting). Together, these tools expose every component of the AI pipeline—from prompt construction to model inference to tool execution.
+VS Code includes five integrated diagnostic systems that provide complete transparency into AI interactions: **Agent Debug Panel** (real-time event stream with chart visualization), **Chat Debug View** (request/response inspection), **Thinking Tokens** (model reasoning visibility), **Customization Diagnostics** (configuration validation), and **Extension Logs** (deep troubleshooting). Together, these tools expose every component of the AI pipeline—from prompt construction to model inference to tool execution.
 
 ### Key Capabilities
 
+- **Real-Time Event Visualization**: Agent Debug Panel shows chat events as they happen—system prompts, tool calls, customization loading—with a visual flow chart view
 - **Request Inspection**: View system prompts, user prompts, full context, tool invocations, and model responses for every chat interaction
 - **Reasoning Visibility**: See model thinking tokens that reveal problem decomposition, tool selection logic, and decision processes
+- **Context Compaction**: Manually or automatically summarize conversation history with `/compact` to free up context space
+- **Session Forking**: Branch conversations with `/fork` to explore alternative approaches without losing original context
 - **Configuration Validation**: Verify that custom agents, instructions, prompts, and skills loaded successfully—or identify syntax errors preventing application
 - **Network Diagnostics**: Troubleshoot connectivity, authentication, proxy configuration, and certificate validation issues
 - **MCP Server Management**: Monitor external tool server status, view logs, restart misbehaving services
 
 ### Architecture Overview
 
-The diagnostic architecture operates as a multi-layer observability stack. **Chat Debug View** captures the full request/response cycle at the VS Code extension level, logging every interaction to a persistent history you can review. **Thinking tokens** (when supported by the model) are rendered inline during generation, giving real-time visibility into reasoning. **Diagnostics View** validates customization files at load time, reporting syntax errors or missing files before they cause silent failures. **Extension logs** capture the deepest layer—network requests, authentication state, and extension lifecycle events—enabling root cause analysis of infrastructure-level issues.
+The diagnostic architecture operates as a multi-layer observability stack. **Agent Debug Panel** (v1.110) provides real-time visibility into chat events with flow chart visualization—replacing the older diagnostics action with much richer detail. **Chat Debug View** captures the full request/response cycle at the VS Code extension level, logging every interaction to a persistent history you can review. **Thinking tokens** (when supported by the model) are rendered inline during generation, giving real-time visibility into reasoning. **Diagnostics View** validates customization files at load time, reporting syntax errors or missing files before they cause silent failures. **Extension logs** capture the deepest layer—network requests, authentication state, and extension lifecycle events—enabling root cause analysis of infrastructure-level issues.
 
-This separation allows targeted debugging: surface-level issues (wrong context, missing instructions) appear in Chat Debug View, configuration problems surface in Diagnostics View, and infrastructure failures require Extension Logs. Each tool serves a specific diagnostic purpose while sharing a common goal: eliminate the AI black box.
+This separation allows targeted debugging: surface-level issues (wrong context, missing instructions) appear in Agent Debug Panel and Chat Debug View, configuration problems surface in Diagnostics View, and infrastructure failures require Extension Logs. Each tool serves a specific diagnostic purpose while sharing a common goal: eliminate the AI black box.
 
 **Official Documentation:**
 - 📖 [Chat Debug View](https://code.visualstudio.com/docs/copilot/chat/chat-debug-view) — Complete guide to request inspection and debugging
@@ -139,8 +150,10 @@ This separation allows targeted debugging: surface-level issues (wrong context, 
 
 *These diagnostic features are detailed in the major sections below*
 
+- **Agent Debug Panel** (v1.110) — Real-time event stream showing chat events, tool calls, customization loading, with visual flow chart view
 - **Chat Debug View** — Complete request/response inspector showing system prompts, context, tool invocations, and model output
-- **Thinking Token Display** — Real-time model reasoning visibility with configurable rendering modes
+- **Thinking Token Display** — Real-time model reasoning visibility with configurable rendering modes and custom thinking phrases
+- **Context Window Indicator** (v1.110) — Visual percentage display with breakdown of tokens by category and manual compaction triggering
 - **Customization Diagnostics View** — Configuration validator reporting load status, errors, and application order for all custom files
 - **Extension Logs (Trace Mode)** — Deep troubleshooting for network, authentication, and extension lifecycle issues
 - **MCP Server Management** — Status dashboard, log viewer, and restart controls for external tool servers
@@ -150,17 +163,24 @@ This separation allows targeted debugging: surface-level issues (wrong context, 
 *Key settings that control diagnostic behavior*
 
 - **`chat.renderThinking`** — Controls thinking token display: "collapsed" (default), "expanded", or "hidden"
-- **`chat.askQuestions.enabled`** — Allows model to ask clarifying questions before generating responses
+- **`chat.agent.thinking.phrases`** (v1.110) — Customize loading text during reasoning with custom phrases
+- **`chat.agent.thinking.collapsedTools`** — Specify which tool sections to collapse by default
+- **`chat.tools.autoExpandFailures`** — Auto-expand tool calls that failed for easier debugging
+- **`chat.tools.terminal.simpleCollapsible`** (v1.110) — Collapsible terminal output sections to reduce noise
+- **`chat.tips.enabled`** (v1.110) — Show contextual tips for feature discovery
 - **Developer: Set Log Level** → **Trace** — Enables detailed logging for GitHub Copilot and Copilot Chat extensions
 
 ### Access Commands
 
 *How to open each diagnostic tool*
 
+- `Developer: Open Agent Debug Panel` (v1.110) — Opens real-time event stream with chart view
 - `Developer: Show Chat Debug View` — Opens request inspector
 - `MCP: List Servers` — Opens MCP server management
 - `GitHub Copilot: Collect Diagnostics` — Generates network diagnostic report
-- Right-click in Chat view → **Diagnostics** — Opens customization validation report
+- Right-click in Chat view → gear icon → **View Agent Logs** — Opens Agent Debug Panel
+- `/compact` (v1.110) — Manually compact conversation history to free context space
+- `/fork` (v1.110) — Branch current conversation into independent session
 
 ---
 
@@ -170,8 +190,11 @@ This separation allows targeted debugging: surface-level issues (wrong context, 
 
 ### Move Toward (Embrace These Patterns)
 
-- ✅ **Debug-View-First Development**: Keep Chat Debug View open during prompt iteration to see exactly what context is sent → Identify missing files or truncated instructions immediately
+- ✅ **Agent Debug Panel First**: Keep Agent Debug Panel open during development sessions to see events in real-time → Catch customization failures, tool issues, and context problems as they happen
+- ✅ **Debug-View-First Development**: Use Chat Debug View during prompt iteration to see exactly what context is sent → Identify missing files or truncated instructions immediately
 - ✅ **Thinking Token Analysis**: Read model reasoning to understand *why* it made specific choices → Debug prompt ambiguity by seeing how the model interpreted your request
+- ✅ **Proactive Context Management**: Monitor context window indicator and use `/compact` before hitting limits → Prevent the "my session got worse" problem
+- ✅ **Session Forking for Exploration**: Use `/fork` to branch conversations at decision points → Compare approaches without losing progress
 - ✅ **Diagnostics-As-Validation**: Check Diagnostics View after every customization file change → Catch syntax errors before wasting time on "why isn't this working?"
 - ✅ **Evidence-Based Prompt Refinement**: Base prompt improvements on actual system prompt content and context sent → Replace guesswork with measurement
 
@@ -180,13 +203,15 @@ This separation allows targeted debugging: surface-level issues (wrong context, 
 - ⚠️ **Blind Prompt Iteration**: Tweaking prompts without checking what context was actually sent → Wastes 20-40 minutes per debugging cycle
 - ⚠️ **Assuming Instructions Loaded**: Writing custom instructions without verifying they appear in Diagnostics View → Silent failures waste hours
 - ⚠️ **Ignoring Thinking Tokens**: Dismissing model reasoning as noise instead of debugging signal → Miss insights into why unexpected decisions were made
+- ⚠️ **Starting Fresh When Sessions Degrade**: Abandoning conversations when quality drops instead of using `/compact` → Lose accumulated context unnecessarily
 
 ### Move Against (Active Resistance Required)
 
 - 🛑 **Reloading Windows as First Debugging Step**: Using "reload window" as primary troubleshooting → Masks root causes, creates learned helplessness
 - 🛑 **Black Box Acceptance**: Treating AI behavior as fundamentally unpredictable → Prevents systematic improvement, perpetuates inefficiency
+- 🛑 **Context Blindness**: Ignoring the context window indicator until responses degrade → Preventable productivity loss
 
-> **Example Transformation:** Before: Developer spends 35 minutes rewriting a prompt, reloading the window three times, and re-adding context files—still gets unexpected results. After: Opens Chat Debug View, sees custom instructions failed to load due to YAML syntax error on line 14. Fixes syntax, validates in Diagnostics View, prompt works in 4 minutes.
+> **Example Transformation:** Before: Developer spends 35 minutes rewriting a prompt, reloading the window three times, and re-adding context files—still gets unexpected results. After: Opens Agent Debug Panel, sees custom instructions failed to load due to YAML syntax error on line 14 in the "Loaded Customizations" view. Fixes syntax, validates in Diagnostics View, prompt works in 4 minutes.
 
 ---
 
@@ -212,9 +237,17 @@ Q: What kind of problem are you debugging?
 │  → Use: Extension Logs + Network Diagnostics
 │  └─ Best for: Connectivity, authentication, infrastructure problems
 │
-└─ "External tools (MCP) not working"
-   → Use: MCP Server Management (check status, view logs)
-   └─ Best for: Server crashes, API failures, timeout issues
+├─ "External tools (MCP) not working"
+│  → Use: MCP Server Management (check status, view logs)
+│  └─ Best for: Server crashes, API failures, timeout issues
+│
+├─ "Long session producing vague responses"
+│  → Use: Context Window Indicator + /compact
+│  └─ Best for: Context exhaustion, token pressure, conversation drift
+│
+└─ "Need to explore two approaches simultaneously"
+   → Use: /fork to branch conversation
+   └─ Best for: Parallel investigation, hypothesis testing, checkpointing
 ```
 
 ### Use This Pattern When
@@ -224,6 +257,8 @@ Q: What kind of problem are you debugging?
 - You want to understand how the model interprets ambiguous prompts to improve clarity
 - External tools (MCP servers) fail and you need to diagnose server-side issues
 - Network, proxy, or authentication issues prevent Copilot from responding
+- Long conversations start degrading in quality (context window pressure)
+- You need to compare alternative implementation approaches
 
 ### Don't Use This Pattern When
 
@@ -233,12 +268,59 @@ Q: What kind of problem are you debugging?
 
 ### Comparison with Related Features
 
-| Aspect | Chat Debug View | Diagnostics View | Extension Logs | Thinking Tokens |
-|--------|----------------|------------------|----------------|-----------------|
-| **Best For** | Understanding request/response details | Validating customization files | Deep infrastructure debugging | Seeing model reasoning |
-| **When to Use** | Response surprises, wrong context | Config not applying | Network/auth failures | Unexpected decisions |
-| **Setup Time** | Instant (built-in command) | Instant (right-click menu) | 2 min (set log level) | Instant (setting toggle) |
-| **Signal Depth** | Full request pipeline | Config load errors | Network/extension internals | Model thought process |
+| Aspect | Agent Debug Panel | Chat Debug View | Diagnostics View | Context Window | Thinking Tokens |
+|--------|------------------|----------------|------------------|----------------|-----------------|
+| **Best For** | Real-time monitoring | Request/response inspection | Config validation | Space management | Model reasoning |
+| **When to Use** | Development sessions | Response surprises | Config not applying | Long sessions | Unexpected decisions |
+| **Setup Time** | Instant (command) | Instant (command) | Instant (menu) | Built-in visual | Instant (setting) |
+| **Signal Depth** | Event timeline | Full pipeline | Load errors | Token breakdown | Thought process |
+| **v1.110 Feature** | ✅ New | Existing | Existing | ✅ Enhanced | Existing |
+
+---
+
+<!-- 🎬 MAJOR SECTION: Agent Debug Panel -->
+## Agent Debug Panel: Real-Time Event Stream (v1.110)
+
+*Watch every chat event as it happens—your live dashboard for AI interactions*
+
+### What It Shows
+
+The Agent Debug Panel is v1.110's flagship debugging feature, providing a real-time event stream for every chat interaction:
+
+| Component | What You See |
+|-----------|--------------|
+| **Chat Events** | Every message, tool call, and response in chronological order |
+| **Tool Invocations** | Live view of tools being called with timing information |
+| **Customization Loading** | Which instruction files, skills, and agents were loaded |
+| **Model Responses** | Raw responses before formatting, including thinking tokens |
+| **Errors & Warnings** | Immediate visibility into failures with context |
+
+### How to Open
+
+- **Command Palette:** `Developer: Open Agent Debug Panel`
+- **Chat View:** Click gear icon (⚙️) → **View Agent Logs**
+- **Quick Access:** Click any timestamp in chat history to open filtered view
+
+### Chart View
+
+The Agent Debug Panel includes a **Chart View** mode that visualizes your conversation as a flow diagram—showing tool call chains, timing bottlenecks, and agent handoffs at a glance.
+
+### Loaded Customizations Inspector
+
+The "Loaded Customizations" section answers critical questions instantly: Was my instruction file loaded? Why isn't my skill appearing? Which agent is active? Each customization shows status (✅ Loaded, ⚠️ Warning, ❌ Failed), file location, and application scope.
+
+### When to Use Agent Debug Panel vs. Chat Debug View
+
+| Need | Use Agent Debug Panel | Use Chat Debug View |
+|------|----------------------|---------------------|
+| Real-time monitoring | ✅ Events stream live | ❌ Static snapshots |
+| Visual flow | ✅ Chart View | ❌ Text-based |
+| Customization audit | ✅ Shows load status | ⚠️ Shows content only |
+| Deep response inspection | ⚠️ Timestamped events | ✅ Full request/response |
+| Historical analysis | ✅ Full session history | ✅ Per-exchange details |
+| Tool timing analysis | ✅ Duration per tool | ❌ Not shown |
+
+**Recommended workflow:** Keep Agent Debug Panel open during development sessions, switch to Chat Debug View when you need to inspect a specific exchange in depth.
 
 ---
 
@@ -261,81 +343,22 @@ The Chat Debug view reveals every component of each AI interaction:
 
 ### How to Open
 
-**Method 1: Chat View Menu**
-1. Open the Chat view
-2. Select the overflow menu (`...`)
-3. Select **Show Chat Debug View**
+- **Chat View:** Overflow menu (`...`) → **Show Chat Debug View**
+- **Command Palette:** `Developer: Show Chat Debug View`
 
-**Method 2: Command Palette**
-1. Open Command Palette (`Ctrl+Shift+P`)
-2. Run **Developer: Show Chat Debug View**
-
-Each section can be expanded to show full details—particularly valuable when using agents where multiple tools might be invoked as part of a single request. You'll see exactly which files were included as context, which instructions were applied, and how each tool contributed to the response.
+Each section expands to show full details—see exactly which files were included, which instructions applied, and how each tool contributed.
 
 ### The Request Pipeline
 
-When you send a chat message, here's what happens:
+Every chat message flows through: **Prompt** → **Context Assembly** (files, instructions, agents, skills) → **System Prompt Construction** → **Model Inference** (with tool invocations) → **Response Delivery**. The Debug View lets you inspect each stage.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  1. YOUR PROMPT                                             │
-│     "Add error handling to this function"                   │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  2. CONTEXT ASSEMBLY                                        │
-│     • Active file contents (implicit)                       │
-│     • Selected text (implicit)                              │
-│     • #file references (explicit)                           │
-│     • @workspace results (explicit)                         │
-│     • Loaded instructions (.github/copilot-instructions.md) │
-│     • Active agent definition                               │
-│     • Applicable skills                                     │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  3. SYSTEM PROMPT CONSTRUCTION                              │
-│     • Base Copilot instructions                             │
-│     • Agent-specific instructions                           │
-│     • Custom instructions from all sources                  │
-│     • Tool definitions and capabilities                     │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  4. MODEL INFERENCE                                         │
-│     • Request sent to language model                        │
-│     • Model may invoke tools                                │
-│     • Tool results fed back to model                        │
-│     • Response generated                                    │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  5. RESPONSE DELIVERY                                       │
-│     • Streamed to Chat view                                 │
-│     • Code blocks formatted                                 │
-│     • Actions available (Apply, Copy, etc.)                 │
-└─────────────────────────────────────────────────────────────┘
-```
+### What to Look For
 
-### What to Look For in Debug View
-
-**Context section:**
-- Are the right files included?
-- Is the context window full? (check token usage)
-- Are instructions being loaded?
-
-**Tool invocations:**
-- Which tools were called?
-- Did they succeed or fail?
-- What data did they return?
-
-**Response:**
-- Does the model reference your instructions?
-- Are patterns from your codebase being followed?
+| Section | Key Questions |
+|---------|---------------|
+| **Context** | Right files included? Context window full? Instructions loaded? |
+| **Tool Invocations** | Which tools called? Success/failure? What data returned? |
+| **Response** | References your instructions? Follows codebase patterns? |
 
 ---
 
@@ -383,6 +406,50 @@ Let me check if there are similar functions to match style...
 ```
 
 Thinking tokens transform debugging from "why did it do that?" to "I see why it did that." For complex prompts or unexpected results, expanding the thinking section shows the model's decision process. This is particularly valuable when training teams on effective prompting—you can demonstrate how different prompts lead to different reasoning chains.
+
+### Custom Thinking Phrases (v1.110)
+
+Personalize the loading text during model reasoning with the `chat.agent.thinking.phrases` setting:
+
+```json
+{
+  "chat.agent.thinking.phrases": [
+    "Contemplating the cosmic implications...",
+    "Consulting the ancient scrolls...",
+    "Performing interpretive dance...",
+    "Asking my rubber duck..."
+  ]
+}
+```
+
+These phrases cycle during extended thinking operations, adding personality to AI interactions while providing visual feedback that the model is actively working.
+
+---
+
+<!-- 🎬 MAJOR SECTION: Context Management -->
+## Context Management: Window Control and Compaction (v1.110)
+
+*Monitor, compact, and branch your conversation context for optimal AI performance*
+
+### Context Window Indicator
+
+VS Code 1.110 adds a visual context usage indicator showing percentage, token breakdown by category (conversation, files, instructions, tool results), and remaining capacity. Hover over it to see detailed breakdown.
+
+**Key thresholds:**
+- **<60%** — Healthy, room for expansion
+- **60-80%** — Monitor, consider being more selective with context
+- **>80%** — Use `/compact` or start fresh before quality degrades
+
+### Commands for Context Control
+
+| Command | What It Does |
+|---------|--------------|
+| `/compact` | Intelligently compresses conversation history (95% → 42% typical) while preserving key decisions and code snippets |
+| `/fork` | Creates independent conversation branch in new tab—explore alternatives without losing progress |
+
+**When to use `/compact`:** Context >80%, responses seem to "forget" earlier context, file reads being excluded.
+
+**When to use `/fork`:** Compare two approaches, checkpoint before risky experiments, branch at decision points.
 
 ---
 
@@ -577,28 +644,18 @@ For network, firewall, or VPN issues:
 - Instructions describe patterns but don't enforce them
 - Model context window limit reached, older context truncated
 
-### Context Window Awareness
+### Pattern 5: "Context Issues" (v1.110)
 
-Every model has a context window limit. When exceeded:
-- Oldest context is truncated
-- Instructions may be dropped
-- File contents may be incomplete
+Use the **context window indicator** to diagnose context pressure (>80% = likely problems). Solutions: `/compact` to compress history, `/fork` to branch, or use explicit `#file` references instead of `@workspace`.
 
-**Monitoring Context Usage:** The chat input area shows a **context window indicator**. Hover to see token usage breakdown by category:
-
-- System prompt tokens
-- User messages tokens
-- Context (files, instructions) tokens
-- Remaining capacity
-
-### Optimizing Context
+### Quick Reference: Optimizing Context
 
 | Problem | Solution |
 |---------|----------|
-| Context window full | Use more specific `#file` instead of `@workspace` |
-| Important context dropped | Reference critical files explicitly |
-| Long conversations losing context | Start new session or use `/compact` |
-| Instructions consuming too much | Simplify or use conditional `applyTo` patterns |
+| Context window full | `/compact` or use specific `#file` instead of `@workspace` |
+| Important context dropped | Reference critical files explicitly with `#file` |
+| Long sessions degrading | `/compact` to preserve key context |
+| Need to explore alternatives | `/fork` to branch before diverging |
 
 ---
 
@@ -672,31 +729,40 @@ Every model has a context window limit. When exceeded:
 
 ---
 
+### Use Case 5: v1.110 Debugging Workflow (v1.110)
+
+**The Problem:** A 45-minute debugging session suddenly started producing vague responses, and the developer had two potential root causes to investigate.
+
+**The Solution:** Used the Agent Debug Panel to verify customization loading, checked context indicator (94% full), ran `/compact` to recover space, then used `/fork` to investigate both hypotheses in parallel.
+
+**Key v1.110 workflow:**
+1. Agent Debug Panel: Check "Loaded Customizations"—verify correct instructions active
+2. Context indicator: See 94% usage—explains quality degradation
+3. `/compact`: Reduce from 94% to 38%—preserve key context
+4. `/fork`: Create parallel session at decision point—investigate both theories
+5. Resolve in 15 minutes vs. 30+ minutes sequential
+
+**Outcome:** Combined v1.110 features enabled systematic debugging. Developer now keeps Agent Debug Panel open during sessions and forks at decision points.
+
+---
+
 ## ✅ What You Can Do Today
 
 **Immediate Actions (5 minutes):**
-- [ ] Open Chat Debug View now: Make any request and examine the system prompt, context, and response sections
-- [ ] Enable thinking display: Settings → `chat.renderThinking` → "expanded" to see model reasoning
-- [ ] Check Diagnostics: Right-click in Chat view → Diagnostics to verify customization load status
-- [ ] Bookmark commands: Save `Developer: Show Chat Debug View` and `MCP: List Servers` for quick access
+- [ ] Open Agent Debug Panel (`Developer: Open Agent Debug Panel`) to see real-time events
+- [ ] Enable thinking display: Settings → `chat.renderThinking` → "expanded"
+- [ ] Check Diagnostics: Right-click in Chat view → gear icon → Diagnostics
+- [ ] Try `/compact` in a long conversation to free context space
 
-**Short-Term Implementation (30 minutes):**
-- [ ] Develop with Debug View open: Split editor, keep Debug View visible during prompt iteration
-- [ ] Monitor context window: Watch the indicator before adding large context—catch truncation proactively
-- [ ] Enable trace logs (if troubleshooting): Developer: Set Log Level → Trace for Copilot extensions
-- [ ] Validate customizations: After adding/editing instructions, agents, or skills, check Diagnostics View immediately
+**Short-Term (30 minutes):**
+- [ ] Keep Agent Debug Panel open during development sessions
+- [ ] Monitor context window indicator before large context additions
+- [ ] Validate customizations immediately after creating/editing instruction files
 
-**Advanced Exploration (1-2 hours):**
-- [ ] Build debugging workflow: Create personal runbook for "unexpected response" → Debug View → Diagnostics → Logs progression
-- [ ] Analyze thinking patterns: Review 10-15 thinking token outputs to understand common reasoning patterns for your prompts
-- [ ] Set up MCP monitoring: If using external tools, establish weekly log review routine
-- [ ] Create team documentation: Share common diagnostic patterns with team—standardize troubleshooting approach
-
-**Next Steps After Completion:**
-1. ✅ Make Chat Debug View a habit—open it for every unexpected result
-2. 📖 Review [Copilot Chat](../copilot-chat/) for context and prompt engineering foundations
-3. 💬 Share diagnostic wins with team—document surprising discoveries in thinking tokens or diagnostics
-4. 🚀 Explore [Custom Agents Workshop](../../workshop/06-custom-agents/) to apply debugging to advanced customization
+**Advanced (1-2 hours):**
+- [ ] Build debugging workflow: Agent Debug Panel → Chat Debug View → Diagnostics → Logs
+- [ ] Practice `/fork` for parallel investigation branches
+- [ ] Create team documentation for common diagnostic patterns
 
 ---
 
