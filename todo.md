@@ -65,8 +65,6 @@ https://github.com/congiuluc/premium-request-csv-viewer/
 
 ---
 
-AGENT FACTORY:
-https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/
-https://github.com/github/gh-aw/blob/main/create.md
-https://github.github.io/gh-aw/reference/safe-outputs/
+AGENT COUNCIL:
+
 https://github.com/Sentry01/AgentCouncil

@@ -1,7 +1,7 @@
 ---
 status: active
 updated: 2026-02-11
-section: "Context & Customization"
+section: "Copilot Surfaces"
 references:
   - url: https://docs.github.com/en/copilot/reference/acp-server
     label: "Copilot CLI ACP Server reference"

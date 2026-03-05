@@ -1,7 +1,7 @@
 ---
 status: active
 updated: 2026-02-18
-section: "Context & Customization"
+section: "Copilot Surfaces"
 references:
   - url: https://github.com/github/copilot-sdk
     label: "GitHub Copilot SDK repository"
