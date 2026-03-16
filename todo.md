@@ -15,25 +15,7 @@ Using agents in Visual Studio Code: https://code.visualstudio.com/docs/copilot/a
 
 ---
 
-add some meat around the statement "Guidance over Governance".  EAs seems to want to bring all their bad habits/assumptions to agentic delivery.
-
----
-
 evergreen process: using Actions to view all changesets at PR approval and updating agents/instructions/docs each time.  maybe refernce https://github.blog/ai-and-ml/automate-repository-tasks-with-github-agentic-workflows/
-
----
-
-let's implement functionality for one-off talks/slidevs.  never published to pages, just live locally in the repo to be run manually.
-
----
-
-lots of temp work around copilot-cli.  look in "harness" folder
-
----
-
-HERE
-
-re-brand using things using https://primer.style/.  Add my contact info, calendar link. make it clear I'm Microsoft
 
 ---
 
@@ -73,3 +55,22 @@ https://github.com/Sentry01/AgentCouncil
 ---
 
 AGENTRC: https://github.com/microsoft/agentrc
+
+---
+
+https://code.visualstudio.com/updates/v1_111
+
+---
+
+Modernize .NET Anywhere with GitHub Copilot - .NET Blog https://share.google/wVwPSslJEQwVTFrSm
+
+---
+
+https://code.visualstudio.com/blogs/2026/03/05/making-agents-practical-for-real-world-development
+
+
+---
+
+https://github.blog/changelog/2026-03-06-figma-mcp-server-can-now-generate-design-layers-from-vs-code/
+
+---
