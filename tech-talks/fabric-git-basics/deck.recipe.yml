@@ -1,0 +1,95 @@
+# deck.recipe.yml — fabric-git-basics
+#
+# Guides slide generation from README.md. Use this file to name and order sections,
+# set the slide budget per section, and surface authoring priorities the generator
+# should follow. Complex narrative content belongs in README.md; structural editorial
+# intent belongs here.
+
+version: 1
+
+deck:
+  title: "Git Basics for Microsoft Fabric"
+  subtitle: "Version Control for Analytics Teams"
+  tagline: "How fundamental Git concepts map to Microsoft Fabric's workspace model"
+
+  # arcToc: short → chain displayed as the TocSlide subtitle. One line, ≤ 80 chars.
+  arcToc: "Git Foundations → Fabric's Git Model → Branch as Environment → Staying in Sync"
+
+  # arcNarrative: prose rationale explaining WHY the sections are ordered this way —
+  # what each section establishes, structural decisions, and where peak engagement lands.
+  arcNarrative: >
+    Section 1 (Git Foundations) establishes shared vocabulary quickly, anchored on the
+    concept-to-Fabric-equivalent cheatsheet table — the goal is comprehension, not depth.
+    Section 2 (Fabric's Git Model) delivers the central inversion insight: the workspace IS
+    the working copy, which recontextualizes everything from Section 1. This is where peak
+    cognitive load and peak "aha" land together, making it the talk's deliberate climax.
+    Section 3 (Branch as Environment) converts the mental model into a concrete operational
+    pattern — dev/test/prod as workspace-branch pairs — making the abstract actionable with
+    the branching workflow artifact as proof. Section 4 (Staying in Sync) shifts to day-2
+    operations: conflict prevention, resolution, and commit message discipline, closing with
+    the timeboxed "What you can do today" actions so the audience leaves with a concrete
+    next step. Sections 1 and 4 are deliberately lighter (medium emphasis) so that the
+    central insight delivery in Sections 2 and 3 gets the airtime and emotional emphasis
+    they earn in a 30-minute slot.
+
+  # Ordered list of the 4 section names (must match sectionModes keys below).
+  # These become the TocSlide entries and SectionOpenerSlide titles.
+  sectionOrder:
+    - "Git Foundations"
+    - "Fabric's Git Model"
+    - "Branch as Environment"
+    - "Staying in Sync"
+
+  # Per-section editorial guidance for the slide generator.
+  sectionModes:
+    "Git Foundations":
+      # Slide budget hint: high = 4–5 slides, medium = 2–3, medium-low = 1–2
+      emphasis: medium
+      # note: authoring priority — what must land, what to cut, what the "whoa" moment is.
+      note: >
+        Compress to vocabulary delivery only — 2 slides maximum. The anchor is the
+        concept-to-Fabric-equivalent cheatsheet table (git-cheatsheet.md): one slide
+        showing the full mapping table is the entire point of this section. Cut the
+        deep-dive prose on repos/commits/branches — just the definitions as a brief
+        visual list, then the table. The audience is here for Fabric, not a Git course.
+    "Fabric's Git Model":
+      emphasis: high
+      note: >
+        This is the talk's central "whoa" moment — the workspace-is-the-working-copy
+        inversion. Lead with the binding model: one workspace, one branch, no local clone,
+        commits go directly to remote. Surface the supported item types table. Show the
+        workspace setup walkthrough steps as a numbered flow. The serialization deep-dive
+        (what gets committed vs. not) earns its own slide. This section earns 4-5 slides
+        and should feel like the moment the talk clicks into place for the audience.
+    "Branch as Environment":
+      emphasis: high
+      note: >
+        The actionable twin peak — every branch is an environment, every environment is a
+        workspace-branch pair. Lead with the dev→test→prod branch diagram showing named
+        workspaces. Surface the workspace-branch mapping table (environment, branch,
+        workspace name, purpose). The branching-workflow.yml CI pipeline is the "proof it's
+        real" artifact — show the key validation steps inline. Close with the branch
+        lifecycle as a numbered flow (create → connect → develop → PR → merge → sync →
+        delete). 4-5 slides.
+    "Staying in Sync":
+      emphasis: medium
+      note: >
+        Day-2 operations — 2-3 slides. Open with the conflict prevention table (4 strategies
+        with concrete implementations). One slide for the conflict resolution decision tree
+        (three options: accept remote, accept workspace, resolve in Git). Close with commit
+        message conventions and the timeboxed "What you can do today" checklist from the
+        README (15min / 1hr / 2-4hr) as the final action-oriented slide. This section
+        should leave the audience with habits, not anxiety.
+
+  # Optional: slide files to import immediately after the TitleSlide.
+  preamble: []
+
+  # Optional: slide files to append after the ThankYouSlide.
+  appendix: []
+
+  # 3–5 high-signal moments the generator must surface in the deck.
+  highlightMoments:
+    - "Connecting a workspace to a branch takes 15 minutes and immediately enables rollback, branching, and PR-based review for all analytics artifacts"
+    - "The workspace IS the working copy — there is no local clone, and every commit is a snapshot of the entire workspace state"
+    - "Each dev/test/prod environment is a workspace-branch pair — branching in Fabric means creating a new workspace, not a new folder"
+    - "Conflicts become rare when teams adopt item ownership and commit daily — prevention consistently beats resolution"
