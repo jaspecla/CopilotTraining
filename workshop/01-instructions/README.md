@@ -1,3 +1,8 @@
+---
+status: active
+updated: 2026-05-14
+---
+
 # Module 1: Instructions
 
 ## ⏰ — Establishing Foundations
@@ -20,7 +25,7 @@ The TechCorp team has cloned the FanHub starter project and experienced **The St
 **This module's mission**: Build a complete instruction system that transforms how Copilot understands your project:
 
 ### Part 0: Quick Start
-0. **`/init` command** — Let AI analyze your codebase and generate initial instructions automatically
+0. **`/init` command** — Let AI analyze your codebase and generate an initial `AGENTS.md` playbook automatically
 
 ### Part 1: The "Magic File" Foundation
 1. **ARCHITECTURE.md** — Project context that reduces token waste
@@ -85,6 +90,7 @@ These files form the foundation of practical Copilot and agent customization:
 - **Result**: Less tokens wasted, faster responses, more accurate suggestions
 - **What to include**: Tech stack, folder structure, data flow, key patterns
 - **What NOT to include**: Implementation details, code examples, exhaustive file lists
+- **Relationship to `AGENTS.md`**: Architecture remains the source of truth for how the system is shaped; agent files should point to it instead of repeating it
 
 **2. .github/copilot-instructions.md** 🪄 **THE MAGIC FILE**
 - **Purpose**: Automatic pattern standardization for ALL interactions
@@ -107,6 +113,7 @@ These files form the foundation of practical Copilot and agent customization:
 - **Value**: Works well as an open, portable convention across agent ecosystems, not just one GitHub surface
 - **Result**: Agents can find the right commands and constraints faster, especially in nested subprojects
 - **What to include**: Dev environment tips, test commands, repo navigation hints, PR instructions, subproject guardrails
+- **What NOT to include**: A duplicate architecture guide, long domain encyclopedia, or rules already handled by path-based `.instructions.md` files
 - **Location**: Repo root or nested inside subdirectories such as `frontend/`, `backend/`, or `infra/`
 - **🤖 Nearest wins**: In monorepos, the closest `AGENTS.md` is the most useful place for local package guidance
 
@@ -117,21 +124,46 @@ Before writing instructions manually, let the AI analyze your codebase first:
 **`/init` slash command:**
 - **Purpose**: Generate initial instructions by analyzing your codebase
 - **How it works**: Scans project structure, package files, and code patterns
-- **Output**: Creates `.github/copilot-instructions.md` or `AGENTS.md` with discovered conventions
+- **Output**: Prefers creating `AGENTS.md` with discovered conventions and local workflow guidance
 - **Best for**: Starting a new project, onboarding existing codebases, updating after major changes
+
+> 🤖 **Current default:** `/init` now prefers `AGENTS.md`. Treat that as the agent-ready bootstrap, then decide whether any GitHub-specific repo standards should also be copied or distilled into `.github/copilot-instructions.md`.
 
 **The workflow:**
 1. Run `/init` to get an AI-generated baseline
 2. Review and refine the output
 3. Add team-specific knowledge the AI couldn't discover
-4. Decide whether the output belongs in `.github/copilot-instructions.md`, `AGENTS.md`, or both
-5. Layer with path-based instructions for context specificity
+4. Keep the generated `AGENTS.md` as the portable agent playbook
+5. Distill any always-on GitHub Copilot standards into `.github/copilot-instructions.md` when needed
+6. Layer with path-based instructions for context specificity
 
-**Which generated file should you keep?**
+**How should you use the generated `AGENTS.md`?**
 
-- Keep **`.github/copilot-instructions.md`** when the content is primarily GitHub Copilot baseline guidance for the whole repository
-- Keep **`AGENTS.md`** when the content reads like agent operating instructions that should also make sense to other coding agents
+- Keep **`AGENTS.md`** as the expected `/init` starting point, especially when it includes commands, test steps, repo navigation, or PR guidance
+- Add or update **`.github/copilot-instructions.md`** when part of that output is primarily always-on GitHub Copilot baseline guidance for the whole repository
 - Keep **both** when you want GitHub-specific repo standards plus portable, nearest-directory agent playbooks
+
+#### `ARCHITECTURE.md` + `AGENTS.md`: Pointer Pattern
+
+`AGENTS.md` does not replace `ARCHITECTURE.md`. They work best when each file has a distinct job:
+
+| File | Primary Question | Best Content |
+|------|------------------|--------------|
+| `docs/ARCHITECTURE.md` | "What is this system and how does it fit together?" | System map, data flow, boundaries, major patterns, key dependencies |
+| Root `AGENTS.md` | "How should an agent work safely in this repo?" | Setup commands, test commands, repo conventions, links to architecture and domain docs |
+| Nested `AGENTS.md` | "What is different in this subproject?" | Local commands, package-specific constraints, deployment notes, local ownership rules |
+
+Use a **pointer pattern**: the root `AGENTS.md` should link to `docs/ARCHITECTURE.md` for system shape, then stay focused on how to operate. Nested `AGENTS.md` files should only exist when a directory has genuinely different commands, tooling, risks, or review expectations.
+
+**Create multiple `AGENTS.md` files when:**
+- Different subprojects have different install, build, test, or deploy commands
+- A monorepo contains packages with separate ownership or release rules
+- Local constraints matter enough that an agent working in that folder should see them first
+
+**Avoid multiple `AGENTS.md` files when:**
+- They would mostly duplicate the root playbook
+- The difference is only coding style that belongs in `.github/instructions/*.instructions.md`
+- The content is architecture reference that belongs in `docs/ARCHITECTURE.md`
 
 #### Organization-Wide Instructions (Enterprise)
 
@@ -365,6 +397,7 @@ Before moving to Module 2, verify:
 
 ### Part 0: Quick Start
 - [ ] Ran `/init` command to generate baseline instructions
+- [ ] Confirmed the generated `AGENTS.md` captures useful agent workflow guidance
 - [ ] Reviewed AI-generated output for accuracy
 - [ ] Identified items needing refinement
 
@@ -408,7 +441,7 @@ Before moving to Module 2, verify:
 ## 🔗 Compounding Value
 
 **What we created in this module:**
-- AI-generated baseline via `/init` — Starting point from codebase analysis
+- AI-generated `AGENTS.md` baseline via `/init` — Starting point from codebase analysis
 - `docs/ARCHITECTURE.md` — Project context
 - `.github/copilot-instructions.md` — 🪄 Universal team patterns
 - `.github/instructions/*.instructions.md` — 📂 Context-specific rules
@@ -474,9 +507,11 @@ When you edit a file, VS Code:
 `AGENTS.md` is different from GitHub's `.instructions.md` system. It is an open Markdown convention for coding agents that usually contains setup commands, testing instructions, PR rules, and directory-local guidance. In a polyrepo, a single root `AGENTS.md` may be enough. In a monorepo, nested `AGENTS.md` files are often better because a frontend package and an infrastructure package may need different commands and guardrails.
 
 **Rule of thumb:**
-1. Put universal GitHub rules in `.github/copilot-instructions.md`
-2. Put file-pattern rules in `.github/instructions/*.instructions.md`
-3. Put local agent workflows and commands in the nearest `AGENTS.md`
+1. Put system shape in `docs/ARCHITECTURE.md`
+2. Put universal GitHub rules in `.github/copilot-instructions.md`
+3. Put file-pattern rules in `.github/instructions/*.instructions.md`
+4. Put local agent workflows and commands in the nearest `AGENTS.md`
+5. Link between files instead of duplicating the same guidance in every layer
 
 ### Why Architecture Documentation Matters to AI
 
@@ -486,6 +521,8 @@ Large Language Models like Copilot:
 - Perform better with explicit relationships
 
 Your `ARCHITECTURE.md` turns implicit knowledge ("everyone knows the frontend calls the backend") into explicit context that AI can use.
+
+The new `/init` preference for `AGENTS.md` makes `ARCHITECTURE.md` more important, not less. The agent playbook tells Copilot where to look and how to work; the architecture doc gives it the map.
 
 ### The Virtuous Cycle
 

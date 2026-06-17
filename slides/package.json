@@ -18,7 +18,7 @@
     "inspect:scan": "node scripts/inspect-slide.js"
   },
   "dependencies": {
-    "@slidev/cli": "^52.11.5",
+    "@slidev/cli": "^52.9.1",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "^0.25.0",
     "playwright": "^1.59.1"

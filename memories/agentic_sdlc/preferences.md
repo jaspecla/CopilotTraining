@@ -4,6 +4,25 @@ Author taste, framing choices, and editorial decisions for agentic SDLC talks.
 
 ---
 
+## agentic-workflows: Path A/B/C framing as primary audience hook (2026-05-05)
+
+`schema_version: 1` | `date: 2026-05-05`
+
+**Lead with paths, not features.** The deck opens with "Which problem is yours?" (Path A: triage, Path B: reporting, Path C: orchestration) before introducing architecture. This immediately anchors every audience member in a use case they recognize — avoid opening with platform/compiler architecture.
+
+**"Find your cell" is the Section 3 tagline.** The 3×3 Path×Maturity matrix is the deck's central intellectual contribution. Every audience member should leave knowing their current cell and their next cell.
+
+**Flagship use cases per path (for CoreQuestionSlide and openers):**
+- Path A: Issue Triage → PR Review → Dependency Audit
+- Path B: Weekly Health Report → Release Notes → Research Digest  
+- Path C: CI Failure Diagnosis → ChatOps Commands → Multi-Agent Orchestration
+
+**arcToc arc:** "Why It Matters → Architecture & Safety → Patterns by Path → Your Path Forward" — this left-to-right progression from motivation to mechanism to use case to action is the intended audience journey.
+
+**Zero direct writes** is the key trust-building stat. Lead with it in BeforeAfterSlide metrics and ThankYouSlide cards — it is what distinguishes this from naive AI automation.
+
+---
+
 ## agentic-sdlc opener: maturity model framing (2026-04-24)
 
 `schema_version: 1` | `date: 2026-04-24`

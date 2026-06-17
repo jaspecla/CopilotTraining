@@ -1,4 +1,13 @@
 /* rebuild trigger */
+#slidev-goto-dialog {
+  display: none !important;
+}
+
+.slidev-layout > h1:first-child,
+.slidev-layout > div:first-child > h1:first-child {
+  display: none;
+}
+
 .sv-title-slide {
   position: relative;
   display: flex;

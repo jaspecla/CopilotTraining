@@ -77,8 +77,11 @@ foreach ($t in $targets) {
             $existing = Get-Content $outFile -Raw
             if ($existing.TrimEnd() -ne $trimmed) {
                 Write-Host "    CHANGED: $($t.Name)" -ForegroundColor Yellow
-                $diff = Compare-Object ($existing -split "`n") ($trimmed -split "`n")
-                $diff | ForEach-Object {
+                # NOTE: do not assign to $diff — it collides with the [switch]$Diff
+                # parameter (PowerShell variables are case-insensitive), which would
+                # throw "Cannot convert ... to SwitchParameter".
+                $differences = Compare-Object ($existing -split "`n") ($trimmed -split "`n")
+                $differences | ForEach-Object {
                     $color = if ($_.SideIndicator -eq '=>') { 'Green' } else { 'Red' }
                     Write-Host "    $($_.SideIndicator) $($_.InputObject)" -ForegroundColor $color
                 }

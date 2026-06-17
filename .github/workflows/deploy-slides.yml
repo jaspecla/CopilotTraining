@@ -27,10 +27,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Restore previous build cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ./slides/dist
           key: slides-dist-${{ github.sha }}
@@ -38,13 +38,13 @@ jobs:
             slides-dist-
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "24"
 
       - name: Cache node_modules
         id: npm-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ./slides/node_modules
           key: npm-${{ runner.os }}-${{ hashFiles('slides/package.json') }}
@@ -214,7 +214,7 @@ jobs:
           echo "📊 ${BUILT} built, ${SKIPPED} skipped (up to date)"
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./slides/dist
 
@@ -227,4 +227,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

@@ -24,10 +24,8 @@ data
 residency (e.g., https://example.ghe.com).
 
 Options:
-  --config-dir <directory>  Set the configuration directory (default:
-                            ~/.copilot)
-  -h, --help                display help for command
-  --host <host>             GitHub host URL (default: https://github.com)
+  -h, --help     display help for command
+  --host <host>  GitHub host URL (default: https://github.com)
 
 Examples:
   # Authenticate with github.com

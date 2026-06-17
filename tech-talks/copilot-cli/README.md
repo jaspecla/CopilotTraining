@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-05-01
+updated: 2026-06-04
 section: "Developers"
 references:
   - url: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli
@@ -39,6 +39,10 @@ references:
   - url: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/chronicle
     label: "About GitHub Copilot CLI session data"
     verified: 2026-05-01
+  - url: https://github.com/github/copilot-cli/releases
+    label: "GitHub Copilot CLI release notes"
+    verified: 2026-05-01
+
 ---
 
 # GitHub Copilot CLI: AI at the Point of Work
@@ -104,10 +108,13 @@ GitHub Copilot CLI brings conversational AI directly into terminal workflows —
 - **MCP Registry Integration**: Discover and connect external tools/agents via GitHub MCP Registry with organization-level controls
 - **Plugin Ecosystem**: Install community and team-created plugins from marketplaces — extend CLI functionality with specialized capabilities
 - **`/chronicle` Session Insights**: Review your session history to generate standup reports, surface personalized usage tips, and get suggestions for improving `.github/copilot-instructions.md` — Copilot learns from how you actually work
+- **Rubber Duck (Adversarial Reviewer)**: A second built-in subagent — powered by a *different* model family than your primary agent — that automatically reviews plans and implementations at key checkpoints. When you're using Claude as orchestrator, Rubber Duck uses GPT-5.4 to catch what one model misses. Now **enabled by default**. Closes ~75% of the quality gap between mid-tier and top-tier models on complex multi-file tasks. Disable with `builtInAgents.rubberDuck: false` in config if latency matters more than review quality
+- **Scheduled Prompts (`/every`, `/after`)**: Recurring autonomous workflows via experimental scheduled prompts — `"/every weekday at 9am summarize overnight PRs"` turns the CLI into a recurring agent runner. Requires `/experimental on`
+- **`/voice`**: Dictate prompts using local speech-to-text via Foundry Local — hands-free operation for long coding sessions or accessibility workflows
 
 ### Architecture Overview
 
-The session is the durable entity — terminals are viewports that connect and disconnect from it. Four modes cover distinct workflows: **Interactive** for collaborative problem-solving with persistent context; **Plan Mode** (Shift+Tab) for clarifying requirements before any code is written; **Programmatic** (`copilot -p`) for headless CI/CD execution; **Remote** (`copilot --remote`) for steering sessions from any device via web or mobile. Specialized built-in agents (Explore, Task, Plan, Code-review) are routed automatically. Cloud delegation (`&` prefix) offloads long-running work to GitHub's coding agent, freeing both your terminal and IDE. Auto-compaction and repository memory make sessions virtually infinite and cross-session aware.
+The session is the durable entity — terminals are viewports that connect and disconnect from it. Four modes cover distinct workflows: **Interactive** for collaborative problem-solving with persistent context; **Plan Mode** (Shift+Tab) for clarifying requirements before any code is written; **Programmatic** (`copilot -p`) for headless CI/CD execution; **Remote** (`copilot --remote`) for steering sessions from any device via web or mobile. Specialized built-in agents (Explore, Task, Plan, Code-review, and Rubber Duck) are routed automatically. Cloud delegation (`&` prefix) offloads long-running work to GitHub's coding agent, freeing both your terminal and IDE. Auto-compaction and repository memory make sessions virtually infinite and cross-session aware. Scheduled Prompts (`/every`, `/after`) enable fully autonomous recurring workflows without any human trigger.
 
 **Official Documentation:**
 - 📖 [About GitHub Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli) — Core concepts and capabilities
@@ -189,7 +196,7 @@ Each capability in this talk removes a different kind of distance between you an
 ### Move Against (Active Resistance Required)
 
 - 🛑 **Pasting secrets into prompts**: Credentials, tokens, and API keys typed into CLI sessions travel to GitHub's API as prompt content — the same way any other context does. It feels natural to give Copilot what it needs to help, but this is a data exposure risk. Use environment variables or secret managers; reference the name, not the value
-- 🛑 **`--yolo` outside sandboxed environments**: Permission prompts feel like friction when you're in flow. `--allow-all-tools` or `--yolo` removes that friction instantly — and grants the agent permission to run any shell command, edit any file, make any API call with your current credentials. If you're authenticated to production, the agent has production access. Approve per-tool or per-session, never blanket
+- 🛑 **`--yolo` outside sandboxed environments**: Permission prompts feel like friction when you're in flow. `--allow-all-tools` or `--yolo` removes that friction instantly — and grants the agent permission to run any shell command, edit any file, make any API call with your current credentials. If you're authenticated to production, the agent has production access. Approve per-tool or per-session, never blanket. Enterprise teams can **enforce this policy** with `permissions.disableBypassPermissionsMode: true` in config — this prevents any user from enabling `--yolo` or `/allow-all` in org-managed environments
 - 🛑 **Skipping Plan Mode because you're in a hurry**: When the deadline is close and you think you know what you need, Plan Mode feels like overhead. It isn't — it's most valuable precisely when you're rushing. The sessions that spiral into 8 failed attempts almost always started with "I'll just jump in." One minute of clarifying questions saves thirty minutes of rework
 - 🛑 **Leaving remote sessions unattended without guardrails**: A persistent `--remote` session with broad permissions on a production machine is powerful and dangerous. Always scope permissions with `--allow-tool`, set session timeouts, and use [Copilot Hooks](../copilot-hooks/) for governance. Never use `--yolo` on a remote production session
 
@@ -280,7 +287,7 @@ Request → AI asks clarifying questions → Collaborate on plan → Review plan
 
 ### How It Works
 
-Press **Shift+Tab** to toggle Plan Mode on/off. Copilot uses the `ask_user` tool to ask clarifying questions before any code is written:
+Press **Shift+Tab** to toggle Plan Mode on/off. Use **`/autopilot`** (or its alias **`/goal`**) to keep autopilot focused on a specific objective — `/goal` framing is particularly useful when you want Copilot to stay anchored to one outcome across a multi-step session. Copilot uses the `ask_user` tool to ask clarifying questions before any code is written:
 
 - **"Should I check docker-compose config, logs, or both?"**
 - **"Do you want environment variable analysis included?"**
@@ -717,6 +724,22 @@ Copilot CLI includes built-in agents that handle common patterns automatically �
 # VS Code opens the file — CLI session continues uninterrupted
 ```
 
+#### Rubber Duck (Adversarial Reviewer)
+
+**Purpose:** A second subagent — powered by a *different* model family — that automatically reviews plans and implementations at key checkpoints. When your primary agent is Claude, Rubber Duck uses GPT-5.4. Cross-family review catches blind spots that any single model has.
+
+**Enabled by default since v1.0.58.** You don't invoke it explicitly — it runs automatically after planning and after significant implementations.
+
+**Why it matters:** Testing shows Rubber Duck closes ~75% of the quality gap between mid-tier (e.g., Claude Sonnet) and top-tier (Opus) models on complex multi-file tasks. Effectively, you get near-Opus quality at Sonnet pricing.
+
+**Configuration:**
+```json
+// ~/.copilot/config.json
+{ "builtInAgents": { "rubberDuck": false } }   // disable if latency matters more than review quality
+```
+
+**When Rubber Duck speaks:** After you approve a plan, Rubber Duck may surface: "This plan doesn't account for concurrent writes to the session store" — a class of issue that the primary model missed because it was focused on implementing the plan, not stress-testing it.
+
 ### Parallel Agent Execution
 
 Multiple agents can work simultaneously:
@@ -730,6 +753,33 @@ Multiple agents can work simultaneously:
 ```
 
 **Result:** Three operations complete in the time of one — agents don't block each other.
+
+### Scheduled Prompts: `/every` and `/after`
+
+**Experimental feature** — Enable with `/experimental on` or `--experimental`.
+
+Schedule recurring agent actions without any external cron job or task scheduler:
+
+```bash
+$ copilot --experimental
+> /every weekday at 9am
+  "Check for overnight PRs, summarize what changed, and post to Slack #dev-standup"
+
+> /after the build completes
+  "Run the security scanner and open an issue for any new HIGH findings"
+
+> /every 30min
+  "Check pod health in staging. Alert me via remote session if anything is unhealthy."
+```
+
+**What this enables:** The CLI becomes a **recurring agent runner** — not just a tool you invoke, but an ambient presence that monitors, reports, and acts on a schedule you define in plain language.
+
+**Combines powerfully with:**
+- **`--remote`** — Schedule a patrol on a server, steer it from any device when it fires
+- **`/fleet`** — Fan out the scheduled work across multiple subtasks in parallel
+- **Cloud delegation** — Delegate the scheduled work to GitHub's coding agent so your terminal stays free
+
+**Current scope:** Requires `--experimental` / `/experimental on`. Scheduled entries persist for the session; use `/session` to manage them. The schedule manager is visible in the footer hint bar.
 
 ### /fleet: Explicit Fan-Out Mode
 
@@ -1004,6 +1054,7 @@ $ copilot
 > "List my open PRs"
 > "Check the changes made in PR https://github.com/my-org/my-repo/pull/123. Report any serious errors."
 > "Merge all the open PRs I've created in my-org/my-repo"
+> "Create a worktree for PR #42 so I can test it locally"
 
 # Creating GitHub Actions workflows
 > "Create a GitHub Actions workflow that runs eslint on PRs and fails if errors are found. Push and open a PR."
@@ -1012,7 +1063,7 @@ $ copilot
 > "Use the GitHub MCP server to find good first issues for a new team member in my-org/my-repo"
 ```
 
-**Key insight:** Copilot CLI can create pull requests on your behalf — you're marked as the author. This means you can describe a change in plain English from your terminal and end up with a PR on GitHub.com, without ever leaving the CLI session.
+**Key insight:** Copilot CLI can create pull requests on your behalf — you're marked as the author. This means you can describe a change in plain English from your terminal and end up with a PR on GitHub.com, without ever leaving the CLI session. Starting in v1.0.60, you can also create a **Git worktree** for any PR directly from the `/pr` screen — one keystroke to spin up an isolated workspace for review or testing without affecting your current branch.
 
 **Outcome:**
 - **Browser context switches eliminated** — GitHub.com tasks stay in terminal flow
@@ -1034,11 +1085,13 @@ $ copilot
 - [ ] Next time a test fails and you don't immediately know why, reach for `copilot` before print statements
 - [ ] Delegate a long-running task with `& <task>` — verify your IDE stays completely free while the agent works in the cloud
 - [ ] Create `.github/copilot-instructions.md` with your project conventions so Copilot learns your style
-- [ ] Run `/context` and `/usage` to understand session management and auto-compaction
+- [ ] Run `/context` and `/usage` to understand session management and auto-compaction — also run `/mcp` if you use MCP servers to see per-server token usage
+- [ ] Try `/voice` if you have Foundry Local installed — dictate a prompt hands-free
 - [ ] Run `/chronicle standup` after a productive session — verify it reflects what you actually did; use `/chronicle instructions` to get Copilot's read on what's worth adding to your `.github/copilot-instructions.md`
 
 **DevOps Short-Term (1 hour):**
 - [ ] Add Copilot CLI to one CI/CD pipeline for build failure analysis — use `copilot -p "Analyze build failure" --allow-tool 'shell(gh)'`
+- [ ] Try a scheduled prompt: `copilot --experimental` then `/every 30min "Check pod health in staging and alert me if anything is unhealthy"` — then close your laptop
 - [ ] Try `--remote` on a staging server: SSH in, run `copilot --remote`, scan the QR code on your phone, and steer from there
 - [ ] Analyze logs on a remote machine without downloading them — `copilot --remote` + "Analyze the last 24 hours of error logs"
 - [ ] Run a long-running agentic task with `& <task>` (security audit, doc generation) — confirm your IDE and terminal stay free while the agent runs in the cloud

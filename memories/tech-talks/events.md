@@ -4,6 +4,29 @@ Milestones for individual tech-talk content: creation, rewrites, conformance, an
 
 ---
 
+## copilot-cli: full deck regeneration with dual-arc narrative (2026-06-04)
+
+`schema_version: 1` | `date: 2026-06-04`
+
+Complete regeneration of `slides/tech-talks/copilot-cli.md` (26 slides) triggered by a README update that added Rubber Duck, Scheduled Prompts, /goal alias, /voice, disableBypassPermissionsMode, worktree-from-PR (v1.0.60), and per-MCP token visibility.
+
+**Key decisions made this session:**
+- 4-section spine held (Intent → Geography → Memory → Scale)
+- Added a second narrative dimension: automation depth progression (human-explicit → automated-explicit → automated-implicit)
+- Rubber Duck placed in S1 as the first step in the automation arc (not an add-on)
+- S3→S4 bridge slide is LIVE execution: speaker kicks off `/every 1m tell me I'm awesome` before the talk; audience watches it fire during the bridge slide
+- `deck.recipe.yml` fully updated with 5 highlightMoments, 4 rewritten sectionModes, new tagline "Act autonomously."
+- Final slide count: 26 (including appendix src: ./copilot-cli-reference.md)
+- TocSlide slide numbers: S1=4, S2=9, S3=14, S4=19
+
+**Component map:**
+- S1 body: HeroStatSlide, WorkflowShowdownStepsSlide, TwoColPairedConceptsSlide, FourCardGridSlide
+- S2 body: AITerminalTranscriptSlide, TwoColPairedConceptsSlide, CodeWithFeaturesSlide, ThreeColumnCardSlide
+- S3 body: TwoColPairedConceptsSlide, AITerminalTranscriptSlide, ProblemSolutionOutcomeSlide, AITerminalTranscriptSlide (bridge)
+- S4 body: CodeWithFeaturesSlide, TwoColPairedConceptsSlide, ThreeColumnCardSlide
+
+
+
 ## Tech-talk pipeline restructured: 3-agent workflow with deck-recipe-review skill (2026-04-22)
 
 `schema_version: 1` | `date: 2026-04-22`

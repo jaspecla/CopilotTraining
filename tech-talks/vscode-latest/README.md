@@ -1,8 +1,17 @@
 ---
 status: active
-updated: 2026-04-22
+updated: 2026-05-13
 section: "Developers"
 references:
+  - url: https://code.visualstudio.com/updates/v1_120
+    label: "VS Code release notes: May 13, 2026 (v1.120)"
+    verified: 2026-05-13
+  - url: https://code.visualstudio.com/updates/v1_119
+    label: "VS Code release notes: May 6, 2026 (v1.119)"
+    verified: 2026-05-13
+  - url: https://code.visualstudio.com/updates/v1_118
+    label: "VS Code release notes: April 29, 2026 (v1.118)"
+    verified: 2026-05-13
   - url: https://code.visualstudio.com/updates/v1_117
     label: "VS Code release notes: April 22, 2026 (v1.117)"
     verified: 2026-04-22
@@ -24,12 +33,6 @@ references:
   - url: https://code.visualstudio.com/updates/v1_110
     label: "VS Code release notes: February 2026 (v1.110)"
     verified: 2026-04-13
-  - url: https://code.visualstudio.com/updates/v1_109
-    label: "VS Code release notes: January 2026 (v1.109)"
-    verified: 2026-04-13
-  - url: https://code.visualstudio.com/updates/v1_108
-    label: "VS Code release notes: December 2025 (v1.108)"
-    verified: 2026-04-13
   - url: https://code.visualstudio.com/docs/copilot/overview
     label: "GitHub Copilot in VS Code documentation"
     verified: 2026-04-13
@@ -44,7 +47,7 @@ references:
     verified: 2026-04-13
 ---
 
-# What's New in Copilot for VS Code: v1.108 – v1.117
+# What's New in Copilot for VS Code: v1.110 – v1.120
 
 > **The Question This Talk Answers:**
 > *"What are the most impactful new Copilot features in VS Code's recent releases, and how do I start using them today?"*
@@ -57,21 +60,24 @@ references:
 
 | Criterion | Assessment | Notes |
 |-----------|-----------|-------|
-| **Relevant** | 🟢 High | Every developer using Copilot in VS Code should know what shipped. These features are available today and change daily workflows. |
+| **Relevant** | 🟢 High | Every developer using Copilot in VS Code needs to know what shipped. These features are available today and change daily workflows. |
 | **Compelling** | 🟢 High | Organized by theme so practitioners see how features connect. Concrete settings and demos for each capability. |
-| **Actionable** | 🟢 High | Every feature is available now in VS Code 1.108+. Settings provided inline. Enable features during or right after the talk. |
+| **Actionable** | 🟢 High | Every feature is available now in VS Code 1.110+. Settings provided inline. Enable features during or right after the talk. |
 
 **Overall Status:** 🟢 Ready to use
 
 ---
 
 
-## Nine Releases at a Glance
+## Eleven Releases at a Glance
 
 > **Note:** Starting with v1.111 (March 2026), VS Code moved to **weekly stable releases**.
 
 | Release | Date | Headline Theme |
 |---------|------|----------------|
+| **v1.120** | May 13, 2026 | **Agents Window (Stable preview)**, command risk assessment, terminal output compression, BYOK thinking effort, Markdown diff preview [^15] |
+| **v1.119** | May 6, 2026 | **Agent-browser tab sharing**, OpenTelemetry tracing for chat, inline diffs in chat, Copilot commit attribution revert, reduced trust interruptions [^16] |
+| **v1.118** | April 29, 2026 | **Remote Copilot CLI**, token efficiency (93%+ prompt cache hit), enterprise org restrictions, CLI auto model selection, Co-authored-by trailer [^17] |
 | **v1.117** | April 22, 2026 | **BYOK for Enterprise** (bring your own model keys), incremental chat rendering, agent session sorting, CLI terminal profile integration [^14] |
 | **v1.115** | April 8, 2026 | **VS Code Agents companion app**, terminal tools for background commands, browser tool improvements [^9] |
 | **v1.114** | April 1, 2026 | Video in chat, Copy Final Response, simplified #codebase semantic search, /troubleshoot previous sessions, TypeScript 6.0 [^8] |
@@ -79,19 +85,17 @@ references:
 | **v1.112** | March 18, 2026 | **Integrated browser debugging**, Copilot CLI Autopilot, **MCP server sandboxing**, image/binary support, **monorepo customizations** [^6] |
 | **v1.111** | March 9, 2026 | **Weekly releases begin**, **Autopilot mode**, agent permissions picker, agent-scoped hooks, debug events snapshot [^5] |
 | **v1.110** | February 2026 | Agent Plugins, agentic browser tools, context compaction, session forking, /create-* commands, Explore subagent [^1] |
-| **v1.109** | January 2026 | Claude Agent preview, Agent Skills GA, terminal sandboxing, Copilot Memory, MCP Apps, integrated browser [^2] |
-| **v1.108** | December 2025 | Agent Skills (experimental), agent sessions UX improvements, terminal IntelliSense rework, 6,000 issues closed [^3] |
 
 ---
 
 ## 🧠 The Shift
 
-> **The Core Insight:** From **one AI assistant you converse with** to **a team of specialized AI agents you orchestrate across local, background, cloud, and Claude sessions — now with full autonomy via Autopilot**
+> **The Core Insight:** From **one AI assistant you converse with** to **a team of specialized AI agents you orchestrate across local, background, cloud, and Claude sessions — now with full autonomy via Autopilot, observable via OpenTelemetry, and manageable from a dedicated Agents Window**
 
 ---
 
 <!-- 🎬 MAJOR SECTION: Autopilot & Agent Autonomy -->
-## Autopilot & Agent Autonomy (v1.111 → v1.115)
+## Autopilot & Agent Autonomy (v1.111 → v1.120)
 
 The biggest evolution in recent releases is **agent autonomy**. Agents can now work completely independently, approving their own actions and iterating until tasks complete.
 
@@ -130,29 +134,27 @@ A new companion app ships alongside VS Code Insiders, built specifically for age
 // No additional configuration needed
 ```
 
+### Agents Window — Stable Preview (v1.120)
+
+The Agents Window is now available as a **stable preview** — no longer limited to Insiders [^15]:
+
+- **Dedicated agent dashboard** — Orchestrate and manage coding agents across multiple projects from a single window
+- **Session persistence** — Preferences, themes, keybindings, and extensions carry across sessions
+- **Streamlined review** — Completed sessions show all edits by default; discard edits directly from the Changes panel
+- **Upstream sync** — New sync button in Files panel pulls upstream changes before agent work begins
+- **Remote agents** — Run agents on remote machines with full environment configuration
+- **Agent harness picker** — Select which agent harness to use per session
+
 ---
 
 <!-- 🎬 MAJOR SECTION: Agent Sessions & Orchestration -->
 ## Agent Sessions & Orchestration
 
-The biggest evolution across these three releases is how VS Code manages multiple agent sessions. What started as a single Chat view conversation is now a unified multi-agent platform [^6].
+The biggest evolution across these releases is how VS Code manages multiple agent sessions. What started as a single Chat view conversation is now a unified multi-agent platform.
 
-### Agent Sessions in the Chat View (v1.108)
+### Agent Session Types
 
-Agent sessions are integrated directly into the Chat view [^3]:
-
-- **Compact mode** — Shows the three most recent sessions when Chat view is narrow
-- **Side-by-side mode** — Full session list with search and filters when Chat view is wide
-- **Status indicators** — In-progress, unread, needs attention (visible in the VS Code command center)
-
-```json
-// Control orientation
-"chat.viewSessions.orientation": "sideBySide"  // or "stacked", "auto"
-```
-
-### Switching and Delegating Between Agent Types (v1.108 → v1.110)
-
-VS Code now supports four agent types optimized for different workflows [^1] [^2]:
+VS Code supports four agent types optimized for different workflows [^1]:
 
 | Agent Type | Best For | Key Trait |
 |-----------|---------|----------|
@@ -161,11 +163,11 @@ VS Code now supports four agent types optimized for different workflows [^1] [^2
 | **Cloud** | Cross-repo operations at scale | GitHub-hosted infrastructure |
 | **Claude** | Complex reasoning, architecture | Anthropic SDK with thinking tokens |
 
-The session type picker lets you start in one mode and hand off to another — plan locally, then click **Continue in → Background** to let the agent implement autonomously while you continue working [^2].
+The session type picker lets you start in one mode and hand off to another — plan locally, then click **Continue in → Background** to let the agent implement autonomously while you continue working.
 
-### Background Agents with Git Worktree Isolation (v1.108)
+### Background Agents with Git Worktree Isolation
 
-Background agents run in dedicated Git worktrees, preventing conflicts with your active workspace [^3]:
+Background agents run in dedicated Git worktrees, preventing conflicts with your active workspace:
 
 - Agent creates a new worktree automatically for the session
 - Changes are committed per turn to the worktree — your main workspace is untouched
@@ -177,28 +179,26 @@ Background agents run in dedicated Git worktrees, preventing conflicts with your
 "git.worktreeIncludeFiles": ["config/local.json", ".env.local"]
 ```
 
-**New in v1.110:** Background agents now support `/compact` for manual context compaction, slash commands for prompts/hooks/skills, and session renaming [^1].
+**v1.110:** Background agents support `/compact` for manual context compaction, slash commands for prompts/hooks/skills, and session renaming [^1].
 
-### Parallel Subagents & Explore (v1.108 → v1.110)
+### Parallel Subagents & Explore (v1.110)
 
-Agents can delegate subtasks to **subagents** that operate in their own context windows [^2] [^3]. Subagents run in parallel, significantly speeding up tasks that can be split into independent parts.
+Agents can delegate subtasks to **subagents** that operate in their own context windows. Subagents run in parallel, significantly speeding up tasks that can be split into independent parts.
 
-**New in v1.110:** A dedicated **Explore subagent** handles all codebase research for the Plan agent [^1]. Explore is read-only, uses only search and file read tools, and runs on fast models (Claude Haiku 4.5, Gemini 3 Flash) by default.
+A dedicated **Explore subagent** handles all codebase research for the Plan agent [^1]. Explore is read-only, uses only search and file read tools, and runs on fast models (Claude Haiku 4.5, Gemini 3 Flash) by default.
 
 ```json
 // Override the model used by Explore
 "chat.exploreAgent.defaultModel": "claude-haiku-4-5"
 ```
 
-### Session Management (v1.109 → v1.110)
+### Session Management (v1.110 → v1.117)
 
-A new experimental welcome page surfaces your agent sessions front and center when you open VS Code [^2]:
+Fork sessions with `/fork` to branch conversations without losing context. Context compaction (`/compact`) manually summarizes history when approaching context limits. Plans persist to session memory across turns [^1].
 
 ```json
 "workbench.startupEditor": "agentSessionsWelcomePage"
 ```
-
-**New in v1.110:** Fork sessions with `/fork` to branch conversations without losing context. Context compaction (`/compact`) manually summarizes history when approaching context limits. Plans persist to session memory across turns [^1].
 
 ### Nested Subagents (v1.113)
 
@@ -218,6 +218,25 @@ When many agent sessions accumulate, sort them by **latest activity** or **creat
 - Click the sort control in the Sessions panel header
 - Options: Latest Activity (default) or Creation Date
 - Combines with existing search and status filters
+
+### Remote Copilot CLI Sessions (v1.118)
+
+Monitor and control Copilot CLI sessions remotely — from GitHub.com or a mobile device [^17]:
+
+- Start a remote session with the `/remote` command in Copilot CLI
+- Check session status, send follow-up prompts, and review outputs from any browser
+- No need to stay at the machine where the session started
+
+**CLI auto model selection** (v1.118): The system picks the optimal model per prompt and marks the response with the model used [^17].
+
+### OpenTelemetry Tracing for Chat (v1.119)
+
+Copilot Chat sessions can now emit OpenTelemetry data for monitoring, debugging, and performance tracking [^16]. This enables organizations to:
+
+- Trace agent session execution end-to-end
+- Monitor tool call latency and success rates
+- Debug agent behavior in production workflows
+- Feed traces into existing observability platforms (Datadog, Grafana, etc.)
 
 ### MCP in Copilot CLI & Claude Agents (v1.113)
 
@@ -276,9 +295,9 @@ A unified UI for managing all chat customizations in one place [^7]:
 
 Open via: **Configure Chat (gear icon)** in Chat view, or **Chat: Open Chat Customizations** from Command Palette.
 
-### Agent Skills — From Experimental to GA (v1.108 → v1.109)
+### Agent Skills
 
-Agent Skills package domain expertise into reusable folders that agents load on-demand. Skills went from experimental in v1.108 to **generally available and enabled by default** in v1.109 [^2] [^3]:
+Agent Skills package domain expertise into reusable folders that agents load on-demand. Skills are **generally available and enabled by default** [^1]:
 
 ```
 .github/skills/
@@ -291,7 +310,7 @@ Agent Skills package domain expertise into reusable folders that agents load on-
 Each `SKILL.md` has a description in its frontmatter — agents match skills to tasks automatically.
 
 ```json
-// Skills are enabled by default in v1.109+
+// Skills are enabled by default
 "chat.useAgentSkills": true,
 
 // Add custom skill locations
@@ -301,7 +320,7 @@ Each `SKILL.md` has a description in its frontmatter — agents match skills to 
 }
 ```
 
-Extension authors can also package skills using the `chatSkills` contribution point [^2].
+**v1.118:** Skills now have isolated execution contexts, keeping the main chat focused with clearer contextual separation [^17].
 
 ### Agent Plugins (Experimental, v1.110)
 
@@ -320,9 +339,9 @@ Agent Plugins are prepackaged bundles of chat customizations — skills, command
 
 Search and install plugins with `@agentPlugins` in the Extensions view or via the **Chat: Plugins** command.
 
-### Custom Agent Controls (v1.109)
+### Custom Agent Controls
 
-Custom agents (`.agent.md` files) gained powerful new attributes [^2]:
+Custom agents (`.agent.md` files) support powerful attributes [^1]:
 
 - **`user-invokable: false`** — Create agents accessible only as subagents, not from the agents dropdown
 - **`disable-model-invocation`** — Prevent an agent from being invoked automatically by other agents
@@ -341,14 +360,18 @@ user-invokable: true
 You are an experienced software architect...
 ```
 
-### Organization-Wide Instructions (v1.108 → v1.109)
+### Organization-Wide Instructions
 
-**Org-level custom agents** and **org-level custom instructions** let GitHub organizations enforce consistent AI guidance across all developers [^2] [^3]:
+**Org-level custom agents** and **org-level custom instructions** let GitHub organizations enforce consistent AI guidance across all developers [^1]:
 
 ```json
-// Enabled by default in v1.109+
+// Enabled by default
 "github.copilot.chat.organizationInstructions.enabled": true
 ```
+
+### Enterprise Organization Restrictions (v1.118)
+
+Organizations can now restrict access to Copilot chat and agent features unless developers are signed into GitHub with a membership in an approved organization [^17]. This is enforced via device policy, enabling tighter enterprise governance for AI tools.
 
 ### Create Agent Customizations from Chat (v1.110)
 
@@ -362,13 +385,13 @@ Generate agent customization files directly from conversations using `/create-*`
 
 After debugging an issue, use `/create-skill` to capture the procedure as reusable expertise. Natural language works too: "save this workflow as a skill".
 
-### `/init` — Bootstrap Your Workspace for AI (v1.109)
+### `/init` — Bootstrap Your Workspace for AI
 
-The new `/init` slash command analyzes your project structure and generates a tailored `copilot-instructions.md` or `AGENTS.md` file automatically [^2].
+The `/init` slash command analyzes your project structure and generates a tailored `copilot-instructions.md` or `AGENTS.md` file automatically [^1].
 
 ### Agent Debug Panel (Preview, v1.110 → v1.112)
 
-The new Agent Debug panel provides deep visibility into chat sessions and customization loading [^1]:
+The Agent Debug panel provides deep visibility into chat sessions and customization loading [^1]:
 
 - Real-time chat events including system prompts, tool calls, and customization events
 - See exactly which prompt files, skills, hooks, and agents are loaded for a session
@@ -412,15 +435,15 @@ This applies to all customization types: instructions, prompt files, custom agen
 <!-- 🎬 MAJOR SECTION: Claude & Anthropic Integration -->
 ## Claude & Anthropic Integration
 
-### Claude Agent (v1.109 → v1.110)
+### Claude Agent (v1.110)
 
-VS Code supports the **Claude Agent SDK** directly — delegate tasks using the Anthropic agent harness with models from your GitHub Copilot subscription [^2]. Claude Agent appears as a session type alongside Local, Background, and Cloud.
+VS Code supports the **Claude Agent SDK** directly — delegate tasks using the Anthropic agent harness with models from your GitHub Copilot subscription. Claude Agent appears as a session type alongside Local, Background, and Cloud.
 
-**New in v1.110:** Steering and queuing for mid-conversation redirects, session renaming, context window rendering with compaction, additional slash commands (`/compact`, `/agents`, `/hooks`), and significant performance improvements [^1].
+Steering and queuing for mid-conversation redirects, session renaming, context window rendering with compaction, additional slash commands (`/compact`, `/agents`, `/hooks`), and significant performance improvements [^1].
 
-### Thinking Tokens (v1.108 → v1.113)
+### Thinking Tokens (v1.110 → v1.113)
 
-Anthropic models now show **thinking tokens** — visible reasoning that shows hypothesis formation, tool selection, and error recovery in real-time [^2]:
+Anthropic models show **thinking tokens** — visible reasoning that shows hypothesis formation, tool selection, and error recovery in real-time:
 
 ```json
 // Choose detailed or compact thinking style
@@ -433,16 +456,16 @@ Anthropic models now show **thinking tokens** — visible reasoning that shows h
 "chat.tools.autoExpandFailures": true
 ```
 
-The Messages API with **interleaved thinking** enables Claude to reason between tool calls, providing more contextual multi-step responses [^2].
+**v1.113:** Configurable thinking effort directly in the model picker — no settings needed [^7]. Select a reasoning model (Claude Sonnet 4.6, GPT-5.4) and choose Low/Medium/High effort. The picker label shows the current level (e.g., "GPT-5.3-Codex · Medium").
 
-**New in v1.113:** Configurable thinking effort directly in the model picker — no settings needed [^7]. Select a reasoning model (Claude Sonnet 4.6, GPT-5.4) and choose Low/Medium/High effort. The picker label shows the current level (e.g., "GPT-5.3-Codex · Medium").
+**v1.120:** BYOK models now also support thinking effort configuration in the model picker [^15].
 
 > **Note:** The `github.copilot.chat.anthropic.thinking.budgetTokens` and `github.copilot.chat.responsesApiReasoningEffort` settings are deprecated in favor of the model picker UI.
 
-### Additional Claude Features (v1.109 → v1.113)
+### Additional Claude Features
 
-- **Tool search tool** — Helps Claude discover the most relevant tools from a large pool [^2]
-- **Context editing (Experimental)** — Clears tool results and thinking tokens from previous turns [^2]
+- **Tool search tool** — Helps Claude discover the most relevant tools from a large pool
+- **Context editing (Experimental)** — Clears tool results and thinking tokens from previous turns
 - **`getDiagnostics` tool** — Let the agent access editor and workspace problems (v1.110) [^1]
 - **Custom thinking phrases** — Customize loading text during reasoning (v1.110) [^1]
 - **Claude session listing via SDK** — Sessions now use official Claude agent SDK APIs (v1.113) [^7]
@@ -478,9 +501,9 @@ Run locally configured stdio MCP servers in a sandboxed environment on macOS and
 
 When a sandboxed server needs additional folder or domain access, VS Code prompts for permission and updates the sandbox configuration.
 
-### Terminal Sandboxing (v1.109 → v1.110)
+### Terminal Sandboxing (v1.110)
 
-OS-level sandboxing restricts agent-executed terminal commands [^2]:
+OS-level sandboxing restricts agent-executed terminal commands:
 
 - **File system**: Read/write only within the workspace directory
 - **Network**: Blocked by default; specific domains can be allowlisted
@@ -493,16 +516,18 @@ OS-level sandboxing restricts agent-executed terminal commands [^2]:
 }
 ```
 
-**New in v1.110:** Trusted domains can be selected via `allowTrustedDomains` in network settings. No installation required on macOS; Linux works without ripgrep. Improved detection with clear feedback on blocked domains [^1].
+Trusted domains can be selected via `allowTrustedDomains` in network settings. No installation required on macOS; Linux works without ripgrep [^1].
 
-### Auto-Approval & YOLO Mode (v1.108 → v1.110)
+### Command Risk Assessment (v1.120)
 
-Auto-approval has expanded progressively across releases [^1] [^2] [^3]:
+Terminal commands are now assessed for risk before execution [^15]. VS Code evaluates commands and provides warnings or additional context when a command could be destructive or have unintended side effects — adding a safety layer before agents or developers run potentially dangerous operations.
+
+### Auto-Approval & YOLO Mode (v1.110)
+
+Auto-approval enables agents to run approved commands without confirmation [^1]:
 
 | Release | New Auto-Approved Commands |
 |---------|---------------------------|
-| v1.108 | `git ls-files`, `rg`, `sed`, workspace npm scripts via `npm`/`pnpm`/`yarn` |
-| v1.109 | `Set-Location`, `dir`, `docker` (safe sub-commands), `npm`/`yarn`/`pnpm` (safe sub-commands) |
 | v1.110 | `/autoApprove` and `/yolo` slash commands for global auto-approve toggle |
 
 ```json
@@ -512,21 +537,41 @@ Auto-approval has expanded progressively across releases [^1] [^2] [^3]:
 
 **New in v1.110:** Toggle auto-approve directly from chat with `/autoApprove` or `/yolo` (and disable with `/disableAutoApprove` or `/disableYolo`) [^1].
 
-### Terminal Tool Improvements (v1.109 → v1.110)
+### Terminal Tool Improvements (v1.110 → v1.119)
 
-- **Richer command details** — Inline syntax highlighting for Python/Node/Ruby, working directory display, command intent description on hover [^2]
-- **Output streaming** — Long-running commands auto-expand to show progress; quick commands stay collapsed [^2]
-- **Interactive input** — Embedded terminals support direct typing for confirmation prompts [^2]
-- **Timeout property** — Required on all terminal tool calls; prevents hung processes [^2]
-- **Background management** — `awaitTerminal` and `killTerminal` tools for proper lifecycle control [^2]
-- **No shell history** — Agent-executed commands no longer appear in shell history (v1.108) [^3]
+- **Richer command details** — Inline syntax highlighting for Python/Node/Ruby, working directory display, command intent description on hover
+- **Output streaming** — Long-running commands auto-expand to show progress; quick commands stay collapsed
+- **Interactive input** — Embedded terminals support direct typing for confirmation prompts
+- **Timeout property** — Required on all terminal tool calls; prevents hung processes
+- **Background management** — `awaitTerminal` and `killTerminal` tools for proper lifecycle control
 - **Collapsible terminal calls** — Terminal output displayed as collapsible sections to reduce noise (v1.110) [^1]
 - **Prevent auto-suspend** — VS Code asks the OS not to suspend while chat requests run (v1.110) [^1]
+- **Interactive terminal access** (v1.119) — Agents have read/write access to open terminals for advanced automation [^16]
+- **Terminal output compression** (v1.120) — Large terminal outputs are automatically compressed to reduce context window usage [^15]
 
 ---
 
 <!-- 🎬 MAJOR SECTION: Chat UX & Productivity -->
 ## Chat UX & Productivity
+
+### Agent-Browser Tab Sharing (v1.119)
+
+Agents can now discover and request access to integrated browser tabs for real-time validation [^16]:
+
+- **Explicit sharing required** — Agents know how many tabs are open but cannot access them until you approve
+- **Multiple sharing methods** — Context picker, drag-and-drop, or accept agent requests
+- **Agent-initiated requests** — Agents can request to share a specific tab when they need to interact with it
+- **Tab reuse suggestions** — If an agent tries to open a new tab on the same domain as an existing one, VS Code prompts to reuse the current tab
+
+This enables agents to verify code changes live, reload pages, and confirm fixes without leaving the chat workflow.
+
+### Inline Diffs in Chat (v1.119)
+
+Code changes made in agent sessions are now visible as diffs directly in the chat thread [^16], making it easier to review what agents changed without switching to a separate diff view.
+
+### Markdown Diff Preview (v1.120)
+
+When reviewing diffs for Markdown files, VS Code can now show formatted content side-by-side — not just raw syntax [^15]. This improves Markdown authoring and review workflows significantly.
 
 ### Incremental Chat Rendering (Experimental, v1.117)
 
@@ -567,7 +612,7 @@ Debug web apps end-to-end without leaving VS Code [^6]:
 
 **New in v1.115:** Browser agent tools have better labels with links to target tabs, long-running script support, and reduced duplicate tab opening [^9].
 
-### Agentic Browser Tools (Experimental, v1.110 → v1.115)
+### Agentic Browser Tools (Experimental, v1.110 → v1.119)
 
 Agents can now autonomously interact with the integrated browser to validate web app changes while building them [^1]:
 
@@ -628,44 +673,60 @@ Copy only the final Markdown response, excluding tool calls and process details 
 
 New `usages` and `rename` tools leverage existing LSP capabilities for precise code navigation and refactoring [^1]. Agents should pick these up automatically, but you can hint with `#rename` or `#usages`.
 
-### Mermaid Diagrams in Chat (v1.109)
+### Mermaid Diagrams in Chat
 
-Chat responses can now render interactive Mermaid diagrams — flowcharts, sequence diagrams, and more. Pan, zoom, and open in a full-sized editor [^2].
+Chat responses can render interactive Mermaid diagrams — flowcharts, sequence diagrams, and more. Pan, zoom, and open in a full-sized editor.
 
-### Ask Questions Tool (v1.109 → v1.110)
+### Ask Questions Tool (v1.110)
 
-Instead of making assumptions, the agent can present clarifying questions with single/multi-select options, free text, and recommended answers. The **Plan agent** uses this in a structured 4-phase workflow: Discovery → Alignment → Design → Refinement [^2].
+Instead of making assumptions, the agent can present clarifying questions with single/multi-select options, free text, and recommended answers. The **Plan agent** uses this in a structured 4-phase workflow: Discovery → Alignment → Design → Refinement.
 
-**New in v1.110:** The tool moved into VS Code core for improved reliability. Send steering messages without dismissing questions first. Keyboard navigation with Alt+N/Alt+P [^1].
+The tool is built into VS Code core. Send steering messages without dismissing questions first. Keyboard navigation with Alt+N/Alt+P [^1].
 
-### Context Window & Compaction (v1.109 → v1.110)
+### Token Efficiency & Context Window (v1.110 → v1.118)
 
-A context window indicator in the chat input area shows token usage breakdown by category on hover [^2].
+A context window indicator in the chat input area shows token usage breakdown by category on hover.
 
-**New in v1.110:** Manual context compaction with `/compact` summarizes conversation history to free up space. Add instructions like `/compact focus on database decisions`. Available for local, background, and Claude sessions [^1].
+Manual context compaction with `/compact` summarizes conversation history to free up space. Add instructions like `/compact focus on database decisions`. Available for local, background, and Claude sessions [^1].
 
-### Copilot Memory (Preview, v1.109)
+**v1.118 — Major token efficiency improvements** ahead of usage-based billing [^17]:
+- **Prompt caching** now hits over 93% cache reuse with strategic cache breakpoints
+- **Cache-stable system prompts** reduce redundant token consumption
+- **Improved tool list handling** saves up to 20% more tokens per session
+- **Background compaction** runs automatically to manage long-running sessions
 
-Persistent context across sessions — the agent can store and recall important information like preferences, conventions, and project context [^2]:
+### Copilot Memory (Preview)
+
+Persistent context across sessions — the agent can store and recall important information like preferences, conventions, and project context:
 
 ```json
 "github.copilot.chat.copilotMemory.enabled": true
 ```
 
-**New in v1.110:** Plans created by the Plan agent persist to session memory and stay available across turns, including after context compaction [^1].
+Plans created by the Plan agent persist to session memory and stay available across turns, including after context compaction [^1].
 
-### Integrated Browser (Preview, v1.109)
+### Chat Session Insights (v1.118)
 
-A full integrated browser replaces the limited Simple Browser. Sign into websites, use DevTools, send elements to chat for AI assistance [^2]:
+VS Code can now generate standup reports, tips, and answer questions about past chat activity [^17] — turning chat history into practical reports for team updates or retrospective insight.
+
+### Copilot Commit Attribution (v1.118 → v1.119)
+
+**v1.118:** Git commits made with Copilot assistance include a "Co-authored-by: Copilot" trailer by default via `git.addAICoAuthor` [^17].
+
+**v1.119:** Following community feedback, this was **reverted to opt-in** — the trailer is no longer appended by default [^16].
+
+### Integrated Browser (Preview)
+
+A full integrated browser replaces the limited Simple Browser. Sign into websites, use DevTools, send elements to chat for AI assistance:
 
 ```json
 "workbench.browser.openLocalhostLinks": true,
 "simpleBrowser.useIntegratedBrowser": true
 ```
 
-### MCP Apps (v1.109)
+### Reduced Trust Interruptions (v1.119)
 
-MCP servers can display rich interactive UI in the client — flame graphs, custom visualizations, and more [^2].
+Fewer prompts for network access or temporary folder usage [^16], streamlining workflows and allowing agents to operate with fewer interruptions.
 
 ### Chat UX Improvements (v1.110)
 
@@ -675,42 +736,33 @@ MCP servers can display rich interactive UI in the client — flame graphs, cust
 - **Inline chat affordance** — Easier access to inline chat via `inlineChat.affordance` (editor or gutter) [^1]
 - **Edit mode deprecated** — Agent mode now handles everything; edit mode hidden by default [^1]
 
-### External Indexing for Non-GitHub Workspaces (v1.109)
-
-Workspaces not hosted on GitHub can now be remotely indexed for fast semantic search (`#codebase`), providing the same code search experience as GitHub-hosted repos [^2].
-
-### Language Models Editor (v1.108 → v1.109)
-
-A centralized editor for managing all language models — toggle visibility, add providers, configure API keys, manage multiple configurations per provider [^2] [^3]. Model configurations are now stored in a dedicated `chatLanguageModels.json` file.
-
-### Inline Chat UX Revamp (v1.108 → v1.110)
-
-Inline chat is optimized for quick single-file code changes, with a lightweight contextual rendering mode [^2] [^3]. In v1.110, inline chat queues messages into existing agent sessions when files have pending changes [^1].
-
 ---
 
 ## 🧠 Mental Model Shift
 
-> **The Core Insight:** From **one AI assistant you converse with** to **a team of autonomous AI agents you orchestrate — with Autopilot, they work independently until tasks complete**
+> **The Core Insight:** From **one AI assistant you converse with** to **a team of autonomous AI agents you orchestrate — with Autopilot, observable via OpenTelemetry, manageable from the Agents Window, and optimized for token efficiency**
 
 ### Move Toward ✅
 
 - ✅ **Autopilot mode**: Let agents work autonomously; enable Autopilot for complex multi-step tasks
-- ✅ **VS Code Agents app**: Run parallel sessions across repos with the new companion app (Insiders)
+- ✅ **Agents Window**: Manage agent sessions across repos from a dedicated window (now in Stable preview)
 - ✅ **Multi-session workflows**: Plan locally → implement in background → review worktree diff → merge selectively
 - ✅ **Domain-specific Skills**: Capture team expertise once in `SKILL.md` files; agents apply it automatically
 - ✅ **Visible reasoning**: Use thinking effort picker (Low/Medium/High) on complex tasks
-- ✅ **Sandboxed autonomy**: Enable Autopilot with MCP server sandboxing for safe autonomous operation
-- ✅ **Organization consistency**: Org-level agents and instructions enforce standards across teams
+- ✅ **Sandboxed autonomy**: Enable Autopilot with MCP server sandboxing and command risk assessment for safe operation
+- ✅ **Organization consistency**: Org-level agents, instructions, and enterprise restrictions enforce standards across teams
 - ✅ **Agent Plugins**: Install prepackaged customizations from Extensions view for instant capability boosts
-- ✅ **Browser debugging**: Let agents debug web apps autonomously with integrated browser
+- ✅ **Browser debugging**: Let agents debug web apps autonomously — share specific browser tabs for live validation
+- ✅ **Token awareness**: Leverage prompt caching (93%+ hit rate) and background compaction ahead of usage-based billing
+- ✅ **Observability**: Enable OpenTelemetry tracing for agent sessions to monitor and debug AI workflows
 
 ### Move Away From ⚠️
 
-- ⚠️ **Single long conversations**: Context overflow degrades quality; use subagents and session handoffs instead
+- ⚠️ **Single long conversations**: Context overflow degrades quality; use subagents, session handoffs, and `/compact` instead
 - ⚠️ **Manual approval fatigue**: Use Bypass Approvals or Autopilot instead of clicking "allow" 50 times
 - ⚠️ **Per-developer customization**: Use Chat Customizations editor for unified management
 - ⚠️ **Separate tool configs**: Monorepo discovery shares customizations automatically
+- ⚠️ **Ignoring token costs**: With usage-based billing approaching, leverage prompt caching and compaction
 
 ### Move Against 🛑
 
@@ -722,12 +774,13 @@ Inline chat is optimized for quick single-file code changes, with a lightweight 
 ## ✅ What You Can Do Today
 
 **Immediate (5 minutes):**
-- [ ] Update VS Code to v1.117+
+- [ ] Update VS Code to v1.120+
 - [ ] Check BYOK availability: ask your Copilot Enterprise admin to enable the "Bring Your Own Language Model Key" policy
 - [ ] Try Autopilot: enable `"chat.autopilot.enabled": true`, then select Autopilot in permissions picker
 - [ ] Try `/init` to bootstrap workspace instructions for your project
 - [ ] Use the thinking effort picker in model selector (Low/Medium/High)
 - [ ] Try `/fork` to branch a conversation for exploring alternatives
+- [ ] Check `git.addAICoAuthor` setting — now opt-in after the v1.119 revert
 
 **Short-Term (30 minutes):**
 - [ ] If BYOK is enabled for your org, add a provider via model picker → Manage Models… and compare responses
@@ -738,15 +791,18 @@ Inline chat is optimized for quick single-file code changes, with a lightweight 
 - [ ] Create your first Agent Skill in `.github/skills/` for a common team pattern
 - [ ] Use `/compact` to manually compact a long conversation
 - [ ] Try `/troubleshoot #session` to diagnose a previous chat session
+- [ ] Share a browser tab with an agent to validate a web change live
 
 **Explore Further (1 hour):**
+- [ ] Try the Agents Window (now in Stable preview) for multi-project agent orchestration
 - [ ] Enable nested subagents: `"chat.subagents.allowInvocationsFromSubagents": true`
 - [ ] Enable monorepo customization discovery: `"chat.useCustomizationsInParentRepositories": true`
-- [ ] Try VS Code Agents app (Insiders): Command Palette → **Chat: Open Agents Application**
 - [ ] Enable background terminal notifications: `"chat.tools.terminal.backgroundNotifications": true`
 - [ ] Use `/create-skill` to extract a debugging workflow from a conversation
 - [ ] Try integrated browser debugging with `"workbench.browser.enableChatTools": true`
 - [ ] Enable Copilot Memory: `"github.copilot.chat.copilotMemory.enabled": true`
+- [ ] Set up OpenTelemetry tracing for agent sessions if your org uses an observability platform
+- [ ] Try remote Copilot CLI: start a session with `/remote` and monitor from GitHub.com
 
 ---
 
@@ -757,7 +813,6 @@ Quick reference for all settings mentioned in this talk:
 ```json
 {
   // Agent Sessions & Orchestration
-  "chat.viewSessions.orientation": "sideBySide",
   "git.worktreeIncludeFiles": [],
   "chat.exploreAgent.defaultModel": "claude-haiku-4-5",
 
@@ -788,13 +843,16 @@ Quick reference for all settings mentioned in this talk:
   "chat.subagents.allowInvocationsFromSubagents": true,
   "chat.useCustomAgentHooks": true,
 
-  // BYOK & Model Management (v1.117) — no settings; admin enables via GitHub.com
+  // BYOK & Model Management (v1.117+) — no settings; admin enables via GitHub.com
   // Add providers via: Chat model picker → Manage Models…
 
   // Incremental Rendering (v1.117)
   "chat.experimental.incrementalRendering.enabled": true,
   "chat.experimental.incrementalRendering.animationStyle": "fade",
   "chat.experimental.incrementalRendering.buffering": "off",
+
+  // Commit Attribution (v1.118 default, v1.119 opt-in)
+  "git.addAICoAuthor": false,
 
   // Productivity
   "github.copilot.chat.copilotMemory.enabled": true,
@@ -827,10 +885,6 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 
 [^1]: **[VS Code Release Notes: February 2026 (v1.110)](https://code.visualstudio.com/updates/v1_110)** — Agent Plugins, agentic browser tools, context compaction, session forking, /create-* commands, Explore subagent
 
-[^2]: **[VS Code Release Notes: January 2026 (v1.109)](https://code.visualstudio.com/updates/v1_109)** — Chat UX, Agent Sessions, Agent Customization, Claude Agent, terminal sandboxing, Copilot Memory, MCP Apps
-
-[^3]: **[VS Code Release Notes: December 2025 (v1.108)](https://code.visualstudio.com/updates/v1_108)** — Agent Skills experimental, Agent Sessions view, terminal IntelliSense rework, housekeeping
-
 [^4]: **[GitHub Copilot in VS Code Documentation](https://code.visualstudio.com/docs/copilot/overview)** — Comprehensive guide to Copilot features, agent types, and customization
 
 [^5]: **[VS Code Release Notes: March 9, 2026 (v1.111)](https://code.visualstudio.com/updates/v1_111)** — Weekly releases begin, Autopilot mode, agent permissions picker, agent-scoped hooks, debug events snapshot
@@ -845,6 +899,12 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 
 [^14]: **[VS Code Release Notes: April 22, 2026 (v1.117)](https://code.visualstudio.com/updates/v1_117)** — BYOK (Bring Your Own Key) for Copilot Business/Enterprise, incremental chat rendering, agent session sorting, Copilot CLI from any terminal profile
 
+[^17]: **[VS Code Release Notes: April 29, 2026 (v1.118)](https://code.visualstudio.com/updates/v1_118)** — Remote Copilot CLI, token efficiency (93%+ prompt cache hit), enterprise org restrictions, CLI auto model selection, Co-authored-by trailer
+
+[^16]: **[VS Code Release Notes: May 6, 2026 (v1.119)](https://code.visualstudio.com/updates/v1_119)** — Agent-browser tab sharing, OpenTelemetry tracing for chat, inline diffs in chat, commit attribution revert, reduced trust interruptions
+
+[^15]: **[VS Code Release Notes: May 13, 2026 (v1.120)](https://code.visualstudio.com/updates/v1_120)** — Agents Window (Stable preview), command risk assessment, terminal output compression, BYOK thinking effort, Markdown diff preview
+
 [^10]: **[Agent Plugins Documentation](https://code.visualstudio.com/docs/copilot/customization/agent-plugins)** — Installing and creating agent plugin bundles
 
 [^11]: **[Agent Skills Documentation](https://code.visualstudio.com/docs/copilot/customization/agent-skills)** — Creating and using Agent Skills in VS Code
@@ -857,26 +917,23 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 
 ## 🎭 Behind the Scenes
 
-### The Copilot Extension Unification
-
-In v1.108, inline suggestions began being served from the GitHub Copilot **Chat** extension. By v1.109, the original GitHub Copilot extension was **fully deprecated** and auto-uninstalled on update [^2]. All AI functionality now lives in a single extension: GitHub Copilot Chat.
-
 ### Weekly Releases (v1.111+)
 
 Starting with v1.111 (March 9, 2026), VS Code transitioned to **weekly stable releases** instead of monthly. This enables faster feature delivery and bug fixes, but means staying current requires more frequent updates [^5].
 
+### Usage-Based Billing (June 2026)
+
+GitHub Copilot is shifting to usage-based billing on June 1, 2026. The token efficiency improvements in v1.118 (93%+ prompt caching, background compaction) directly address this by reducing per-session token consumption [^17].
+
 ### Engineering Highlights
 
-- **v1.108 Housekeeping**: The VS Code team closed **5,951 issues** across all repositories, including 2,872 in the core `microsoft/vscode` repo and 1,659 in `microsoft/vscode-copilot-release` [^3]
 - **TypeScript 6.0.3 patch** (v1.117): Resolves import-related bugs introduced in 6.0 [^14]
 - **TypeScript-Go (tsgo)**: VS Code now defaults to TSGo for development, with built-in extensions compiling in under a second [^1]
 - **Extension bundling with esbuild**: Most built-in extensions migrated from webpack to esbuild for faster builds [^1]
-- **macOS DMG installer**: VS Code ships DMG images for native drag-and-drop installation [^2]
-- **Windows 11 context menu**: Right-click in File Explorer now shows VS Code in the top-level context menu [^2]
 - **Kitty graphics protocol**: Terminal now supports high-fidelity image rendering (v1.110) [^1]
-- **Modal editors**: Experimental floating editor experience for Settings, Keyboard Shortcuts, etc. (v1.110) [^1]
-- **Edit mode deprecated**: Hidden by default in v1.110, fully removed in v1.125 [^1]
+- **Edit mode deprecated**: Hidden by default in v1.110 [^1]
 - **Autopilot architecture** (v1.111): Autopilot builds on the existing bypass-approvals flow with a new state machine for autonomous operation — retry on failure, auto-respond to tool results, and completion detection [^5]
 - **VS Code Agents app** (v1.115): The standalone companion app shares VS Code's core runtime, enabling parallel agent sessions without consuming IDE resources [^9]
+- **Agents Window in Stable** (v1.120): Moved from Insiders-only to Stable preview, signaling agent-driven development is ready for mainstream adoption [^15]
 - **TypeScript 6.0 support** (v1.114): Full semantic support for new TS 6.0 features including improved type inference [^8]
 - **Simplified #codebase** (v1.114): Pure semantic search replaces fuzzy fallback, reducing false positives for large codebases [^8]

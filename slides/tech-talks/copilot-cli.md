@@ -13,7 +13,7 @@ title: "GitHub Copilot CLI: AI at the Point of Work"
 mdc: true
 section: Developers
 status: active
-updated: 2026-05-05
+updated: 2026-06-04
 ---
 
 <script setup>
@@ -25,395 +25,569 @@ import BeforeAfterSlide from './components/structure/BeforeAfterSlide.vue'
 import WhatYouCanDoTodaySlide from './components/structure/WhatYouCanDoTodaySlide.vue'
 import ReferencesSlide from './components/structure/ReferencesSlide.vue'
 import ThankYouSlide from './components/structure/ThankYouSlide.vue'
-import BeforeAfterMetricsSlide from './components/BeforeAfterMetricsSlide.vue'
-import BeforeAfterPanelsSlide from './components/BeforeAfterPanelsSlide.vue'
-import ProblemSolutionOutcomeSlide from './components/ProblemSolutionOutcomeSlide.vue'
-import TwoColPairedConceptsSlide from './components/TwoColPairedConceptsSlide.vue'
-import ThreeColumnCardSlide from './components/ThreeColumnCardSlide.vue'
-import FourCardGridSlide from './components/FourCardGridSlide.vue'
-import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
 import HeroStatSlide from './components/HeroStatSlide.vue'
 import WorkflowShowdownStepsSlide from './components/WorkflowShowdownStepsSlide.vue'
+import TwoColPairedConceptsSlide from './components/TwoColPairedConceptsSlide.vue'
+import FourCardGridSlide from './components/FourCardGridSlide.vue'
 import AITerminalTranscriptSlide from './components/AITerminalTranscriptSlide.vue'
+import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
+import ThreeColumnCardSlide from './components/ThreeColumnCardSlide.vue'
+import ProblemSolutionOutcomeSlide from './components/ProblemSolutionOutcomeSlide.vue'
 </script>
 
 <!-- SLIDE: Title -->
+# Title
 <TitleSlide
-  title="GitHub Copilot CLI"
-  subtitle="AI at the Point of Work"
-  tagline="Think anywhere. Steer anywhere. Learn always."
-  meta="45 min · Developers & DevOps Engineers"
+  title="GitHub Copilot CLI: At the Point of Work"
+  subtitle="Close Every Gap Between You and the Work"
+  tagline="Think anywhere. Steer anywhere. Learn always. Act autonomously."
+  meta="CopilotTraining Tech Talk · 2026"
 />
 
 ---
 
 <!-- SLIDE: Core Question -->
+# Core Question
 <CoreQuestionSlide
-  question="How do I bring AI to where the work actually is — and keep steering it from wherever I am?"
-  subtext="The terminal sees everything VS Code can&#39;t —"
-  highlight="what unlocks when AI can follow you into the ~70% of your day that happens outside the editor?"
+  question="What unlocks when AI follows you everywhere you work?"
+  subtext="Copilot isn't just an IDE feature — it's an agent you can direct from"
+  highlight="any device, any machine, any stage of the pipeline."
   :cards='[
-    {"icon": "👩‍💻", "title": "Developer", "description": "Your AI assistant can&#39;t see the container logs, the CI failure, or the env var mismatch — it only sees source files."},
-    {"icon": "🛠️", "title": "DevOps Engineer", "description": "Incidents happen on servers you can&#39;t always reach. Log forensics, CI triage, and container debugging need AI where data lives."},
-    {"icon": "⚡", "title": "CLI Power User", "description": "You already live in the terminal. The question is whether AI can meet you there without slowing you down."},
-    {"icon": "⏱️", "title": "~70% of dev time", "description": "spent outside the editor on debugging, deployments, log analysis, CI triage — Atlassian DevEx 2025"},
-    {"icon": "🔄", "title": "8→2 debug attempts", "description": "Plan Mode catches misunderstandings before implementation — collaborative planning replaces trial-and-error"},
-    {"icon": "⚡", "title": "25→5 min CI/CD", "description": "Programmatic mode drops build failure investigation from 25 minutes to 5 with zero human intervention"}
+    { icon: "🔧", title: "Backend Developer", description: "Discover what&#39;s possible outside the editor — debug, deploy, triage with AI" },
+    { icon: "🚀", title: "DevOps Engineer", description: "Run AI sessions on remote machines, in CI/CD, and across parallel workloads" },
+    { icon: "🧑‍💼", title: "Tech Lead", description: "Build AI systems shaped by how your team works — that execute without asking" },
+    { title: "~70% of dev time", description: "is outside the editor — debugging, deployments, log analysis, CI triage" },
+    { title: "45 min → 8 min", description: "Docker debug collapse with Plan Mode + Rubber Duck cross-model review" },
+    { title: "30 sec standup", description: "Generated from session history by /chronicle — everyday value, no extra work" }
   ]'
 />
 
 ---
 
-<!-- SLIDE: TOC -->
+<!-- SLIDE: Table of Contents -->
+# Table of Contents
 <TocSlide
-  title="GitHub Copilot CLI"
-  subtitle="Think Before You Build → Work From Anywhere → Sessions That Learn → Scale Beyond Yourself"
   :sections='[
-    {"icon": "🧠", "title": "Think Before You Build", "blurb": "Close the intent gap — Plan Mode asks before it acts, aligns before it generates", "slide": 4},
-    {"icon": "📱", "title": "Work From Anywhere", "blurb": "Close the geography gap — modes, remote sessions, CI/CD automation", "slide": 7},
-    {"icon": "♾️", "title": "Sessions That Learn", "blurb": "Close the memory gap — /chronicle standup, tips, instruction proposals", "slide": 12},
-    {"icon": "⚡", "title": "Scale Beyond Yourself", "blurb": "Close the reach gap — agents, /fleet fan-out, custom agents and plugins", "slide": 17}
+    { icon: "🎯", title: "Think Before You Build", subtitle: "Close the Intent gap", blurb: "Plan Mode, Rubber Duck, and the 70% of your day outside the editor", slide: 4 },
+    { icon: "📱", title: "Work From Anywhere", subtitle: "Close the Geography gap", blurb: "Phone steering, remote sessions, and CI/CD integration", slide: 9 },
+    { icon: "🧠", title: "Sessions That Learn", subtitle: "Close the Memory gap", blurb: "/chronicle: standup in 30s, personalized tips, and improved instructions", slide: 14 },
+    { icon: "⏰", title: "Scale Beyond Yourself", subtitle: "Close the Reach gap", blurb: "Scheduled Prompts, /fleet fan-out, and cloud delegation", slide: 19 }
   ]'
 />
 
 ---
 
-<!-- SLIDE: Part 1 Opener -->
+<!-- SLIDE: Part 1 — Think Before You Build -->
+# Part 1 — Think Before You Build
 <SectionOpenerSlide
   :partNumber="1"
-  pillIcon="🧠"
-  pillLabel="Think Before You Build"
   title="Think Before You Build"
-  subtitle="Close the intent gap — most AI failures start with misunderstood intent, not bad code."
+  subtitle="Close the Intent gap: AI follows you into the 70% of your day that happens outside the editor"
   :cards='[
-    {"icon": "🎯", "title": "Ask Before Acting", "blurb": "Plan Mode asks clarifying questions — like a senior engineer would."},
-    {"icon": "🔄", "title": "8 Attempts → 2", "blurb": "Aligned intent eliminates the guess-and-check cycle."},
-    {"icon": "⚡", "title": "45 min → 8 min", "blurb": "Docker root cause found on the second targeted check."}  ]'
-  :terminal='{"context": "$ copilot (Shift+Tab)", "detail": "Plan Mode — collaborative planning replaces trial-and-error"}'
+    { icon: "🎯", title: "Plan Mode", blurb: "Q&A before coding — catches wrong assumptions early" },
+    { icon: "🦆", title: "Rubber Duck", blurb: "Cross-model plan review — default-on since v1.0.58" },
+    { icon: "⚡", title: "The Collapse", blurb: "8 attempts → 2 · 45 min → 8 min Docker debug" }
+  ]'
+  :terminal='{ context: "copilot --plan", detail: "8 attempts → 2 · 45 min → 8 min" }'
+/>
+
+<!-- Phase B S1: high — 4 body slides -->
+
+---
+
+<!-- SLIDE: The 70% You're Missing -->
+# The 70% You're Missing
+<HeroStatSlide
+  :partNumber="1"
+  pillIcon="⏱️"
+  pillLabel="Think Before You Build · The Gap"
+  title="AI Follows You to the 70%"
+  subtitle="The IDE sees code. The terminal sees everything that's running."
+  :hero='{ value: "~70%", label: "of developer time is outside the editor", source: "Atlassian State of Developer Experience 2025" }'
+  :supporting='[
+    { icon: "🐛", title: "Debugging failures", description: "Container logs, process state, environment vars — in the terminal, not source files" },
+    { icon: "🚀", title: "Deployments & CI triage", description: "Build failures, pipeline logs, rollout verification — at the shell" },
+    { icon: "📊", title: "Log analysis", description: "12GB of access logs on a production server — analyze where they live" },
+    { icon: "🔍", title: "Infrastructure triage", description: "Network connectivity, disk state, service health — runtime visibility" }
+  ]'
+  :insight='{ icon: "💡", text: "What unlocks when AI follows you into these spaces?" }'
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: Plan Mode Workflow -->
+<!-- SLIDE: Plan Mode — Questions Before Code -->
+# Plan Mode — Questions Before Code
 <WorkflowShowdownStepsSlide
   :partNumber="1"
-  pillIcon="🧠"
-  pillLabel="Think Before You Build"
-  title="Plan Mode: Align First, Implement Second"
-  :progressDots='{"current": 1, "total": 2, "activeColor": "bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
-  leftLabel="Without Plan Mode"
-  rightLabel="With Plan Mode (Shift+Tab)"
+  pillIcon="🎯"
+  pillLabel="Think Before You Build · Plan Mode"
+  title="Plan Mode: Questions Before Code"
+  subtitle="From trial-and-error to collaborative strategy"
+  leftLabel="Traditional Workflow"
+  rightLabel="With Plan Mode"
   :steps='[
-    {"left": {"label": "Describe the feature or bug"}, "right": {"label": "Describe the feature or bug"}},
-    {"left": {"label": "AI guesses at intent, generates code"}, "right": {"label": "AI asks 2–3 clarifying questions"}},
-    {"left": {"label": "Review, find wrong assumptions, iterate"}, "right": {"label": "You answer — AI proposes a plan"}},
-    {"left": {"label": "Repeat 6–8 more times to converge"}, "right": {"label": "Approve the plan — AI implements"}}
+    { left: { label: "Describe what you need", note: "AI picks one interpretation" }, right: { label: "Describe what you need", note: "AI asks clarifying questions first" } },
+    { left: { label: "AI generates solution", note: "Assumes intent, no alignment check" }, right: { label: "Collaborate on the plan", note: "Ambiguity resolved before any code runs" } },
+    { left: { label: "You review and fix", note: "Discover wrong assumptions late" }, right: { label: "AI executes the approved plan", note: "Confidence earned through alignment" } },
+    { left: { label: "Repeat until it works", note: "Average: 8 attempts" }, right: { label: "Done", note: "Average: 2 attempts" } }
   ]'
-  :outcomeLeft='{"label": "45 min, 8 failed attempts"}'
-  :outcomeRight='{"label": "8 min, root cause found"}'
+  :outcomeLeft='{ icon: "🔄", label: "Repeat ×8 — 45 min Docker debug" }'
+  :outcomeRight='{ icon: "✓", label: "2 attempts — 8 minutes" }'
+  summaryMetric="8 attempts → 2 · 45 min → 8 min with Plan Mode"
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: Docker Debug Demo -->
-<AITerminalTranscriptSlide
+<!-- SLIDE: Rubber Duck — The Automation Arc Begins -->
+# Rubber Duck — The Automation Arc Begins
+<TwoColPairedConceptsSlide
   :partNumber="1"
-  pillIcon="🐳"
-  pillLabel="Think Before You Build"
-  title="Plan Mode in Action — Docker Debugging"
-  :progressDots='{"current": 2, "total": 2, "activeColor": "bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
-  :transcript='[
-    {"type": "prompt", "text": "Debug why the backend container won&#39;t start"},
-    {"type": "thinking"},
-    {"type": "response", "lines": ["Should I check docker-compose config, container logs, or both?", "Do you want environment variable analysis included?", "Start with network config or service dependencies?"]},
-    {"type": "user", "text": "Start with logs, then check config if needed"},
-    {"type": "response", "lines": ["Plan: (1) Retrieve container logs", "(2) Analyze error patterns and stack traces", "(3) Inspect docker-compose.yml if logs suggest config issue", "Proceed? (y/n)"]},
-    {"type": "user", "text": "y"},
-    {"type": "outcome", "text": "Found: Port 5000 mapped to 5001. Fix: change ports from 5001:5000 to 5000:5000"}
-  ]'
-  footerMetric="Two targeted checks, one root cause — questions first eliminated 6 wasted attempts"
+  pillIcon="🦆"
+  pillLabel="Think Before You Build · Rubber Duck"
+  title="The First Step in the Automation Arc"
+  :left='{
+    header: "Plan Mode",
+    icon: "🎯",
+    items: [
+      { title: "Human-explicit intent", detail: "You steer with Q&A before any code is written" },
+      { title: "Senior engineer questions", detail: "Catches wrong assumptions before they compound" },
+      { title: "Shift+Tab or /goal", detail: "Available in any interactive session" }
+    ]
+  }'
+  :right='{
+    header: "Rubber Duck",
+    icon: "🦆",
+    items: [
+      { title: "Automated-explicit review", detail: "A second model reviews the plan you just approved" },
+      { title: "Different model family", detail: "GPT-5.4 reviews when primary is Claude — catches different blind spots" },
+      { title: "Default-on since v1.0.58", detail: "Closes ~75% of quality gap vs top-tier models" }
+    ]
+  }'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: Part 2 Opener -->
+<!-- SLIDE: Four Operating Modes -->
+# Four Operating Modes
+<FourCardGridSlide
+  :partNumber="1"
+  pillIcon="🗺️"
+  pillLabel="Think Before You Build · Modes"
+  title="Four Ways to Work with Copilot CLI"
+  :cards='[
+    { icon: "💬", title: "Interactive", description: "Conversational sessions — Plan Mode, steering, context-aware debugging (default)" },
+    { icon: "🤖", title: "Programmatic", description: "Headless execution for CI/CD pipelines via copilot -p — stateless, structured output" },
+    { icon: "☁️", title: "Cloud Delegation", description: "Background execution via & prefix — IDE and terminal stay completely free" },
+    { icon: "📱", title: "Remote", description: "Steer any session from any device via URL or QR code with --remote" }
+  ]'
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
+
+---
+
+<!-- SLIDE: Part 2 — Work From Anywhere -->
+# Part 2 — Work From Anywhere
 <SectionOpenerSlide
   :partNumber="2"
-  pillIcon="📱"
-  pillLabel="Work From Anywhere"
   title="Work From Anywhere"
-  subtitle="Close the geography gap — the session follows you across machines, devices, and disconnects."
+  subtitle="Close the Geography gap: steer from any device, any machine, any pipeline"
   :cards='[
-    {"icon": "📱", "title": "Sessions, Not Terminals", "blurb": "Terminals are viewports. Sessions are the work unit."},
-    {"icon": "🌐", "title": "--remote Flag", "blurb": "Steer from GitHub.com or Mobile via URL/QR code."},
-    {"icon": "⚡", "title": "25 min → 5 min", "blurb": "CI/CD triage with zero human intervention."}
+    { icon: "📱", title: "Phone Steering", blurb: "Live prod AI session steered from phone — 60-second reveal" },
+    { icon: "🌐", title: "Remote Mode", blurb: "QR code or URL handoff — zero reconnect friction" },
+    { icon: "🔒", title: "Permission Safety", blurb: "Per-tool approval, never --yolo; enforce with policy config" }
   ]'
-  :terminal='{"context": "$ copilot --remote", "detail": "60-second demo — steer from your phone before explaining how"}'
+  :terminal='{ context: "copilot --remote", detail: "Session live on prod-api-02 · steering from mobile" }'
 />
+
+<!-- Phase B S2: high — 4 body slides -->
 
 ---
 
-<!-- SLIDE: Remote Cold Open -->
-<HeroStatSlide
+<!-- SLIDE: Phone Steering Reveal -->
+# Phone Steering Reveal
+<AITerminalTranscriptSlide
   :partNumber="2"
   pillIcon="📱"
-  pillLabel="Work From Anywhere"
-  title="A Phone. A Production Server. One Session."
-  subtitle="Start on any machine. Steer from any device."
-  :hero='{"value": "--remote", "label": "one flag that closes the geography gap"}'
-  :supporting='[
-    {"icon": "📱", "title": "Any device", "description": "GitHub.com, GitHub Mobile, or any browser — full live session control from anywhere"},
-    {"icon": "🔒", "title": "Logs stay on-machine", "description": "12GB of auth logs analyzed where they live — no scp, no data transfer, no compliance risk"},
-    {"icon": "🔗", "title": "Session continuity", "description": "Phone connects to the same session — context, history, and running commands all intact"}
+  pillLabel="Work From Anywhere · The Reveal"
+  title="A Phone Controlling a Production AI Session"
+  subtitle="60 seconds. No context. No preamble. Just a phone and a live server."
+  :transcript='[
+    { type: "prompt", text: "copilot --remote" },
+    { type: "response", lines: ["✓ Session started on prod-api-02", "✓ Remote URL: https://copilot.github.com/s/a4f7", "✓ QR code displayed — scan to connect from any device"] },
+    { type: "divider" },
+    { type: "user", text: "The auth service is returning 503. Debug it." },
+    { type: "thinking" },
+    { type: "response", lines: ["[runs: docker logs auth-service --tail 50]", "[runs: docker exec auth-service env | grep JWT]"] },
+    { type: "outcome", text: "Found: JWT_SECRET missing from staging container env" },
+    { type: "outcome", text: "Remediation plan ready — approve from your phone?" }
   ]'
-  :insight='{"icon": "💡", "text": "SSH moves your keystrokes. --remote moves a reasoning session."}'
-  :progressDots='{"current": 1, "total": 4, "activeColor": "bg-blue-400 shadow-lg shadow-blue-500/50"}'
+  footerMetric="Session lives on the server · you steer from wherever you are"
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: Operating Modes -->
-<ThreeColumnCardSlide
+<!-- SLIDE: SSH vs Remote — Paradigm Shift -->
+# SSH vs Remote — Paradigm Shift
+<TwoColPairedConceptsSlide
   :partNumber="2"
-  pillIcon="⚙️"
-  pillLabel="Work From Anywhere"
-  title="Four Ways to Engage a Session"
-  :progressDots='{"current": 2, "total": 4, "activeColor": "bg-blue-400 shadow-lg shadow-blue-500/50"}'
-  :columns='[
-    {"icon": "💻", "title": "Interactive", "items": ["Conversational, persistent context", "Plan Mode + real-time steering", "Best for: debugging, exploration, unknown root causes", "Use /ide to open files in VS Code mid-session"]},
-    {"icon": "⚙️", "title": "Programmatic", "items": ["Headless, stateless single-command", "Structured output for pipelines", "Best for: CI/CD, build failure analysis", "25 min → 5 min automated triage"]},
-    {"icon": "☁️", "title": "Cloud Delegation", "items": ["Background execution in GitHub&#39;s cloud", "IDE and terminal stay completely free", "Best for: security audits, large refactors", "PR created when agent finishes"]}
-  ]'
+  pillIcon="🌐"
+  pillLabel="Work From Anywhere · Remote Architecture"
+  title="SSH Moves You. --remote Moves the AI."
+  :left='{
+    header: "SSH Approach",
+    icon: "🖥️",
+    items: [
+      "You physically move to the machine",
+      "Context lost on disconnect",
+      "One device, one session",
+      "Copy-paste to share logs or findings"
+    ]
+  }'
+  :right='{
+    header: "--remote Session",
+    icon: "📱",
+    items: [
+      "AI session lives where the problem is",
+      "Session persists across disconnects",
+      "Any device is a viewport — phone, tablet, browser",
+      { title: "Public preview since 2026-04-13", detail: "docs.github.com/en/copilot/how-tos/copilot-cli/steer-remotely" }
+    ]
+  }'
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: CI/CD Automation -->
+<!-- SLIDE: CI/CD Integration -->
+# CI/CD Integration
 <CodeWithFeaturesSlide
   :partNumber="2"
-  pillIcon="🔁"
-  pillLabel="Work From Anywhere"
-  title="CI/CD Build Failure — Zero Human Intervention"
-  :progressDots='{"current": 3, "total": 4, "activeColor": "bg-blue-400 shadow-lg shadow-blue-500/50"}'
-  :code='{"language": "yaml", "content": "- name: Analyze with Copilot CLI\n  if: failure()\n  run: |\n    copilot -p Analyze build failure and suggest fixes\n      --allow-tool shell(gh)\n      --allow-tool shell(git)\n      > failure-analysis.txt", "filename": ".github/workflows/build.yml"}'
+  pillIcon="⚙️"
+  pillLabel="Work From Anywhere · CI/CD"
+  title="Programmatic Mode: AI in Your Pipeline"
   codePosition="left"
+  :code='{ language: "yaml", filename: ".github/workflows/build.yml", content: "- name: Analyze failure\n  if: failure()\n  run: |\n    copilot -p \u201cAnalyze the build failure.\n      Check recent commits and error patterns.\n      Suggest specific fixes.\u201d \\\n      --allow-tool \u201cshell(gh)\u201d \\\n      --allow-tool \u201cshell(git)\u201d \\\n      > analysis.txt\n- name: Post as PR comment\n  if: failure()\n  run: |\n    gh pr comment $PR_NUMBER \\\n      --body-file analysis.txt" }'
   :features='[
-    {"icon": "⚡", "title": "25 min → 5 min", "description": "Build failure investigation time with automated pattern recognition across historical failures"},
-    {"icon": "🤖", "title": "Zero human intervention", "description": "Runs only on failure, posts analysis as a PR comment — no developer action required"},
-    {"icon": "🔒", "title": "--allow-tool scoping", "description": "Explicit permission grants per tool — never blanket access in production pipelines"}
+    { icon: "🤖", title: "Headless execution", description: "copilot -p — non-interactive, stateless, designed for pipelines" },
+    { icon: "🔒", title: "Scoped permissions", description: "--allow-tool pins exactly what the agent can touch" },
+    { icon: "📊", title: "25 min → 5 min", description: "Build failure investigation — from manual to automated" }
   ]'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: Log Forensics -->
-<BeforeAfterPanelsSlide
+<!-- SLIDE: Permission Safety -->
+# Permission Safety
+<ThreeColumnCardSlide
   :partNumber="2"
-  pillIcon="🔍"
-  pillLabel="Work From Anywhere"
-  title="Log Forensics Without Data Transfer"
-  :progressDots='{"current": 4, "total": 4, "activeColor": "bg-blue-400 shadow-lg shadow-blue-500/50"}'
-  :before='{"header": "Old Approach", "items": ["scp a subset of logs to your laptop", "grep locally — lose context on the full picture", "Sensitive data leaves the production boundary", "12GB logs too large to download at all"]}'
-  :after='{"header": "With --remote", "items": ["copilot --remote on the log server — AI lives where the logs live", "Analyze 24 hours of auth logs, find credential-stuffing patterns, recommend WAF rules", "Logs never leave the machine — PII stays within the production boundary", "Local analysis is orders of magnitude faster than transfer"]}'
+  pillIcon="🔒"
+  pillLabel="Work From Anywhere · Permission Safety"
+  title="Permission Safety: The Right Level for Every Context"
+  :columns='[
+    { icon: "🖱️", title: "Per-Tool Approval", description: "Approve each action individually — default and safest", items: ["Reject with inline feedback", "Approve for session to auto-approve same-type actions", "Runs in dev and staging safely"] },
+    { icon: "🚫", title: "Never --yolo in Prod", description: "Blanket approval = agent has prod access if you&#39;re authenticated there", items: ["--allow-all-tools = full access", "--yolo is its alias", "Only in sandboxed or trusted envs"] },
+    { icon: "🏢", title: "Enterprise Policy", description: "disableBypassPermissionsMode: true prevents --yolo in org-managed environments", items: ["Enforced at config level", "Users cannot override", "Pairs with /voice for hands-free accessibility"] }
+  ]'
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: Part 3 Opener -->
+<!-- SLIDE: Part 3 — Sessions That Learn -->
+# Part 3 — Sessions That Learn
 <SectionOpenerSlide
   :partNumber="3"
-  pillIcon="♾️"
-  pillLabel="Sessions That Learn"
   title="Sessions That Learn"
-  subtitle="Close the memory gap — sessions that accumulate value across compaction, resume, and time."
+  subtitle="Close the Memory gap: the session learns how you work — and that shapes everything in S4"
   :cards='[
-    {"icon": "♾️", "title": "Infinite Sessions", "blurb": "Auto-compaction at 95% — sessions never hit a wall."},
-    {"icon": "📋", "title": "/chronicle", "blurb": "Standup, tips, instruction proposals from history."},
-    {"icon": "✨", "title": "AI That Gets Better", "blurb": "Proposes its own instruction improvements. Pause here."}
+    { icon: "🧠", title: "Auto-Compaction", blurb: "Never forgets across 95% token limits; /context shows budget" },
+    { icon: "📓", title: "/chronicle", blurb: "Standup in 30s · tips · proposes instruction improvements" },
+    { icon: "🌉", title: "The Bridge", blurb: "Patterns learned → execute in S4 — live proof at the close" }
   ]'
-  :terminal='{"context": "$ copilot > /chronicle standup", "detail": "Yesterday&#39;s work summarized in seconds from session history"}'
+  :terminal='{ context: "/chronicle standup", detail: "Generated from 3h session history in 3s" }'
 />
+
+<!-- Phase B S3: high — 4 body slides (includes bridge slide at close) -->
 
 ---
 
-<!-- SLIDE: Session Continuity Foundation -->
-<TwoColPairedConceptsSlide
-  :partNumber="3"
-  pillIcon="♾️"
-  pillLabel="Sessions That Learn"
-  title="Sessions That Survive Everything"
-  :progressDots='{"current": 1, "total": 4, "activeColor": "bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
-  :left='{"header": "Auto-Compaction", "items": ["Triggers automatically at 95% token limit — no interruptions", "Important context kept: decisions made, approaches tried, facts learned", "Manual control: /compact anytime, Esc to cancel", "Monitor: /context shows token breakdown, /usage shows session stats"]}'
-  :right='{"header": "Session Resume", "items": ["copilot --continue — resume the most recent session", "copilot --resume — pick from recent sessions interactively", "/rename NEW_NAME — label sessions for easy retrieval", "~/.copilot/session-state/ — local, private to your account"]}'
-/>
-
----
-
-<!-- SLIDE: /chronicle standup + tips -->
-<BeforeAfterMetricsSlide
-  :partNumber="3"
-  pillIcon="📋"
-  pillLabel="Sessions That Learn"
-  title="/chronicle — From Session History to Intelligence"
-  :progressDots='{"current": 2, "total": 4, "activeColor": "bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
-  :before='{"header": "Before /chronicle", "items": ["Reconstruct what you did from memory or git log", "Write your own standup from scratch every morning", "Miss patterns — same mistakes repeated across sessions", "Guess what to add to .github/copilot-instructions.md"]}'
-  :after='{"header": "With /chronicle", "items": ["/chronicle standup — session history → standup in 30 seconds", "/chronicle tips — AI surfaces your usage patterns and suggests improvements", "/chronicle instructions — proposes specific additions to copilot-instructions.md", "Ask: What did I work on yesterday? — answered from session history"]}'
-  :metrics='[
-    {"value": "~10 min → 30 sec", "label": "standup prep time"},
-    {"value": "guesswork → evidence", "label": "instruction improvements"},
-    {"value": "0 → ongoing", "label": "personalized tips per session"}
-  ]'
-/>
-
----
-
-<!-- SLIDE: /chronicle instructions — the emotional peak -->
-<HeroStatSlide
-  :partNumber="3"
-  pillIcon="✨"
-  pillLabel="Sessions That Learn"
-  title="AI That Proposes to Improve Its Own Instructions"
-  subtitle="Copilot reviews your sessions and proposes improvements to its own instructions"
-  :hero='{"value": "/chronicle", "label": "observation → advice → automation"}'
-  :supporting='[
-    {"icon": "📋", "title": "/chronicle standup", "description": "Yesterday&#39;s work summarized from session history — no reconstruction needed"},
-    {"icon": "💡", "title": "/chronicle tips", "description": "AI surfaces patterns in how you work and suggests personalized improvements"},
-    {"icon": "✨", "title": "/chronicle instructions", "description": "AI proposes specific additions to .github/copilot-instructions.md — then asks to apply"}
-  ]'
-  :insight='{"icon": "⏸️", "text": "Pause here. The only feature where Copilot improves how it works with you — by watching you work."}'
-  :progressDots='{"current": 3, "total": 4, "activeColor": "bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
-/>
-
----
-
-<!-- SLIDE: Repository Memory -->
+<!-- SLIDE: Context Foundation — The Session Never Forgets -->
+# Context Foundation — The Session Never Forgets
 <TwoColPairedConceptsSlide
   :partNumber="3"
   pillIcon="🧠"
-  pillLabel="Sessions That Learn"
-  title="Repository Memory: Cross-Session Knowledge"
-  :progressDots='{"current": 4, "total": 4, "activeColor": "bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
-  :left='{"header": "The Problem", "items": ["Spending 10 min re-explaining your codebase at session start", "Docker-compose networking, deployment targets, team conventions — every time", "Time spent explaining = time not spent building"]}'
-  :right='{"header": "Repository Memory", "items": ["Learned facts about your codebase persist across sessions automatically", "Custom instructions at user, repo, and org level — all combine additively", "Combined with /chronicle instructions: conventions become permanent", "One-time investment — inherit the context automatically forever"]}'
+  pillLabel="Sessions That Learn · Context Foundation"
+  title="The Session Never Forgets"
+  :left='{
+    header: "Auto-Compaction",
+    icon: "📦",
+    items: [
+      { title: "Triggers at 95% token limit", detail: "Transparent — important context persists, redundant details pruned" },
+      { title: "Manual control", detail: "/compact to trigger anytime, Escape to cancel" },
+      { title: "Monitor with /context and /usage", detail: "Visual breakdown of token budget by source" }
+    ]
+  }'
+  :right='{
+    header: "Token Transparency",
+    icon: "🔍",
+    items: [
+      { title: "Per-MCP token visibility", detail: "See exactly which MCP servers consumed your context budget" },
+      { title: "/context shows the full stack", detail: "File context, tool responses, session history — all visible" },
+      { title: "Practically infinite sessions", detail: "The foundation that makes sessions worth reconnecting to" }
+    ]
+  }'
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: Part 4 Opener -->
+<!-- SLIDE: /chronicle in Action -->
+# /chronicle in Action
+<AITerminalTranscriptSlide
+  :partNumber="3"
+  pillIcon="📓"
+  pillLabel="Sessions That Learn · /chronicle"
+  title="/chronicle: Session History Becomes Intelligence"
+  subtitle="Standup in 30 seconds — personalized patterns — improving instructions"
+  :transcript='[
+    { type: "prompt", text: "/chronicle standup" },
+    { type: "response", lines: ["✓ Fixed auth middleware (JWT validation edge case)", "✓ Reviewed 3 PRs — approved 2, requested changes on 1", "✓ Unblocked staging deploy (missing env var)", "✓ Today: continue auth cleanup, sprint planning at 2pm"] },
+    { type: "divider" },
+    { type: "prompt", text: "/chronicle tips" },
+    { type: "response", lines: ["Pattern: you check docker logs before env vars — reversing this saves ~3 min per debug cycle", "Pattern: 40% of sessions start with the same 3 context commands — consider a /setup alias"] }
+  ]'
+  footerMetric="Generated from 3h of session history in under 4 seconds"
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+<!-- SLIDE: /chronicle — AI That Gets Better the Way You Do -->
+# /chronicle — AI That Gets Better the Way You Do
+<ProblemSolutionOutcomeSlide
+  :partNumber="3"
+  pillIcon="✨"
+  pillLabel="Sessions That Learn · /chronicle improve"
+  title="AI That Gets Better the Way You Do"
+  :problem='{
+    header: "The Problem",
+    items: [
+      "Instructions files decay — written once, rarely updated",
+      { title: "Manual review is unrealistic", detail: "You&#39;d have to scan weeks of sessions yourself" },
+      "Gap widens: instructions describe how you worked months ago"
+    ]
+  }'
+  :solution='{
+    header: "The Solution",
+    items: ["/chronicle improve analyzes your actual sessions"],
+    code: { language: "bash", content: "/chronicle improve\n# reads your session history\n# proposes additions to:\n#   .github/copilot-instructions.md\n# you review and approve" }
+  }'
+  :outcome='{
+    header: "The Outcome",
+    items: [
+      "Instructions stay current — without extra work",
+      { title: "AI shaped by how you actually work", detail: "Not by how you thought you&#39;d work when you wrote the file" }
+    ],
+    metrics: [{ value: "0 min", label: "manual instruction maintenance" }]
+  }'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+<!-- SLIDE: The Bridge — You Taught It. Now It Executes. -->
+# The Bridge — You Taught It. Now It Executes.
+<AITerminalTranscriptSlide
+  :partNumber="3"
+  pillIcon="🌉"
+  pillLabel="Sessions That Learn · Bridge"
+  title="You Taught It How You Work. Now It Executes."
+  subtitle="Started at the top of this talk — /every 1m tell me I&#39;m awesome"
+  :transcript='[
+    { type: "prompt", text: "/every 1m tell me I&#39;m awesome" },
+    { type: "response", lines: ["[Scheduled] Runs every 1 minute", "[14:31:02] ✅ You&#39;re awesome! (firing #1)", "[14:32:02] ✅ You&#39;re awesome! (firing #2)", "[14:33:02] ✅ You&#39;re awesome! (firing #3)", "..."] },
+    { type: "divider" },
+    { type: "outcome", text: "30+ firings since slide 1 — no human triggered any of them" }
+  ]'
+  footerMetric="Patterns learned in S3 · Executing autonomously · S4 shows what this looks like at real scale"
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+<!-- SLIDE: Part 4 — Scale Beyond Yourself -->
+# Part 4 — Scale Beyond Yourself
 <SectionOpenerSlide
   :partNumber="4"
-  pillIcon="⚡"
-  pillLabel="Scale Beyond Yourself"
   title="Scale Beyond Yourself"
-  subtitle="Close the reach gap — agents carry your chronicle&#39;s learned preferences forward."
+  subtitle="Close the Reach gap: learned patterns now execute autonomously, without asking"
   :cards='[
-    {"icon": "🤖", "title": "Built-in Agents", "blurb": "Explore, Task, Plan, Code-review — auto-routed."},
-    {"icon": "⚡", "title": "/fleet Fan-Out", "blurb": "Parallel subagents, separate context windows, merged."},
-    {"icon": "🔌", "title": "Ecosystem", "blurb": "Custom agents + plugins carry chronicle&#39;s preferences."}
+    { icon: "⏰", title: "Scheduled Prompts", blurb: "/every and /after — run learned patterns on a schedule" },
+    { icon: "🚀", title: "/fleet Fan-Out", blurb: "Parallel subagents, separate contexts, merged results" },
+    { icon: "☁️", title: "Cloud Delegation", blurb: "Delegate to GitHub&#39;s coding agent — terminal stays free" }
   ]'
-  :terminal='{"context": "$ copilot > /fleet implement all phases", "detail": "One prompt → parallel subagents → merged results"}'
+  :terminal='{ context: "/every weekday at 9am summarize overnight PRs", detail: "Scheduled · next run Mon 09:00" }'
 />
+
+<!-- Phase B S4: medium — 3 body slides -->
 
 ---
 
-<!-- SLIDE: Built-in Agents -->
-<FourCardGridSlide
+<!-- SLIDE: Scheduled Prompts — Earned Payoff -->
+# Scheduled Prompts — Earned Payoff
+<CodeWithFeaturesSlide
   :partNumber="4"
-  pillIcon="🤖"
-  pillLabel="Scale Beyond Yourself"
-  title="Built-in Agents — Auto-Routed by Intent"
-  :progressDots='{"current": 1, "total": 3, "activeColor": "bg-purple-400 shadow-lg shadow-purple-500/50"}'
-  :cards='[
-    {"icon": "🔍", "title": "Explore", "description": "Fast codebase analysis — focused answers under 300 words, safe to run in parallel"},
-    {"icon": "⚙️", "title": "Task", "description": "Execute commands with smart output filtering — brief summary on success, full output on failure"},
-    {"icon": "📋", "title": "Plan", "description": "Analyze dependencies and create multi-step strategies you review before execution"},
-    {"icon": "👁️", "title": "Code-Review", "description": "High signal-to-noise review — only bugs, security issues, and logic errors. Invoke with /review"}
+  pillIcon="⏰"
+  pillLabel="Scale Beyond Yourself · Scheduled Prompts"
+  title="Scheduled Prompts: Automation in Plain Language"
+  codePosition="left"
+  :code='{ language: "bash", filename: "Scheduled Prompts  (/experimental on)", content: "# Daily PR summary\n> /every weekday at 9am\n  \"Summarize overnight PRs and post\n   to Slack #dev-standup\"\n\n# Continuous health check\n> /every 30min\n  \"Check pod health in staging.\n   Alert via remote session if unhealthy.\"\n\n# After a long in-session task\n> run the full test suite\n> /after the tests finish\n  \"If all pass, commit and open a PR\n   with a summary of what changed.\n   If any fail, show me the failures.\"" }'
+  :features='[
+    { icon: "🔄", title: "Describe in plain language", description: "/every — no cron syntax, no task scheduler, no code. Just intent and a schedule." },
+    { icon: "📡", title: "Pairs with --remote", description: "Schedule a patrol on a server, steer it from any device when it fires" },
+    { icon: "⚡", title: "Pairs with /fleet", description: "Fan out the scheduled work across parallel subtasks automatically" }
   ]'
-  :insight='{"icon": "🤖", "text": "You don&#39;t invoke agents explicitly — Copilot routes based on what you&#39;re asking for."}'
+  :progressDots='{ current: 1, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: /fleet fan-out -->
-<ProblemSolutionOutcomeSlide
-  :partNumber="4"
-  pillIcon="⚡"
-  pillLabel="Scale Beyond Yourself"
-  title="/fleet — Explicit Parallel Execution"
-  :progressDots='{"current": 2, "total": 3, "activeColor": "bg-purple-400 shadow-lg shadow-purple-500/50"}'
-  :problem='{"header": "Sequential Tasks Are Slow", "items": ["Large tasks run one step at a time — total time is the sum of every subtask", "Refactor N files, create N tests, analyze N services: each step waits for the previous", "One long context window accumulates noise across unrelated subtasks"]}'
-  :solution='{"header": "/fleet Orchestrates Parallel Execution", "items": ["/fleet decomposes the plan into subtasks and assesses dependencies automatically", "Assigns each subtask to a subagent in its own context window — no cross-contamination", "Parallel subtasks run simultaneously; sequential ones run in the right order"]}'
-  :outcome='{"header": "Time Is the Longest Subtask, Not the Sum", "items": ["Results merged automatically by the orchestrator — one coherent output", "Pair with Shift+Tab autopilot: plan → Accept and build on autopilot + /fleet", "Custom agents in .github/agents/ are picked up automatically for matching subtasks"]}'
-/>
-
----
-
-<!-- SLIDE: Ecosystem close -->
+<!-- SLIDE: /fleet and Cloud Delegation — Two Ways to Scale -->
+# /fleet and Cloud Delegation — Two Ways to Scale
 <TwoColPairedConceptsSlide
   :partNumber="4"
-  pillIcon="🔌"
-  pillLabel="Scale Beyond Yourself"
-  title="Extend the Fleet — Custom Agents &amp; Plugins"
-  :progressDots='{"current": 3, "total": 3, "activeColor": "bg-purple-400 shadow-lg shadow-purple-500/50"}'
-  :left='{"header": "Custom Agents", "items": ["Create specialized agents for your team&#39;s workflows", "~/.copilot/agents/ — user-level, all projects", ".github/agents/ — repo-level, current project", ".github-private/agents/ — org-level, all org projects"]}'
-  :right='{"header": "Plugins", "items": ["Install community plugins from marketplaces", "copilot plugin marketplace browse awesome-copilot", "copilot plugin install database-data-management@awesome-copilot", "Domain expertise from the community — extend without building from scratch"]}'
+  pillIcon="🚀"
+  pillLabel="Scale Beyond Yourself · Fan-Out"
+  title="Two Ways to Scale Beyond a Single Agent"
+  :left='{
+    header: "/fleet Fan-Out",
+    icon: "🌐",
+    items: [
+      { title: "Explicit parallelization", detail: "Decompose a plan into subtasks — each in its own context window" },
+      "Results merged by the orchestrator",
+      { title: "Use after Plan Mode", detail: "Accept plan → /fleet implement → parallel execution, you review results" },
+      "Custom agents used automatically for matching subtasks"
+    ]
+  }'
+  :right='{
+    header: "Cloud Delegation (&)",
+    icon: "☁️",
+    items: [
+      { title: "Background execution", detail: "& prefix delegates to GitHub&#39;s coding agent — terminal and IDE stay free" },
+      "A PR is created when the agent finishes",
+      { title: "Best for 20+ min tasks", detail: "Security audits, large refactors, test scaffolding, doc generation" },
+      "You review the outcome, not the steps"
+    ]
+  }'
+  :progressDots='{ current: 2, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
 />
 
 ---
 
-<!-- SLIDE: Before After -->
+<!-- SLIDE: Ecosystem — Carry the Learning Across Your Team -->
+# Ecosystem — Carry the Learning Across Your Team
+<ThreeColumnCardSlide
+  :partNumber="4"
+  pillIcon="🌱"
+  pillLabel="Scale Beyond Yourself · Ecosystem"
+  title="Carry the Learning Across Your Team"
+  :columns='[
+    { icon: "🤖", title: "Custom Agents", description: "Team-specific specialists in .github/agents/ — scoped knowledge, shared workflows", items: ["User, repo, or org scope", "Auto-routed or invoked by @mention", "Pair with /chronicle improve for continuous improvement"] },
+    { icon: "🌿", title: "Worktree from PR", description: "New in v1.0.60: checkout a PR into a new worktree — full context, no branch switching", items: ["Context isolated per worktree", "No stash, no interruption", "Sessions follow the worktree"] },
+    { icon: "📦", title: "Plugin Ecosystem", description: "Extend beyond built-in agents via community or team plugins", items: ["copilot plugin install", "Database, cloud, domain tools", "Org-governed via MCP registry"] }
+  ]'
+  :progressDots='{ current: 3, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
+
+---
+
+<!-- SLIDE: Before and After -->
+# Before and After
 <BeforeAfterSlide
-  header="From Guessing and Iterating to Steering and Learning"
-  :leftItems='["AI guesses at intent — you iterate 8+ times to converge", "SSH into server, manually copy-paste logs into chat window", "Session ends — all context lost, re-explain from scratch next time", "Long tasks tie up your IDE and terminal until the agent finishes"]'
-  :rightItems='["Plan Mode asks first — 2 targeted attempts after you approve the plan", "--remote puts AI on the server, steer from your phone, logs never leave", "/chronicle standup, tips, and instruction proposals — sessions accumulate value", "Cloud delegation with & prefix — both tools stay completely free, PR arrives when done"]'
-  :metrics='[{"value": "8→2", "detail": "debug attempts with Plan Mode"}, {"value": "45→8 min", "detail": "Docker debugging time"}, {"value": "25→5 min", "detail": "CI/CD failure triage"}]'
+  header="From Scattered Attempts to Structured Intelligence"
+  :leftItems='[
+    "8 tool-call attempts to diagnose a container startup failure",
+    "45 minutes of trial-and-error without a structured plan",
+    "AI walked into a hidden port conflict assumption",
+    "No second opinion on the implementation before committing"
+  ]'
+  :rightItems='[
+    "2 targeted tool calls after Plan Mode&#39;s structured Q&A",
+    "8 minutes to root cause and fix with a clear implementation plan",
+    "Rubber Duck (different model family) caught the hidden assumption",
+    "Session memory carries context from debug through to PR description"
+  ]'
+  :metrics='[
+    { value: "75%", detail: "fewer tool calls" },
+    { value: "82%", detail: "faster to resolution" },
+    { value: "~75%", detail: "quality gap closed vs top-tier model" }
+  ]'
 />
 
 ---
 
 <!-- SLIDE: What You Can Do Today -->
+# What You Can Do Today
 <WhatYouCanDoTodaySlide
-  :today='["Install Copilot CLI: gh copilot or npm install -g @github/copilot — ready in 2 minutes", "Try Plan Mode: press Shift+Tab, describe a feature or bug — watch it ask before it acts", "Run /chronicle standup after any session — see what Copilot learned about your day"]'
-  :thisWeek='["Try --remote on staging: SSH in, run copilot --remote, scan the QR code on your phone", "Add a CI/CD failure step: drop copilot -p into a GitHub Actions workflow for zero-human triage", "Run /chronicle instructions — get Copilot&#39;s read on what to add to your copilot-instructions.md"]'
-  :thisMonth='["Delegate a long task with & prefix — security audit or large refactor, IDE stays completely free", "Set up /fleet autopilot: Shift+Tab → plan → Accept plan and build on autopilot + /fleet", "Create a custom agent in .github/agents/ — fleet picks it up automatically for matching subtasks"]'
-  footer="Review Copilot CLI Best Practices · Explore Copilot Hooks for governance · See the command reference appendix"
+  :today='[
+    "Run `copilot --plan` on your next real debugging or refactoring task",
+    "Watch Rubber Duck&#39;s cross-model review appear automatically — check if it caught something",
+    "Try `/goal` to anchor a multi-step agent session to a single clear objective"
+  ]'
+  :thisWeek='[
+    "After 3+ hours of coding, run `/chronicle standup` — share the output in your team standup",
+    "Run `/chronicle tips` and review the personalized usage patterns it surfaces for you",
+    "Try a remote session: `copilot --remote` and steer it from your phone"
+  ]'
+  :thisMonth='[
+    "Enable Scheduled Prompts (`/experimental on`) and set up one recurring automation with `/every`",
+    "Use `/fleet` to parallelize a large multi-part task — test suite creation, multi-module refactor, or multi-machine environments — that you&#39;d normally run sequentially by hand",
+    "Let `/chronicle improve` propose updates to your `.github/copilot-instructions.md`"
+  ]'
+  footer="All features available with a GitHub Copilot Individual, Business, or Enterprise subscription."
 />
 
 ---
 
 <!-- SLIDE: References -->
+# References
 <ReferencesSlide
   :groups='[
-    {"title": "📖 Official Documentation", "color": "cyan", "items": [
-      {"label": "About GitHub Copilot CLI", "href": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli", "description": "Core concepts, capabilities, and operating modes"},
-      {"label": "Using GitHub Copilot CLI", "href": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli", "description": "Command syntax, options, and slash commands"},
-      {"label": "Steering a session remotely", "href": "https://docs.github.com/en/copilot/how-tos/copilot-cli/steer-remotely", "description": "Using --remote to monitor and steer sessions from web and mobile"},
-      {"label": "Using Copilot CLI session data", "href": "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/chronicle", "description": "/chronicle: standup reports, tips, and instruction proposals"},
-      {"label": "Running tasks in parallel with /fleet", "href": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet", "description": "Explicit fan-out: orchestrator, subagents, and result merging"}
-    ]},
-    {"title": "🛠️ Additional Resources", "color": "purple", "items": [
-      {"label": "Installing GitHub Copilot CLI", "href": "https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli", "description": "Setup for npm, Homebrew, WinGet"},
-      {"label": "Copilot CLI Best Practices", "href": "https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-best-practices", "description": "Optimization patterns and anti-patterns"},
-      {"label": "Finding and installing plugins", "href": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing", "description": "Plugin discovery, installation, and marketplace management"}
-    ]},
-    {"title": "📊 Research Cited", "color": "indigo", "items": [
-      {"label": "Atlassian State of Developer Experience 2025", "href": "https://www.atlassian.com/software/developer-experience", "description": "Developers spend ~30% of time writing code; ~70% on non-coding work (debugging, CI, deployments)"}
-    ]}
+    { title: "📖 Official Documentation", color: "cyan", items: [
+        { href: "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli", label: "About GitHub Copilot CLI", description: "Concepts, architecture, and built-in agents overview" },
+        { href: "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli", label: "Use Copilot CLI", description: "Command syntax, modes, and configuration" },
+        { href: "https://docs.github.com/en/copilot/how-tos/copilot-cli/steer-remotely", label: "Steering a CLI session from another device", description: "--remote flag, QR code handoff, and session persistence" },
+        { href: "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet", label: "Running tasks in parallel with /fleet", description: "Orchestrator-subagent fan-out and context isolation" },
+        { href: "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/chronicle", label: "Using GitHub Copilot CLI session data (/chronicle)", description: "Standup generation, personalized tips, and instruction improvements" }
+    ] },
+    { title: "📦 Changelog & Releases", color: "purple", items: [
+        { href: "https://github.blog/changelog/2026-04-13-remote-control-cli-sessions-on-web-and-mobile-in-public-preview/", label: "Remote control CLI sessions on web and mobile (public preview)", description: "Announcement and feature details for --remote" },
+        { href: "https://github.com/github/copilot-cli/releases", label: "GitHub Copilot CLI release notes", description: "Full version history including Rubber Duck, Scheduled Prompts, worktree-from-PR" }
+    ] },
+    { title: "🔗 Related Talks", color: "indigo", items: [
+        { label: "Copilot Memory", description: "How repository memory and cross-session learning work in depth" }
+    ] }
   ]'
 />
 
 ---
 
 <!-- SLIDE: Thank You -->
+# Thank You
 <ThankYouSlide
-  title="AI at the Point of Work"
-  subtitle="Think anywhere. Steer anywhere. Learn always."
+  title="GitHub Copilot CLI"
+  subtitle="Think anywhere. Steer anywhere. Learn always. Act autonomously."
   :cards='[
-    {"icon": "🧠", "value": "Close the Intent Gap", "detail": "Plan Mode: 8 attempts → 2, 45 min → 8 min — ask before building"},
-    {"icon": "📱", "value": "Close the Geography Gap", "detail": "--remote: AI lives where the problem is, steer from any device"},
-    {"icon": "✨", "value": "Close the Memory Gap", "detail": "/chronicle turns sessions into standup reports, tips, and instruction proposals"}
+    { value: "8 → 2 attempts", detail: "Plan Mode + Rubber Duck: 45 min Docker debug → 8 min, 8 tool calls → 2" },
+    { value: "/chronicle", detail: "AI proposes improvements to your .github/copilot-instructions.md — it gets better the way you do" },
+    { value: "/every 1m", detail: "tell me I&#39;m awesome — started at the top of this talk, executing every minute since" }
   ]'
-  prompt="What&#39;s the first gap you want to close?"
+  prompt="What&#39;s the first gap you&#39;d close?"
 />
 
 ---

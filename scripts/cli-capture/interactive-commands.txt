@@ -1,17 +1,18 @@
 Interactive Mode Commands:
 
-  Agent environment:
-    /init    Initialize Copilot instructions for this repository, or suppress the init suggestion
+  Agent Environment:
+    /init    Initialize Copilot instructions for this repository
     /agent   Browse and select from available agents (if any)
     /skills  Manage skills for enhanced capabilities
     /mcp     Manage MCP server configuration
     /plugin  Manage plugins and plugin marketplaces
 
-  Models and subagents:
-    /model     Select AI model to use
-    /delegate  Send this session to GitHub and Copilot will create a PR
-    /fleet     Enable fleet mode for parallel subagent execution
-    /tasks     View and manage background tasks (subagents and shell sessions)
+  Agents / Subagents:
+    /model      Select AI model to use
+    /delegate   Send this session to GitHub and Copilot will create a PR
+    /fleet      Enable fleet mode for parallel subagent execution
+    /autopilot  Toggle autopilot mode
+    /tasks      View and manage tasks (subagents and shell commands)
 
   Code:
     /ide             Connect to an IDE workspace
@@ -29,35 +30,46 @@ Interactive Mode Commands:
     /reset-allowed-tools  Reset the list of allowed tools
 
   Session:
-    /resume   Switch to a different session (optionally specify session ID or task ID)
+    /resume   Switch to a different session (optionally specify session ID, task ID, or name)
     /rename   Rename the current session, or auto-generate a name from conversation
     /context  Show context window token usage and visualization
     /usage    Display session usage metrics and statistics
     /session  View and manage sessions. Use subcommands for details.
-    /compact  Summarize conversation history to reduce context window usage
+    /compact  Summarize conversation history to reduce context window usage. Optionally provide focus instructions.
     /share    Share session or research report to markdown file, HTML file, or GitHub gist
+    /remote   Toggle remote control from GitHub web and mobile
     /copy     Copy the last response to the clipboard
     /rewind   Rewind the last turn and revert file changes
 
-  Help and feedback:
+  Help:
     /help           Show help for interactive commands
     /changelog      Display changelog for CLI versions. Add 'summarize' to get an AI summary.
     /feedback       Provide feedback about the CLI
     /theme          View or set color mode
+    /statusline     Configure status line items
+    /footer         Configure status line items
     /update         Update the CLI to the latest version
     /version        Display version information and check for updates
     /experimental   Show available experimental features, or enable/disable experimental mode
+    /memory         Show memory status, or enable/disable memory across sessions
     /clear          Abandon this session and start fresh
     /instructions   View and toggle custom instruction files
     /streamer-mode  Toggle streamer mode (hides preview model names and quota details for streaming)
 
   Other commands:
-    /exit, /quit    Exit the CLI
-    /login          Log in to Copilot
-    /logout         Log out of Copilot
-    /new            Start a new conversation
-    /plan           Create an implementation plan before coding
-    /research       Run deep research investigation using GitHub search and web sources
-    /restart        Restart the CLI, preserving the current session
-    /undo, /rewind  Rewind the last turn and revert file changes
-    /user           Manage GitHub user list
+    /ask         Ask a quick side question without adding to conversation history (experimental)
+    /chronicle   Session history tools and insights
+    /env         Show loaded environment details (instructions, MCP servers, skills, agents, plugins, LSPs, extensions)
+    /exit        Exit the CLI; use 'print' to print the session after exiting alt screen
+    /keep-alive  Manage keep-alive mode (prevents system sleep).
+    /login       Log in to Copilot
+    /logout      Log out of an OAuth login session
+    /new         Start a new conversation
+    /plan        Create an implementation plan before coding
+    /research    Run deep research investigation using GitHub search and web sources
+    /restart     Restart the CLI, preserving the current session
+    /search      Search the conversation timeline (experimental)
+    /sidekicks   View running sidekick agents
+    /undo        Rewind the last turn and revert file changes
+    /user        Manage GitHub user list
+    /voice       Manage voice mode (dictation transcription via Foundry Local)

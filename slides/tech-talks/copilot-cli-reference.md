@@ -2,69 +2,254 @@
 import { isDark } from './components/useTheme'
 </script>
 
-<!-- SLIDE: Interactive Mode Commands -->
+<!-- SLIDE: Interactive Mode - Agent Environment -->
+# Interactive Mode - Agent Environment
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<div class="flex items-center gap-1.5">
-<div class="w-2 h-2 rounded-full bg-purple-400 shadow-lg shadow-purple-500/50"></div>
-<div class="w-2 h-2 rounded-full" :class="isDark ? 'bg-white/20' : 'bg-gray-300'"></div>
-<div class="w-2 h-2 rounded-full" :class="isDark ? 'bg-white/20' : 'bg-gray-300'"></div>
-<div class="w-2 h-2 rounded-full" :class="isDark ? 'bg-white/20' : 'bg-gray-300'"></div>
-<div class="w-2 h-2 rounded-full" :class="isDark ? 'bg-white/20' : 'bg-gray-300'"></div>
-<div class="w-2 h-2 rounded-full" :class="isDark ? 'bg-white/20' : 'bg-gray-300'"></div>
-<div class="w-2 h-2 rounded-full" :class="isDark ? 'bg-white/20' : 'bg-gray-300'"></div>
-<div class="w-2 h-2 rounded-full" :class="isDark ? 'bg-white/20' : 'bg-gray-300'"></div>
-<div class="w-2 h-2 rounded-full" :class="isDark ? 'bg-white/20' : 'bg-gray-300'"></div>
-<div class="w-2 h-2 rounded-full" :class="isDark ? 'bg-white/20' : 'bg-gray-300'"></div>
-</div>
-<span class="text-xs ml-1" :class="isDark ? 'text-white/40' : 'text-gray-400'">1 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">1 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
-<h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Interactive Mode &#8212; Type <code class="px-2 py-0.5 rounded" :class="isDark ? 'bg-zinc-800 text-yellow-300' : 'bg-amber-100 text-amber-900'">/</code> to explore</h2>
+<h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Interactive Mode &#8212; Agent Environment</h2>
 <div class="grid grid-cols-2 gap-4">
 <TerminalFrame title="copilot - interactive session" prompt="/" size="lg">
-<div class="space-y-1 text-sm leading-relaxed">
-<div class="font-semibold mt-1" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Agent environment</div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/init</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Initialize AGENTS.md for this repo</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/agent</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Select a custom agent</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/skills</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Manage skills</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/mcp</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Manage MCP servers</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/plugin</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Manage plugins</span></div>
-<div class="font-semibold mt-3" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Models &amp; subagents</div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/model</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Select AI model</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/delegate</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Hand off &#8594; GitHub PR</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/fleet</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Parallel subagent execution</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/tasks</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">View background tasks</span></div>
-<div class="font-semibold mt-3" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Code</div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/diff</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Review current changes</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/pr</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Operate on pull requests</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/review</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Code review agent</span></div>
-<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/plan</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Implementation plan before coding</span></div>
+<div class="space-y-2 text-sm leading-relaxed">
+<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/init</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Initialize Copilot instructions for this repo</span></div>
+<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/agent</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Browse and select from available agents</span></div>
+<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/skills</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Manage skills for enhanced capabilities</span></div>
+<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/mcp</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Manage MCP server configuration</span></div>
+<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/plugin</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Manage plugins and plugin marketplaces</span></div>
+<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/instructions</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">View &amp; toggle custom instruction files</span></div>
+<div><span class="w-24 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/env</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Show loaded instructions, MCPs, skills, agents</span></div>
 </div>
 </TerminalFrame>
-<TerminalFrame title="copilot - interactive session (cont.)" size="lg">
-<div class="space-y-1 text-sm leading-relaxed">
-<div class="font-semibold mt-1" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Session</div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/resume</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Switch sessions</span></div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/compact</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Summarize context window</span></div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/context</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Show token usage</span></div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/share</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Export session to file / gist</span></div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/rewind</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Undo last turn + revert files</span></div>
-<div class="font-semibold mt-3" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Permissions</div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/allow-all</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Enable all tools/paths/URLs</span></div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/add-dir</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Whitelist a directory</span></div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/cwd</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Change working directory</span></div>
-<div class="font-semibold mt-3" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Research &amp; More</div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/research</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Deep research via GitHub + web</span></div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/changelog</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">CLI version history (+ AI summary)</span></div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/ide</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Connect to VS Code workspace</span></div>
-<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/new</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Fresh conversation</span></div>
+<div class="flex flex-col gap-3 text-sm">
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">What this gives you</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'">Everything that shapes the agent's behavior in this session &#8212; instructions, custom agents, skills, MCP servers, and plugins.</div>
+</div>
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Start here</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'"><code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/init</code> once per repo, then <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/env</code> any time you wonder &quot;what does the agent actually know right now?&quot;</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+---
+
+<!-- SLIDE: Interactive Mode - Models & Subagents -->
+# Interactive Mode - Models & Subagents
+<div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
+<div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+<div class="relative z-10 flex items-center gap-3 mb-3">
+<span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
+<div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">2 of 16</span>
+</div>
+<div class="relative z-10 mt-2">
+<h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Interactive Mode &#8212; Models &amp; Subagents</h2>
+<div class="grid grid-cols-2 gap-4">
+<TerminalFrame title="copilot - interactive session" prompt="/" size="lg">
+<div class="space-y-2 text-sm leading-relaxed">
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/model</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Select AI model to use</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/autopilot</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Toggle autopilot mode</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/fleet</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Parallel subagent execution</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/delegate</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Send session to GitHub &#8594; create a PR</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/tasks</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">View &amp; manage tasks (subagents, shell)</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/sidekicks</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">View running sidekick agents</span></div>
 </div>
 </TerminalFrame>
+<div class="flex flex-col gap-3 text-sm">
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Three execution gears</div>
+<ul class="space-y-1 list-disc list-inside" :class="isDark ? 'text-zinc-300' : 'text-gray-700'">
+<li><b>Interactive</b> &#8212; you approve each step</li>
+<li><b>Autopilot</b> &#8212; agent runs until done</li>
+<li><b>Fleet</b> &#8212; multiple subagents in parallel</li>
+</ul>
+</div>
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Hand-off vs parallelize</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'"><code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/delegate</code> ships the work to GitHub coding agent; <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/fleet</code> stays local and fans out subagents.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+---
+
+<!-- SLIDE: Interactive Mode - Code -->
+# Interactive Mode - Code
+<div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
+<div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+<div class="relative z-10 flex items-center gap-3 mb-3">
+<span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
+<div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">3 of 16</span>
+</div>
+<div class="relative z-10 mt-2">
+<h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Interactive Mode &#8212; Code</h2>
+<div class="grid grid-cols-2 gap-4">
+<TerminalFrame title="copilot - interactive session" prompt="/" size="lg">
+<div class="space-y-2 text-sm leading-relaxed">
+<div><span class="w-36 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/plan</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Implementation plan before coding</span></div>
+<div><span class="w-36 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/diff</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Review the changes made in current dir</span></div>
+<div><span class="w-36 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/pr</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Operate on pull requests for this branch</span></div>
+<div><span class="w-36 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/review</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Run code review agent on changes</span></div>
+<div><span class="w-36 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/ide</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Connect to an IDE workspace</span></div>
+<div><span class="w-36 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/lsp</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Manage language server configuration</span></div>
+<div><span class="w-36 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/terminal-setup</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Configure shift+enter for multiline</span></div>
+</div>
+</TerminalFrame>
+<div class="flex flex-col gap-3 text-sm">
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Plan &#8594; Code &#8594; Review</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'"><code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/plan</code> drafts the approach, the agent codes, then <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/diff</code> and <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/review</code> let you inspect &amp; refine before opening a PR.</div>
+</div>
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">IDE bridge</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'"><code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/ide</code> pairs the CLI with an open editor &#8212; file edits open as native diffs and selections flow back to Copilot.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+---
+
+<!-- SLIDE: Interactive Mode - Session -->
+# Interactive Mode - Session
+<div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
+<div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+<div class="relative z-10 flex items-center gap-3 mb-3">
+<span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
+<div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">4 of 16</span>
+</div>
+<div class="relative z-10 mt-2">
+<h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Interactive Mode &#8212; Session</h2>
+<div class="grid grid-cols-2 gap-4">
+<TerminalFrame title="copilot - interactive session" prompt="/" size="lg">
+<div class="space-y-1.5 text-sm leading-relaxed">
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/resume</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Switch sessions (id / task id / name)</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/session</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">View &amp; manage sessions</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/rename</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Rename or auto-name current session</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/context</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Show context window token usage</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/usage</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Session usage metrics &amp; stats</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/compact</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Summarize history to free context</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/memory</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Toggle cross-session fact recall</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/rewind</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Undo last turn + revert file changes</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/share</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Export to markdown / HTML / gist</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/copy</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Copy last response to clipboard</span></div>
+<div><span class="w-28 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/remote</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Toggle control from GitHub web / mobile</span></div>
+</div>
+</TerminalFrame>
+<div class="flex flex-col gap-3 text-sm">
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Context hygiene</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'">Watch <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/context</code>. When it&#8217;s &gt; 70% full, run <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/compact</code> with focus instructions instead of starting over.</div>
+</div>
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Sessions are persistent</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'">All sessions live in <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">~/.copilot/session-store.db</code>. <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/resume</code> picks any one up &#8212; even days later, by name or ID prefix.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+---
+
+<!-- SLIDE: Interactive Mode - Permissions -->
+# Interactive Mode - Permissions
+<div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
+<div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+<div class="relative z-10 flex items-center gap-3 mb-3">
+<span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
+<div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">5 of 16</span>
+</div>
+<div class="relative z-10 mt-2">
+<h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Interactive Mode &#8212; Permissions</h2>
+<div class="grid grid-cols-2 gap-4">
+<TerminalFrame title="copilot - interactive session" prompt="/" size="lg">
+<div class="space-y-2 text-sm leading-relaxed">
+<div><span class="w-44 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/allow-all</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Enable all permissions (tools, paths, URLs)</span></div>
+<div><span class="w-44 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/add-dir</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Whitelist a directory for file access</span></div>
+<div><span class="w-44 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/list-dirs</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Show all allowed directories</span></div>
+<div><span class="w-44 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/cwd</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Change or show working directory</span></div>
+<div><span class="w-44 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/reset-allowed-tools</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Clear the list of allowed tools</span></div>
+</div>
+</TerminalFrame>
+<div class="flex flex-col gap-3 text-sm">
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Three permission surfaces</div>
+<ul class="space-y-1 list-disc list-inside" :class="isDark ? 'text-zinc-300' : 'text-gray-700'">
+<li><b>Tools</b> &#8212; what the agent can invoke</li>
+<li><b>Paths</b> &#8212; what files it can touch</li>
+<li><b>URLs</b> &#8212; what domains it can reach</li>
+</ul>
+</div>
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Denial always wins</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'">Deny rules override <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/allow-all</code>. Safe pattern: allow broadly, deny specifically (e.g. <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">shell(git push)</code>).</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+---
+
+<!-- SLIDE: Interactive Mode - Help & More -->
+# Interactive Mode - Help & More
+<div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
+<div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+<div class="relative z-10 flex items-center gap-3 mb-3">
+<span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
+<div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">6 of 16</span>
+</div>
+<div class="relative z-10 mt-2">
+<h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Interactive Mode &#8212; Help &amp; More</h2>
+<div class="grid grid-cols-2 gap-4">
+<TerminalFrame title="copilot - interactive session" prompt="/" size="lg">
+<div class="space-y-1.5 text-sm leading-relaxed">
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/research</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Deep research via GitHub + web</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/chronicle</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Session history insights</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/changelog</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">CLI version history (+ AI summary)</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/new</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Start a new conversation</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/clear</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Abandon session and start fresh</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/keep-alive</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Prevent system sleep during work</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/voice</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Dictation via Foundry Local</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/theme</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">View or set color mode</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/streamer-mode</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Hide model names / quota (screen share)</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/experimental</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Enable / disable experimental features</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/feedback</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Provide feedback about the CLI</span></div>
+<div><span class="w-32 inline-block" :class="isDark ? 'text-green-400' : 'text-green-700'">/help</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">Show help for interactive commands</span></div>
+</div>
+</TerminalFrame>
+<div class="flex flex-col gap-3 text-sm">
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Long-running work</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'"><code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/research</code> spins up a deep-dive task; pair with <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/keep-alive</code> so your laptop doesn&#8217;t sleep mid-run.</div>
+</div>
+<div class="rounded-lg p-4 border" :class="isDark ? 'bg-zinc-900 border-zinc-700' : 'bg-gray-50 border-gray-300'">
+<div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Demo &amp; screen-share kit</div>
+<div :class="isDark ? 'text-zinc-300' : 'text-gray-700'"><code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/streamer-mode</code> hides quota and preview model names; <code :class="isDark ? 'text-yellow-300' : 'text-amber-800'">/theme</code> swaps light/dark to match your slides.</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -72,13 +257,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: Non-Interactive Mode (Scripting) -->
+# Non-Interactive Mode (Scripting)
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">2 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">7 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
 <h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Non-Interactive Mode &#8212; Scriptable AI</h2>
@@ -102,13 +288,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: Permissions Model -->
+# Permissions Model
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">3 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">8 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
 <h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Permissions &#8212; Granular Control</h2>
@@ -147,13 +334,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: copilot init -->
+# copilot init
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">4 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">9 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
 <h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'"><code class="px-2 rounded" :class="isDark ? 'bg-zinc-800 text-yellow-300' : 'bg-amber-100 text-amber-900'">copilot init</code> &#8212; Bootstrap Your Repo</h2>
@@ -190,13 +378,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: copilot login -->
+# copilot login
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">5 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">10 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
 <h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'"><code class="px-2 rounded" :class="isDark ? 'bg-zinc-800 text-yellow-300' : 'bg-amber-100 text-amber-900'">copilot login</code> &#8212; Authentication</h2>
@@ -237,13 +426,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: copilot plugin -->
+# copilot plugin
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">6 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">11 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
 <h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'"><code class="px-2 rounded" :class="isDark ? 'bg-zinc-800 text-yellow-300' : 'bg-amber-100 text-amber-900'">copilot plugin</code> &#8212; Extend with Plugins</h2>
@@ -288,13 +478,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: Configuration Settings -->
+# Configuration Settings
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">7 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">12 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
 <h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'"><code class="px-2 rounded" :class="isDark ? 'bg-zinc-800 text-yellow-300' : 'bg-amber-100 text-amber-900'">copilot help config</code> &#8212; Key Settings</h2>
@@ -303,13 +494,16 @@ import { isDark } from './components/useTheme'
 <div>
 <div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Behavior</div>
 <div class="space-y-1 font-mono text-xs">
-<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">model</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; AI model (gpt-5.2, claude-sonnet-4.6, ...)</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">model</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; AI model (gpt-5.4, claude-sonnet-4.6, ...)</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">autoUpdate</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; auto-download CLI updates (default: true)</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">memory</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; agentic cross-session fact recall (default: true)</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">keepAlive</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; prevent system sleep (off / on / busy)</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">experimental</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; enable experimental features</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">renderMarkdown</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; render markdown in terminal</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">respectGitignore</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; hide gitignored files from @ picker</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">includeCoAuthoredBy</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; add Co-authored-by to commits</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">compactPaste</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; collapse large pastes (&gt;10 lines)</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">streamerMode</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; hide model names &amp; quota (for screen sharing)</span></div>
 </div>
 <div class="font-semibold mt-4 mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Terminal</div>
 <div class="space-y-1 font-mono text-xs">
@@ -323,15 +517,17 @@ import { isDark } from './components/useTheme'
 <div>
 <div class="font-semibold mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Security</div>
 <div class="space-y-1 font-mono text-xs">
-<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">allowed_urls</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; pre-approved URL/domain list</span></div>
-<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">denied_urls</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; blocked domains (takes precedence)</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">allowedUrls</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; pre-approved URL/domain list (supports *.domain)</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">deniedUrls</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; blocked domains (takes precedence)</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">trustedFolders</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; folders with persisted read/exec approval</span></div>
 </div>
 <div class="font-semibold mt-4 mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Available models</div>
 <div class="font-mono text-xs space-y-0.5" :class="isDark ? 'text-zinc-400' : 'text-gray-600'">
-<div>claude-sonnet-4.6 &nbsp; claude-opus-4.6</div>
-<div>claude-haiku-4.5 &nbsp; claude-sonnet-4.5</div>
-<div>gpt-5.4 &nbsp; gpt-5.3-codex &nbsp; gpt-5.2</div>
-<div>gpt-5.2-codex &nbsp; gpt-5.1 &nbsp; gpt-4.1</div>
+<div>claude-sonnet-4.6 &nbsp; claude-sonnet-4.5 &nbsp; claude-haiku-4.5</div>
+<div>claude-opus-4.8 &nbsp; claude-opus-4.7 &nbsp; claude-opus-4.6</div>
+<div>claude-opus-4.6-fast &nbsp; claude-opus-4.5</div>
+<div>gpt-5.5 &nbsp; gpt-5.4 &nbsp; gpt-5.2</div>
+<div>gpt-5.3-codex &nbsp; gpt-5.2-codex</div>
 <div>gpt-5.4-mini &nbsp; gpt-5-mini</div>
 </div>
 <div class="font-semibold mt-4 mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Teams</div>
@@ -347,13 +543,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: Environment Variables -->
+# Environment Variables
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">8 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">13 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
 <h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'"><code class="px-2 rounded" :class="isDark ? 'bg-zinc-800 text-yellow-300' : 'bg-amber-100 text-amber-900'">copilot help environment</code> &#8212; Key Env Vars</h2>
@@ -366,6 +563,7 @@ import { isDark } from './components/useTheme'
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">GH_TOKEN</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; GitHub CLI token (second)</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">GITHUB_TOKEN</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; CI token (third)</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">GH_HOST</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; GitHub Enterprise hostname</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_GH_HOST</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; Copilot-only host (overrides GH_HOST)</span></div>
 </div>
 <div class="font-semibold text-sm mt-4 mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Behavior</div>
 <div class="space-y-1">
@@ -380,10 +578,12 @@ import { isDark } from './components/useTheme'
 <div>
 <div class="font-semibold text-sm mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">BYOK &#8212; Bring Your Own Key</div>
 <div class="space-y-1">
-<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_PROVIDER_BASE_URL</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; custom API endpoint</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_PROVIDER_BASE_URL</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; custom API endpoint (activates BYOK)</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_PROVIDER_TYPE</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; openai / azure / anthropic</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_PROVIDER_API_KEY</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; API key</span></div>
-<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_PROVIDER_WIRE_API</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; completions / responses</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_PROVIDER_BEARER_TOKEN</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; bearer token (takes precedence over API key)</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_PROVIDER_WIRE_API</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; completions / responses (use responses for GPT-5)</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_PROVIDER_AZURE_API_VERSION</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; Azure API version</span></div>
 </div>
 <div class="font-semibold text-sm mt-4 mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">Proxy &amp; Output</div>
 <div class="space-y-1">
@@ -394,7 +594,8 @@ import { isDark } from './components/useTheme'
 </div>
 <div class="font-semibold text-sm mt-4 mb-2" :class="isDark ? 'text-cyan-400' : 'text-cyan-800'">OpenTelemetry</div>
 <div class="space-y-1">
-<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">OTEL_EXPORTER_OTLP_ENDPOINT</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; enables OTel automatically</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_OTEL_ENABLED</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'">=true &#8212; explicitly enable OTel</span></div>
+<div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">OTEL_EXPORTER_OTLP_ENDPOINT</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; OTLP endpoint (also enables OTel)</span></div>
 <div><span :class="isDark ? 'text-yellow-300' : 'text-amber-800'">COPILOT_OTEL_FILE_EXPORTER_PATH</span><span :class="isDark ? 'text-zinc-400' : 'text-gray-600'"> &#8212; JSON-lines output file</span></div>
 </div>
 </div>
@@ -406,13 +607,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: BYOK - Custom Model Providers -->
+# BYOK - Custom Model Providers
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">9 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">14 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
 <h2 class="!text-xl !font-bold !m-0 mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">BYOK &#8212; Bring Your Own Key</h2>
@@ -462,13 +664,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: /fleet - Parallel Subagent Execution -->
+# /fleet - Parallel Subagent Execution
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">10 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">15 of 16</span>
 </div>
 <div class="relative z-10 mt-2">
 <h2 class="!text-lg !font-bold !m-0 mb-3" :class="isDark ? 'text-white' : 'text-gray-900'"><code class="px-2 rounded" :class="isDark ? 'bg-zinc-800 text-yellow-300' : 'bg-amber-100 text-amber-900'">/fleet</code> &#8212; Parallel Subagent Execution</h2>
@@ -525,13 +728,14 @@ import { isDark } from './components/useTheme'
 ---
 
 <!-- SLIDE: Where the Magic Lives - ~/.copilot -->
+# Where the Magic Lives - ~/.copilot
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-transparent"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
 <span class="px-4 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 rounded-full text-white text-xs font-semibold tracking-wide shadow-lg">⌨️ Reference &amp; Syntax</span>
 <div class="flex-1 h-px bg-gradient-to-r from-purple-400/60 to-transparent"></div>
-<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">11 of 11</span>
+<span class="text-xs" :class="isDark ? 'text-white/40' : 'text-gray-400'">16 of 16</span>
 </div>
 <div class="relative z-10 mt-1">
 <h2 class="!text-base !font-bold !m-0 mb-0.5" :class="isDark ? 'text-white' : 'text-gray-900'">Where the Magic Lives &#8212; <code class="px-2 rounded" :class="isDark ? 'bg-zinc-800 text-yellow-300' : 'bg-amber-100 text-amber-900'">~/.copilot/</code></h2>

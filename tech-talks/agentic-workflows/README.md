@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-03-05
+updated: 2026-05-05
 section: "Agentic Systems"
 references:
   - url: https://github.blog/ai-and-ml/automate-repository-tasks-with-github-agentic-workflows/
@@ -968,6 +968,260 @@ Include links to worker-generated issues for details.
 
 ---
 
+### 6. Automated PR Review
+
+**Scenario:** Every pull request arrives without context—reviewers apply the same checks repeatedly: test coverage, security risks, blast radius of API changes.[^12][^14]
+
+**Agentic Workflow Solution:**
+
+```markdown
+---
+on:
+  pull_request:
+    types: [opened, synchronize]
+permissions:
+  contents: read
+  pull-requests: read
+tools:
+  github:
+    toolsets: [pull-requests, code]
+safe-outputs:
+  create-pull-request-review-comment:
+    max: 10
+    side: RIGHT
+  submit-pull-request-review:
+    max: 1
+    target: triggering
+---
+
+## PR Risk Reviewer
+
+Analyze the incoming pull request and provide a structured first-pass review.
+
+### Instructions
+
+1. Read the PR title, description, and diff
+2. Assess the change across three dimensions:
+   - Code quality (complexity, duplication, naming clarity)
+   - Security (injection points, credential exposure, unsafe dependencies)
+   - Blast radius (how many call sites change? any public API surface affected?)
+3. Add inline review comments for specific concerns with line references
+4. Submit a COMMENT review summarizing:
+   - Overall risk level: LOW / MEDIUM / HIGH
+   - Top 3 concerns
+   - At least one thing done well
+
+Do not APPROVE or REQUEST_CHANGES—this is a first-pass context brief, not a gate.
+```
+
+**Value:** Every PR gets a consistent structured brief within seconds of opening. Human reviewers start from a risk-assessed summary instead of a blank diff.
+
+---
+
+### 7. Intelligent Dependency Audit
+
+**Scenario:** Dependabot generates a stream of update PRs with no context—maintainers can't tell which upgrades matter, what breaks, or whether a major version bump is worth the migration cost.[^17]
+
+**Agentic Workflow Solution:**
+
+```markdown
+---
+on:
+  schedule: weekly
+permissions:
+  contents: read
+  pull-requests: write
+tools:
+  github:
+    toolsets: [code, pull-requests]
+  bash: [npm, pip]
+safe-outputs:
+  create-pull-request:
+    title-prefix: "[deps] "
+    labels: [dependencies, bot]
+    draft: true
+    max: 3
+    expires: 14
+---
+
+## Intelligent Dependency Audit
+
+Review outdated dependencies and create focused, context-rich upgrade PRs.
+
+### Instructions
+
+1. Run the package audit tool to identify outdated dependencies
+2. For each outdated package:
+   - Read the changelog between current and latest version
+   - Identify breaking changes that affect this codebase's usage patterns
+   - Note any CVEs or security advisories
+3. Group by risk level:
+   - PATCH/MINOR with no breaking changes → single combined PR
+   - MAJOR or security-critical → one PR per package
+4. For each PR, include:
+   - What changed in the package and why it matters here
+   - Required code changes with before/after examples
+   - Any transitive vulnerabilities addressed
+
+Skip packages requiring more than 2 hours of migration—note them as deferred in the PR body.
+```
+
+**Value:** One clear, annotated PR per upgrade decision instead of noisy bot churn. Maintainers understand the impact before merging, not after.
+
+---
+
+### 8. Release Notes Generation
+
+**Scenario:** Every release requires manually aggregating merged PRs, writing upgrade guidance, and surfacing breaking changes—work that frequently gets skipped or rushed under release pressure.[^16]
+
+**Agentic Workflow Solution:**
+
+```markdown
+---
+on:
+  release:
+    types: [created]
+permissions:
+  contents: read
+  pull-requests: read
+tools:
+  github:
+    toolsets: [pull-requests, releases, issues]
+safe-outputs:
+  create-issue:
+    title-prefix: "[release-notes] "
+    labels: [release, documentation]
+    max: 1
+---
+
+## Release Notes Generator
+
+When a release is created, generate comprehensive release notes for team review.
+
+### Instructions
+
+1. Identify all PRs merged since the previous release tag
+2. Categorize by change type:
+   - ✨ New Features
+   - 🐛 Bug Fixes
+   - 💥 Breaking Changes
+   - 🔒 Security Updates
+   - 📚 Documentation
+   - 🔧 Internal/Maintenance
+3. For breaking changes, include migration paths with before/after examples
+4. Surface top contributors by merged PR count
+5. Write for end users, not contributors—focus on impact, not implementation
+
+Create a draft issue with the notes for team review before publishing to the release.
+```
+
+**Value:** Release documentation ready within seconds of tagging. Breaking changes get explicit callouts. Consistent voice and format across every release without manual coordination.
+
+---
+
+### 9. ChatOps via Comment Commands
+
+**Scenario:** Maintainers want to trigger triage, summaries, or ownership routing from directly within an issue or PR—without leaving GitHub, opening a terminal, or navigating to the Actions tab.[^16]
+
+**Agentic Workflow Solution:**
+
+```markdown
+---
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+tools:
+  github:
+    toolsets: [issues, pull-requests, labels]
+safe-outputs:
+  add-comment:
+    max: 1
+  add-labels:
+    allowed: [bug, needs-repro, wont-fix, good-first-issue, help-wanted]
+    max: 3
+  add-issue-assignees:
+    max: 1
+---
+
+## Comment Command Handler
+
+Respond to slash commands posted in issue or PR comments.
+
+### Supported Commands
+
+- `/triage` — Analyze the issue content and apply appropriate labels
+- `/summarize` — Summarize the discussion thread so far
+- `/suggest-owner` — Recommend the best team member based on code ownership
+- `/close-reason [text]` — Draft a polite closing comment explaining the decision
+
+### Instructions
+
+1. Read the triggering comment body
+2. Identify whether it starts with a recognized slash command
+3. Execute the corresponding action using available tools
+4. Reply in the same thread with a brief explanation of what was done and why
+
+If no recognized command is found, call noop.
+```
+
+**Value:** Power-user automation available to anyone with comment access. Triage, summarization, and ownership routing happen in-thread without dashboards or terminal access.
+
+---
+
+### 10. Weekly External Research Digest
+
+**Scenario:** Engineering teams want to stay current with developments relevant to their stack, but monitoring external feeds and distilling them into actionable context is manual overhead that fades when the team gets busy.[^18]
+
+**Agentic Workflow Solution:**
+
+```markdown
+---
+on:
+  schedule: weekly
+permissions:
+  contents: read
+tools:
+  github:
+    toolsets: [issues]
+  bash: [curl, jq]
+safe-outputs:
+  create-issue:
+    title-prefix: "[research-digest] "
+    labels: [research, weekly]
+    close-older-issues: true
+    expires: 8
+---
+
+## Weekly External Research Digest
+
+Every week, collect and summarize external developments relevant to this project's technology choices.
+
+### Sources to Monitor
+
+1. Hacker News — search for topics matching our primary technologies
+2. arXiv — recent papers relevant to our domain
+3. GitHub Trending — repositories gaining momentum in our language/ecosystem
+
+### Instructions
+
+1. Fetch content from each source using curl and jq
+2. Filter to items with direct relevance to this project's tech stack
+3. For each relevant item, write a 2-3 sentence summary explaining why it matters here
+4. Score relevance: HIGH / MEDIUM / LOW
+5. Include only HIGH and MEDIUM items in the digest
+
+If fewer than 3 relevant items are found, call noop—don't post low-signal noise.
+Format as a readable weekly briefing with source links.
+```
+
+**Value:** Version-controlled, auditable research automation that lives in the repository—not siloed in a personal automation account or an AI tool outside team governance.[^18]
+
+---
+
 ## 🧠 Mental Model Shift
 
 ### From Scripted Steps to Adaptive Intent
@@ -1129,6 +1383,12 @@ Include links to worker-generated issues for details.
 [^14]: Ken Muse Blog: [GitHub Agentic Workflows Bring AI Agents to Actions](https://www.kenmuse.com/blog/github-agentic-workflows-bring-ai-agents-to-actions/)
 
 [^15]: GitHub Agentic Workflows: [Quick Start Guide](https://github.github.com/gh-aw/setup/quick-start/)
+
+[^16]: GitHub Next: [githubnext/agentics — Sample Pack of GitHub Agentic Workflows](https://github.com/githubnext/agentics)
+
+[^17]: Erik Lieben: [Dependency Updates That Understand Your Code](https://www.eriklieben.com/posts/agentic-dev-workflow-dependency-management/)
+
+[^18]: Shing Lyu: [Automating Weekly Research with GitHub Agentic Workflows](https://shinglyu.com/blog/2026/04/15/automating-weekly-research-with-github-agentic-workflows.html)
 
 ---
 

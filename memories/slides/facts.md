@@ -4,6 +4,61 @@ Confirmed, locked facts about Slidev infrastructure, build rules, and structural
 
 ---
 
+## Component content validator limits — character maximums per component (2026-06-16)
+
+`schema_version: 1` | `date: 2026-06-16`
+
+The build validator enforces per-component character limits that are NOT documented in `template.md`. Exceed them → `[WARN]` lines in build output (deck still builds `[OK]` but content may overflow visually).
+
+| Component | Constraint | Max |
+|---|---|---|
+| `FourCardGridSlide` | `:cards` items | exactly 4 (insight prop counts toward limit — remove it if you have 4 cards) |
+| `ThreeColumnCardSlide` | `description` per column | 100 chars |
+| `MaturityJourneyRoadmapSlide` | `description` per stage | 100 chars |
+| `FrameworkMappingRowsSlide` | `label` per row | 13 chars |
+| `FrameworkMappingRowsSlide` | `description` per row | 70 chars |
+
+**`FourCardGridSlide` + insight:** The validator counts `:insight` as an item alongside `:cards`. If you have 4 cards + insight = 5 items → CARDS_MAX warning. Workaround: remove `:insight` when you need all 4 cards.
+
+---
+
+## Blank line required between `---` and `<!-- SLIDE: -->` (2026-05-05)
+
+`schema_version: 1` | `date: 2026-05-05`
+
+Every `---` slide separator must be followed by a **blank line** before the `<!-- SLIDE: Name -->` comment. Missing the blank line causes Slidev to misparse the slide boundary.
+
+✅ Correct:
+```
+/>
+
+---
+
+<!-- SLIDE: Next Slide -->
+<ComponentName
+```
+
+❌ Wrong (what the generator produced on 2026-05-05):
+```
+/>
+
+---
+<!-- SLIDE: Next Slide -->
+<ComponentName
+```
+
+**Fix:** Use PowerShell to repair all occurrences at once:
+```powershell
+$file = "slides/tech-talks/{slug}.md"
+$content = [System.IO.File]::ReadAllText($file)
+$fixed = $content -replace "---\r?\n(<!--)", "---`r`n`r`n`$1"
+[System.IO.File]::WriteAllText($file, $fixed, [System.Text.UTF8Encoding]::new($false))
+```
+
+**Root cause:** The tech-talk-slide-generator agent's "Common mistakes" list said `---` must be on its own line but did not explicitly require the blank line after it. Fixed by adding the rule to `.github/agents/tech-talk-slide-generator.agent.md`.
+
+---
+
 ## TwoColPairedConceptsSlide `code` prop block was hardcoded dark (2026-04-26)
 
 `schema_version: 1` | `date: 2026-04-26`

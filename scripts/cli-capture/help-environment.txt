@@ -38,7 +38,9 @@ Environment Variables:
 
   `COPILOT_PROVIDER_MAX_OUTPUT_TOKENS`: maximum output tokens for the BYOK model. Overrides both catalog and default values.
 
-  `GH_HOST`: GitHub hostname for authentication and API requests; defaults to "github.com". Set this to your GitHub Enterprise Cloud with data residency hostname (e.g., "mycompany.ghe.com").
+  `GH_HOST`: GitHub hostname for authentication and API requests; defaults to "github.com". Set this to your GitHub Enterprise Cloud with data residency hostname (e.g., "mycompany.ghe.com"). Use when both GitHub CLI and Copilot CLI should target the same host.
+
+  `COPILOT_GH_HOST`: GitHub hostname used only by Copilot CLI for authentication and API requests, overriding GH_HOST when set. Useful when GH_HOST points to a GitHub Enterprise Server instance but Copilot CLI needs to authenticate against github.com or a GitHub Enterprise Cloud with data residency hostname instead.
 
   `HTTP_PROXY`, `HTTPS_PROXY` (case-insensitive): proxy server URL for outgoing HTTP and HTTPS connections respectively (e.g., "http://proxy.example.com:8080").
 

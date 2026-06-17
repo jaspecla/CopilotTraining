@@ -208,7 +208,7 @@ Frontend, backend, tests, docs, and Python utilities should not all receive the 
 </div>
 <div class="p-3 rounded-lg border-l-4 border-purple-500 bg-gray-900/60">
 <div class="font-bold text-purple-300 mb-0.5 text-sm">1.2–1.5 — Precision by path</div>
-<div class="text-gray-400 font-mono text-xs mb-2">copilot-instructions.md + *.instructions.md</div>
+<div class="text-gray-400 font-mono text-xs mb-2">AGENTS.md + *.instructions.md</div>
 <div class="text-gray-300">Repo-wide defaults plus targeted rules for frontend, backend, tests, docs, and language runtimes.</div>
 </div>
 <div class="p-3 rounded-lg border-l-4 border-green-500 bg-gray-900/60">
@@ -258,7 +258,7 @@ Frontend, backend, tests, docs, and Python utilities should not all receive the 
 
 <div class="p-4 rounded-xl bg-gradient-to-br from-purple-900/40 to-gray-900/40 border border-purple-500/30">
 <div class="text-sm text-purple-300 font-semibold mb-1">Baseline rules</div>
-<div class="text-base text-white font-bold"><code>copilot-instructions.md</code></div>
+<div class="text-base text-white font-bold"><code>AGENTS.md</code></div>
 <div class="text-sm text-gray-300 leading-snug">How this repository expects code and content to look.</div>
 </div>
 
@@ -350,7 +350,7 @@ We'll walk through the complete orchestration flow showing how all context sourc
 </div>
 </div>
 <div class="relative z-10 mb-3 p-3 bg-gray-900/50 rounded-xl border border-orange-500/20 text-sm text-gray-300">
-Generates a baseline <code class="text-orange-200">copilot-instructions.md</code> by scanning your repo. Think of it as Copilot reading your codebase and drafting its own briefing document. A good first draft &mdash; not a final answer.
+Generates a baseline <code class="text-orange-200">copilot-instructions.md</code> or <code class="text-orange-200">AGENTS.md</code>by scanning your repo. Think of it as Copilot reading your codebase and drafting its own briefing document. A good first draft &mdash; not a final answer.
 </div>
 <div class="relative z-10 grid grid-cols-3 gap-3">
 <div class="p-3 rounded-xl bg-gradient-to-br from-blue-950/60 to-gray-900/80 border border-blue-500/20">
@@ -385,7 +385,7 @@ Generates a baseline <code class="text-orange-200">copilot-instructions.md</code
 </div>
 ---
 
-<!-- SLIDE: 🔎 File 2 of 5 — copilot-instructions.md -->
+<!-- SLIDE: 🔎 File 2 of 5 — AGENTS.md -->
 <div class="h-full flex flex-col justify-start px-14 py-4 relative overflow-hidden">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/25 via-indigo-900/15 to-gray-900/20"></div>
 <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-purple-500/15 to-transparent rounded-full blur-3xl"></div>
@@ -398,7 +398,7 @@ Generates a baseline <code class="text-orange-200">copilot-instructions.md</code
 <div class="relative z-10 mb-3 flex items-center gap-4">
 <div class="text-5xl">🪄</div>
 <div>
-<div class="text-2xl font-bold text-purple-300 font-mono">copilot-instructions.md</div>
+<div class="text-2xl font-bold text-purple-300 font-mono">AGENTS.md</div>
 <div class="text-sm text-gray-400 mt-1">Included with <span class="text-purple-300 font-semibold">every prompt</span> &mdash; automatically, without you asking</div>
 </div>
 </div>
@@ -503,10 +503,10 @@ When one area of your repo plays by different rules, give it its own instruction
 </div>
 </div>
 <div class="relative z-10 mb-3 p-3 bg-gray-900/50 rounded-xl border border-cyan-500/20 text-sm text-gray-300">
-Copilot doesn't automatically read this file. The trick: add a line in <code class="text-purple-300">copilot-instructions.md</code> that points to it. When that line is in context, Copilot knows to reference the architecture doc — keeping your main instructions file short.
+Copilot doesn't automatically read this file. The trick: add a line in <code class="text-purple-300">AGENTS.md</code> that points to it. When that line is in context, Copilot knows to reference the architecture doc — keeping your main instructions file short.
 </div>
 <div class="relative z-10 mb-3 p-3 bg-gray-950/80 rounded-xl border border-cyan-500/30 font-mono text-xs text-gray-300">
-<div class="text-cyan-400/60 text-[10px] mb-1 uppercase tracking-wider">copilot-instructions.md</div>
+<div class="text-cyan-400/60 text-[10px] mb-1 uppercase tracking-wider">AGENTS.md</div>
 <div><span class="text-gray-500"># Context</span></div>
 <div>See <span class="text-cyan-300">ARCHITECTURE.md</span> for stack, services, and data flows.</div>
 <div>See <span class="text-green-300">SECURITY.md</span> for auth patterns and compliance constraints.</div>
@@ -524,7 +524,7 @@ Copilot doesn't automatically read this file. The trick: add a line in <code cla
 <div class="p-3 rounded-xl bg-gradient-to-br from-amber-950/60 to-gray-900/80 border border-amber-500/20">
 <div class="text-xs font-bold text-amber-400 mb-2 uppercase tracking-wider">💡 Why It Works</div>
 <div class="text-xs text-gray-300 space-y-1.5">
-<div>• Keeps <code>copilot-instructions.md</code> short</div>
+<div>• Keeps <code>AGENTS.md</code> short</div>
 <div>• Add as many pointers as you need</div>
 <div>• Each doc stays focused and maintainable</div>
 <div>• Works for any context doc, not just architecture</div>
@@ -606,7 +606,7 @@ Defined by your GitHub organization, not your repo. Every developer and every re
 </div>
 <div class="p-3 rounded-xl bg-gradient-to-br from-purple-900/40 to-gray-900/40 border border-purple-500/30 text-left">
 <div class="text-purple-300 font-semibold mb-1 text-xs uppercase tracking-wide">Step 2B</div>
-<div class="text-white font-bold text-sm"><code>copilot-instructions.md</code></div>
+<div class="text-white font-bold text-sm"><code>AGENTS.md</code><code>AGENTS.md</code></div>
 <div class="text-xs text-gray-300 mt-1 leading-snug">Defines the repo&rsquo;s default rules.</div>
 </div>
 </div>
@@ -705,7 +705,7 @@ Defined by your GitHub organization, not your repo. Every developer and every re
 </tr>
 <tr class="bg-gray-900/50">
 <td class="p-3 rounded-l-lg font-semibold text-blue-300">1.2</td>
-<td class="p-3">Create <code>copilot-instructions.md</code></td>
+<td class="p-3">Create <code>AGENTS.md</code></td>
 <td class="p-3">Repo defaults</td>
 <td class="p-2">Sarah ⭐</td>
 <td class="p-3 rounded-r-lg">10 min</td>
@@ -1101,7 +1101,7 @@ Copilot keeps rediscovering the same structure because nothing explains the syst
 <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-purple-500/30 flex-shrink-0">1.2</div>
 <div>
 <div class="text-purple-300 text-xs font-semibold tracking-widest uppercase">Exercise</div>
-<h2 class="!text-2xl !font-bold text-white !m-0">Adjust <code>copilot-instructions.md</code></h2>
+<h2 class="!text-2xl !font-bold text-white !m-0">Adjust <code>AGENTS.md</code></h2>
 </div>
 <div class="ml-auto flex gap-3 text-xs text-gray-400">
 <span class="px-3 py-1 bg-gray-800 rounded-full">Sarah ⭐</span>
@@ -1134,11 +1134,11 @@ The same defaults keep getting re-explained in code review. <strong class="text-
 
 ---
 
-<!-- SLIDE: &#x1F4AC; Prompt: Updating copilot-instructions.md -->
+<!-- SLIDE: &#x1F4AC; Prompt: Updating AGENTS.md -->
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-transparent"></div>
 <div class="relative z-10 flex items-center gap-3 mb-3">
-<span class="px-3 py-1 bg-gradient-to-r from-orange-600/80 to-red-600/80 rounded-full text-white text-sm font-medium tracking-wide shadow-lg">&#x1F4AC; Prompt: Updating copilot-instructions.md</span>
+<span class="px-3 py-1 bg-gradient-to-r from-orange-600/80 to-red-600/80 rounded-full text-white text-sm font-medium tracking-wide shadow-lg">&#x1F4AC; Prompt: Updating AGENTS.md</span>
 <div class="flex-1 h-px bg-gradient-to-r from-orange-400/50 to-transparent"></div>
 </div>
 <div class="relative z-10 flex-1 flex flex-col gap-3">
@@ -1146,7 +1146,7 @@ The same defaults keep getting re-explained in code review. <strong class="text-
 <div class="flex flex-col gap-2">
 <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">&#x1F9D1; Prompt to Copilot</div>
 <div class="bg-purple-900/20 rounded-xl p-4 border border-purple-500/30 text-gray-200 text-xs leading-relaxed flex-1 select-all cursor-text">
-<div>We now have <span class="font-mono text-purple-300">ARCHITECTURE.md</span>. Update <span class="font-mono text-purple-300">.github/copilot-instructions.md</span> to reflect that.</div>
+<div>We now have <span class="font-mono text-purple-300">ARCHITECTURE.md</span>. Update <span class="font-mono text-purple-300">AGENTS.md</span> to reflect that.</div>
 <div class="mt-3">Specifically:</div>
 <div class="mt-1 text-gray-300">&#x2023; <strong>Remove</strong> any detailed tech stack descriptions &mdash; folder names, framework versions, request flow diagrams</div>
 <div class="mt-1 text-gray-300">&#x2023; <strong>Replace</strong> them with a single reference: <span class="font-mono text-purple-200">See ARCHITECTURE.md for system structure and key boundaries</span></div>
@@ -1194,7 +1194,7 @@ The same defaults keep getting re-explained in code review. <strong class="text-
 </div>
 
 <div class="relative z-10">
-<div class="text-xl font-bold text-white mb-6">copilot-instructions.md is for <span class="text-red-300">Conventions & Constraints</span>, NOT Details</div>
+<div class="text-xl font-bold text-white mb-6">AGENTS.md is for <span class="text-red-300">Conventions & Constraints</span>, NOT Details</div>
 
 <div class="grid grid-cols-2 gap-4 mb-6">
 <div class="p-4 rounded-xl bg-green-900/30 border border-green-600/40">
@@ -1220,7 +1220,7 @@ The same defaults keep getting re-explained in code review. <strong class="text-
 
 <div class="p-4 rounded-xl bg-orange-900/40 border-l-4 border-orange-400">
 <div class="text-orange-300 font-bold mb-2">💡 The Rule of Thumb</div>
-<div class="text-gray-300 text-sm">If it's something Copilot needs to remember <strong>on every single prompt</strong>, it belongs in copilot-instructions.md. If it's something developers need to read once, it belongs elsewhere.</div>
+<div class="text-gray-300 text-sm">If it's something Copilot needs to remember <strong>on every single prompt</strong>, it belongs in AGENTS.md. If it's something developers need to read once, it belongs elsewhere.</div>
 </div>
 </div>
 </div>
@@ -1289,7 +1289,7 @@ Frontend and backend keep borrowing the wrong patterns from each other. <strong 
 <div class="text-gray-300 mt-1">&#x2023; <code>applyTo: "backend/**"</code></div>
 <div class="text-gray-300">&#x2023; Express patterns: route structure, middleware order, error handling</div>
 <div class="text-gray-300">&#x2023; Data access: no raw SQL outside db layer, parameterized queries</div>
-<div class="mt-3">Do not repeat anything already in <span class="font-mono text-purple-200">copilot-instructions.md</span>.</div>
+<div class="mt-3">Do not repeat anything already in <span class="font-mono text-purple-200">AGENTS.md</span>.</div>
 </div>
 </div>
 <div class="flex flex-col gap-3">
@@ -1526,7 +1526,7 @@ Tests, Docker files, and docs serve different purposes than production app code.
 <div class="space-y-2 text-xs">
 <div class="flex items-start gap-3 p-2 bg-gray-900/40 rounded-lg"><span class="w-5 h-5 rounded-full bg-green-700 text-white text-xs flex items-center justify-center flex-shrink-0">1</span><span class="text-gray-300"><strong class="text-green-300">Ground the content</strong> &mdash; any TV series, game, or universe you know well. Then in Agent mode, scaffold <span class="font-mono text-green-300">docs/[show]-universe.md</span> using web search for premise, characters, terminology, and canon rules</span></div>
 <div class="flex items-start gap-3 p-2 bg-gray-900/40 rounded-lg"><span class="w-5 h-5 rounded-full bg-green-700 text-white text-xs flex items-center justify-center flex-shrink-0">2</span><span class="text-gray-300">Review and correct the draft — find at least one inaccuracy Copilot introduced</span></div>
-<div class="flex items-start gap-3 p-2 bg-gray-900/40 rounded-lg"><span class="w-5 h-5 rounded-full bg-green-700 text-white text-xs flex items-center justify-center flex-shrink-0">3</span><span class="text-gray-300">Add a <span class="font-mono text-green-300">## Universe</span> pointer section to <span class="font-mono text-green-300">copilot-instructions.md</span> linking to the file</span></div>
+<div class="flex items-start gap-3 p-2 bg-gray-900/40 rounded-lg"><span class="w-5 h-5 rounded-full bg-green-700 text-white text-xs flex items-center justify-center flex-shrink-0">3</span><span class="text-gray-300">Add a <span class="font-mono text-green-300">## Universe</span> pointer section to <span class="font-mono text-green-300">AGENTS.md</span> linking to the file</span></div>
 <div class="flex items-start gap-3 p-2 bg-gray-900/40 rounded-lg"><span class="w-5 h-5 rounded-full bg-green-700 text-white text-xs flex items-center justify-center flex-shrink-0">4</span><span class="text-gray-300">Validate: ask Copilot for a character bio — it should return accurate, show-specific content on the first pass</span></div>
 </div>
 </div>
@@ -1536,7 +1536,7 @@ Tests, Docker files, and docs serve different purposes than production app code.
 <div class="flex items-center gap-2 p-2 bg-green-900/20 rounded-lg border border-green-700/30"><span class="text-green-400">☐</span> <span class="font-mono">[show]-universe.md</span> drafted in Agent mode</div>
 <div class="flex items-center gap-2 p-2 bg-green-900/20 rounded-lg border border-green-700/30"><span class="text-green-400">☐</span> At least one Copilot error found and corrected</div>
 <div class="flex items-center gap-2 p-2 bg-green-900/20 rounded-lg border border-green-700/30"><span class="text-green-400">☐</span> 5+ characters, 3+ terms, 2+ canon accuracy rules</div>
-<div class="flex items-center gap-2 p-2 bg-green-900/20 rounded-lg border border-green-700/30"><span class="text-green-400">☐</span> <span class="font-mono">copilot-instructions.md</span> links to universe file</div>
+<div class="flex items-center gap-2 p-2 bg-green-900/20 rounded-lg border border-green-700/30"><span class="text-green-400">☐</span> <span class="font-mono">AGENTS.md</span> links to universe file</div>
 <div class="flex items-center gap-2 p-2 bg-green-900/20 rounded-lg border border-green-700/30"><span class="text-green-400">☐</span> Bio test returns accurate, show-specific result</div>
 </div>
 <div class="mt-3 p-3 bg-green-900/20 rounded-lg border border-green-500/30 text-xs text-gray-300 italic">💭 <strong class="text-green-300">Sarah:</strong> "I&#39;ve answered &#39;What is Breaking Bad about?&#39; twelve times this week. After this, the answer lives in the file — zero times next week."</div>
@@ -1558,7 +1558,7 @@ The file should cover:
 • Canon accuracy rules — common mistakes to avoid
 • Timeline — season/year markers for key events
 
-After creating the file, update copilot-instructions to refer to it for domain-related questions.`
+After creating the file, update AGENTS.md to refer to it for domain-related questions.`
 </script>
 <div class="h-full flex flex-col justify-start relative overflow-hidden px-14">
 <div class="absolute inset-0 bg-gradient-to-br from-green-900/20 via-transparent to-transparent"></div>
@@ -1721,7 +1721,7 @@ Reseed:
 <div class="text-blue-300 font-bold mb-3">Foundation</div>
 <ul class="space-y-2 text-gray-300">
 <li>Create <code>docs/ARCHITECTURE.md</code></li>
-<li>Create <code>.github/copilot-instructions.md</code></li>
+<li>Create <code>AGENTS.md</code></li>
 <li>Confirm both describe reality clearly</li>
 </ul>
 </div>

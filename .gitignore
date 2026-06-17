@@ -60,6 +60,7 @@ temp/
 
 # Debug
 .debug/
+slides/.preview-prod
 
 # Development databases (MCP testing)
 dev-data/

@@ -1,6 +1,15 @@
 import { defineAppSetup } from '@slidev/types'
-import ThankYouSlide from '../components/structure/ThankYouSlide.vue'
-import TitleSlide from '../components/structure/TitleSlide.vue'
+
+function hideGotoDialog() {
+  const styleId = 'copilottraining-hide-goto-dialog'
+  if (document.getElementById(styleId))
+    return
+
+  const style = document.createElement('style')
+  style.id = styleId
+  style.textContent = '#slidev-goto-dialog { display: none !important; }'
+  document.head.appendChild(style)
+}
 
 function normalizeRouterBase(router: any) {
   const base: string = router?.options?.history?.base ?? ''
@@ -38,11 +47,9 @@ function normalizeRouterBase(router: any) {
   }
 }
 
-export default defineAppSetup(({ app, router }) => {
-  app.component('ThankYouSlide', ThankYouSlide)
-  app.component('TitleSlide', TitleSlide)
-
+export default defineAppSetup(({ router }) => {
   if (typeof window !== 'undefined' && router) {
+    hideGotoDialog()
     normalizeRouterBase(router)
 
     router.isReady().then(() => {

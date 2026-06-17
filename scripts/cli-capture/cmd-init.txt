@@ -11,7 +11,7 @@ The generated instructions help Copilot understand your project's conventions so
 it can produce more relevant code suggestions and follow your team's practices.
 
 For more information, see:
-https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions
+https://docs.github.com/copilot/how-tos/configure-custom-instructions/add-repository-instructions
 
 Options:
   -h, --help  display help for command

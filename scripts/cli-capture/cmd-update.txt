@@ -1,4 +1,4 @@
-Usage: copilot update [options]
+Usage: copilot update [options] [channel]
 
 Download the latest version.
 
@@ -11,12 +11,18 @@ RUN_ID, or SYSTEM_COLLECTIONURI environment variables).
 
 Use --no-auto-update or set COPILOT_AUTO_UPDATE=false to disable it manually.
 
+Arguments:
+  channel     update channel (choices: "prerelease")
+
 Options:
   -h, --help  display help for command
 
 Examples:
   # Check for and install updates
   $ copilot update
+
+  # Update to the latest prerelease
+  $ copilot update prerelease
 
 Learn More:
   Use `copilot <command> --help` for more information about a command.

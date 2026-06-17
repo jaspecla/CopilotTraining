@@ -4,6 +4,33 @@ Confirmed facts about agentic SDLC tech-talk decks: agentic-sdlc, agentic-workfl
 
 ---
 
+## agentic-workflows deck: fully rebuilt 2026-05-05 (25 slides, zero warnings)
+
+`schema_version: 1` | `date: 2026-05-05`
+
+`slides/tech-talks/agentic-workflows.md` — 25 slides, builds `[OK]` with zero prop lint warnings.
+
+**New 4-section structure (replaces old 3-section model):**
+1. Why Agentic Workflows Matter (high, 4 slides)
+2. Architecture & Safe Execution (high, 5 slides)
+3. Patterns by Path & Maturity (medium, 3 slides)
+4. Your Path Forward (medium-low, 2 slides)
+
+**Section 3 — Option B decision:** Three path slides (Path A, Path B, Path C), each as a `ThreeColumnCardSlide` showing L1/L2/L3 maturity columns. Rejected Option A (3×3 grid) as too dense and Option C (one maturity-level slide per level) as non-path-differentiated.
+
+**Five new use cases added to README (2026-05-05):**
+- #6 Automated PR Review (pull_request trigger, submit-pull-request-review)
+- #7 Intelligent Dependency Audit (schedule:weekly, create-pull-request draft max:3)
+- #8 Release Notes Generation (release:created, create-issue for team review)
+- #9 ChatOps via Comment Commands (issue_comment, add-comment, add-labels)
+- #10 Weekly External Research Digest (schedule:weekly, create-issue expires:8)
+
+**Components used:** WorkflowShowdownStepsSlide, ThreeColumnCardSlide, AITerminalTranscriptSlide, FourCardGridSlide, MaturityJourneyRoadmapSlide, CodeWithFeaturesSlide, ProblemSolutionOutcomeSlide, FrameworkMappingRowsSlide
+
+**FrameworkMappingRowsSlide row description limit: 70 chars.** Significantly shorter than ThreeColumnCardSlide (100 chars). Account for this when writing row descriptions — typically only 8–10 words fit.
+
+---
+
 ## agentic-workflows deck: prop lint status as of 2026-04-22
 
 `schema_version: 1` | `date: 2026-04-22`

@@ -1,9 +1,12 @@
 # deck.recipe.yml — Agentic Workflows talk guidance
 #
-# COUNCIL VERDICT: "The Opportunity" is promoted to S1 (no 🎬 README marker) — the talk
-# opens cold without it. Safe Outputs is elevated to medium-high: 1 slide against a
-# security-critical argument is a structural gap that costs enterprise adoption, not
-# merely a polish issue.
+# COUNCIL VERDICT (May 2026, 3-agent collaborative council):
+# The core structural problem: 10 use cases (5 newly added) are buried in an unsectioned
+# block, making their relationship to patterns and decision criteria opaque. The fix:
+# promote flagship use cases into the opening section as evidence for the problem, merge
+# Architecture + Safe Outputs into one trust-building section, and deploy a Path×Maturity
+# matrix as Section 3's spine — surfacing all 10 use cases visually so audience members
+# can self-locate before the CTA lands.
 
 version: 1
 
@@ -11,102 +14,107 @@ deck:
   title: "GitHub Agentic Workflows"
   subtitle: "Repository Automation with AI Agents"
   tagline: "Write repository automation in natural language, execute with security-first AI agents"
-  arcToc: "The Opportunity → Core Architecture → Safe Outputs → Agent Factory"
+
+  # arcToc: ≤80 chars, displayed as TocSlide subtitle
+  arcToc: "Why It Matters → Architecture & Safety → Patterns by Path → Your Path Forward"
 
   arcNarrative: >
-    The talk opens with The Opportunity to land the WHY before anything technical arrives:
-    the audience must feel the friction of YAML-bound, deterministic automation that breaks
-    whenever repository context demands judgment — otherwise Core Architecture sounds like a
-    feature list instead of a solution. Core Architecture is the load-bearing section; the
-    three-phase Markdown→compile→lock.yml pipeline is the single mental model that makes
-    every downstream claim credible — without it, neither the security story nor the 100+
-    pattern catalog has a foundation to stand on, so it earns the most slides and the slowest
-    pace. Safe Outputs lands third as the enterprise trust unlock: the read-only AI sandbox
-    plus validated safe-output handlers answer the "can I actually ship this?" objection for
-    platform engineers and EMs before they hit the catalog — skipping or thinning this section
-    costs the audience's confidence right before the payoff. Agent Factory closes as
-    proof-of-concept made concrete: the 100+ pattern catalog validated through continuous
-    production use, three rapid vignettes (issue triage, CI diagnostic, daily status) giving
-    every persona an on-ramp, and a "What You Can Do Today" CTA anchored on `gh extension
-    install github/gh-aw` as the cleanest possible landing strip. Peak engagement lands in
-    Core Architecture (the "aha" of the lock-file reveal) with a second spike at the Factory
-    vignettes; this ordering beats alternatives because it withholds the "here's what to
-    build" excitement until the audience has the security and architecture confidence to
-    actually believe it.
+    Section 1 establishes three audience paths (A: high-volume triage automation; B: complex
+    visibility and reporting; C: multi-agent orchestration) via three flagship use cases — one
+    per path — so every persona self-recognizes their problem within the first 12 slides. The
+    decision tree is a teaser here, not a deep dive; its job is to plant the A/B/C framing
+    that threads through the entire talk. Section 2 is the intellectual core: it layers
+    architecture → safe execution → Pattern Showcase, moving from "how it compiles" to "what
+    these patterns are called," with the Pattern Showcase slide acting as the bridge that
+    translates technical concepts into repeatable design vocabulary before Section 3 applies
+    them. Section 3 is the talk's centerpiece: a 3×3 matrix (Path A/B/C × Maturity Level
+    1/2/3) distributes all 10 use cases visually so audience members scan for their path and
+    level intersection and instantly find their peer use cases and dominant patterns. Peak
+    engagement lands at Section 1 (motivation + credential) and Section 3 (the "I can see
+    myself here" matrix moment). Section 4 closes with a path+level self-assessment that
+    converts the matrix insight into concrete week-by-week actions per path. This ordering
+    beats the previous structure because it makes use cases primary evidence rather than a
+    reference appendix, ties patterns to decisions rather than abstract categorization, and
+    gives every persona a personalized action sequence rather than a generic CTA.
 
   sectionOrder:
-    - "The Opportunity"
-    - "Core Architecture"
-    - "Safe Outputs"
-    - "Agent Factory"
+    - "Why Agentic Workflows Matter"
+    - "Architecture & Safe Execution"
+    - "Patterns by Path & Maturity"
+    - "Your Path Forward"
 
   sectionModes:
-    "The Opportunity":
+    "Why Agentic Workflows Matter":
+      emphasis: high
+      note: >
+        Draw from: README "The Opportunity", "The Solution", "Mental Model Shift" intro, and
+        3 flagship use cases from "Real-World Use Cases". Open with the YAML friction contrast
+        (intent-driven vs. stepwise), then deliver three flagship use cases — one per path —
+        concisely (2-3 lines + trigger + artifact each): Path A = Issue Triage (high-volume,
+        instant wins), Path B = Weekly Health Report (visibility, zero effort), Path C =
+        Multi-Agent Orchestration (parallel workers, synthesized insight). End with the A/B/C
+        decision tree as a preview/teaser: "Which path is yours?" Do NOT explain the
+        compilation pipeline here — defer to Section 2. The "whoa" moment is the before/after:
+        complex YAML automation collapsed into an 8-line Markdown intent statement. Leave the
+        audience leaning forward to understand how that is safe.
+    "Architecture & Safe Execution":
+      emphasis: high
+      note: >
+        Draw from: README "Core Architecture & Compilation", "Safe Outputs Deep Dive",
+        and "Key Artifacts". This is the trust-building section. Teach the three-phase
+        pipeline (Authoring -> Compilation -> Execution) with the lock-file reveal as the
+        primary "whoa" moment: show compiled YAML side-by-side with the Markdown source so
+        the audience viscerally understands the compiler enforces security, not author
+        discipline. Then the Safe Outputs model: read-only AI sandbox -> structured JSON ->
+        validation pipeline (schema, sanitization, rate limiting, permissions) -> scoped
+        handler executes. Include the noop pattern as the #1 runtime failure mode with its
+        fix. Close with the Pattern Showcase bridge slide: name and visually map the 5
+        pattern families (Continuous Improvement, Monitoring/Insights, Orchestration,
+        Quality/Safety, Release/Delivery) to their primary use-case examples — this slide
+        transitions the audience from "I understand the mechanism" to "I know the vocabulary
+        for Section 3."
+    "Patterns by Path & Maturity":
       emphasis: medium
       note: >
-        Two slides maximum — no more. Open with the YAML friction contrast: intent-driven
-        automation (adaptive, natural language) vs. stepwise YAML workflows (deterministic,
-        imperative). The "whoa" moment is the before/after: a 30-line YAML workflow reduced
-        to 8 lines of natural-language Markdown. Do not explain the compilation pipeline
-        here — that belongs in Core Architecture. This section earns its place despite
-        having no 🎬 README marker; without the WHY frame the talk opens cold into
-        architecture diagrams for an audience that hasn't been given a reason to care.
-    "Core Architecture":
-      emphasis: high
+        Draw from: README "The Agent Factory Pattern" and "Real-World Use Cases" (all 10).
+        Spine of this section is a 3x3 matrix: rows = Path A/B/C, columns = Level 1
+        (prototype/quick win), Level 2 (production-ready), Level 3 (advanced/multi-agent).
+        Distribute all 10 use cases across the 9 cells: Path A L1=Issue Triage, L2=PR Review,
+        L3=Dependency Audit; Path B L1=Weekly Health Report, L2=Release Notes, L3=Weekly
+        Research Digest; Path C L1=CI Failure Diagnosis, L2=ChatOps Commands,
+        L3=Multi-Agent Orchestration + Code Simplification. Include the Agent Factory
+        philosophy (specialize not monolith; 100+ workflows in continuous production) as
+        framing before the matrix. Surface 1 failure mode per path (Path A: too many ops
+        hitting max; Path B: low-signal noop spam; Path C: worker synchronization). The
+        "whoa" moment is the matrix reveal — audience scans for their intersection and
+        instantly locates their peer use cases. Use 3 slides (one per path), each showing
+        that path's 3 maturity levels with 1-2 use cases and the dominant pattern per cell.
+        Do NOT use a single dense 3x3 grid — legibility requires one path per slide.
+    "Your Path Forward":
+      emphasis: medium-low
       note: >
-        This is the load-bearing section — teach the three-phase pipeline explicitly:
-        (1) Authoring: Markdown workflow definition with frontmatter triggers, permissions,
-        tools, and safe-outputs declarations; (2) Compilation: `gh aw compile` transforms
-        Markdown → secure .lock.yml with agent job (read-only sandbox) + safe-output handler
-        jobs (minimal write permissions); (3) Execution: sandboxed runner, structured JSON
-        output, validation pipeline, audit trail. The "whoa" moment is the lock-file reveal —
-        show the compiled YAML side-by-side with the Markdown source so the audience viscerally
-        understands that the lock file is a generated artifact they never touch. Cover the three
-        runtime environments (local/Actions/Docker) concisely — don't let environment detail
-        crowd out the pipeline model. Everything downstream depends on this section; do not rush.
-    "Safe Outputs":
-      emphasis: medium-high
-      note: >
-        EXPANSION REQUIRED — currently 1 slide, must reach 2–3 before next delivery.
-        This is the enterprise trust unlock and the primary skeptic-converter for platform
-        engineers and EMs. Slide 1: the threat model — read-only AI sandbox produces
-        structured JSON → validation pipeline (schema check, sanitization, rate limiting,
-        permission check) → safe-output handler executes with minimal scoped permissions.
-        The "whoa" moment is the compiler-as-policy framing: security is enforced by the
-        compiler, not the author's discipline. Slide 2 (required addition): the seven Safe
-        Output types matrix (Issues, PRs, Comments, Labels, Projects, Code Review, Security
-        Advisories) with at least one config archetype YAML visual showing max/expires/
-        title-prefix guardrails. Call out the noop pattern as the #1 runtime failure mode
-        and its fix. Do not let this section be a single bullet list — it must feel like a
-        security architecture review, because for platform engineers it is.
-    "Agent Factory":
-      emphasis: high
-      note: >
-        Conceptual payoff plus concrete proof in one section. Open with the Factory origin
-        story (Peli de Halleux, 100+ workflows running continuously in production on
-        github/gh-aw) to establish that this is validated reality, not demo-ware. Frame the
-        catalog by pattern type: reactive (issue triage, PR review) → scheduled (daily status,
-        dependency updates) → orchestrator (multi-agent dispatch, CI diagnostic synthesis).
-        Deliver three rapid vignettes — issue triage (event-triggered, labels + comment),
-        CI failure diagnostic (log analysis, creates structured issue), daily status report
-        (scheduled, synthesizes activity) — to give each audience persona a concrete anchor.
-        The "whoa" moment is the AgentCouncil integration: consensus mechanism for high-stakes
-        decisions requiring multiple AI perspectives. Close hard into the Mental Model Shift
-        ("describe outcomes, not steps") and "What You Can Do Today": `gh extension install
-        github/gh-aw`, one workflow in minutes, production via GitHub Actions. Before/After
-        and closing slides feed directly from this arc.
+        Draw from: README "What You Can Do Today", "Mental Model Shift" tables, and "Related
+        Patterns". Recap the A/B/C decision tree as a commitment: "You have seen the matrix
+        — which path is yours?" Then deliver a maturity progression contract per path (Week 1:
+        Level 1 workflow; Week 2-3: add safe writes; Week 4+: Level 2; Month 2+: Level 3).
+        Path-specific CTAs: Path A gets triage workflow starter; Path B gets weekly report
+        template; Path C gets orchestrator scaffolding. Include the Mental Model Shift
+        move-toward/move-away tables compressed to one slide. Close with Related Patterns
+        breadcrumbs (MCP, Custom Instructions, Agent Teams) and the single install command:
+        gh extension install github/gh-aw. This section should feel fast and confident —
+        audience leaves knowing exactly what to build Monday morning.
+
+  preamble: []
+  appendix: []
 
   highlightMoments:
-    - "30-line YAML workflow → 8-line Markdown intent: write what you want, compile gets you what you need"
-    - "Lock file is a generated artifact — the compiler enforces security, not author discipline"
-    - "Read-only AI sandbox + validation pipeline: zero direct writes, every action auditable via workflow-id markers"
-    - "Seven Safe Output types cover the full GitHub surface — Issues to Security Advisories — without a single unscoped write"
-    - "100+ workflows running continuously in production (Peli's Agent Factory): this is validated reality, not demo-ware"
+    - "Write repository automation in 8-line Markdown intent — the compiler generates the secure YAML lock file"
+    - "Safe outputs: AI reads everything, writes nothing — all requests flow through a validation pipeline enforced by the compiler, not author discipline"
+    - "Noop is the #1 failure mode: every workflow must explicitly handle 'no action needed' or it fails silently"
+    - "100+ workflows running continuously in production (Peli's Agent Factory): validated reality across triage, PR review, CI diagnosis, ChatOps, research digests, and more"
+    - "The 3x3 matrix (Path x Maturity) shows exactly where you sit — find your cell and see which peers have already shipped it"
 
-# OPEN DECISION: Safe Outputs slide count — section currently has 1 slide against
-# medium-high emphasis (elevated from prior medium). Required additions before next
-# delivery to platform engineers or security stakeholders:
-# (a) Safe Output types matrix slide (all seven types with key config options),
-# (b) config archetype visual (project/PR/issue YAML with guardrail annotations).
-# Candidate third slide: the noop pattern as an operational anti-pattern / failure mode
-# story — this converts skeptics who worry about silent failures.
+# DECIDED: Matrix format = Option B — 3 path slides (one per Path A/B/C), each showing
+# 3 maturity levels with 1-2 use cases and the dominant pattern per cell. Estimated
+# Section 3 slide count: ~14-16 slides (3 matrix slides + factory intro + failure modes
+# + transitions).

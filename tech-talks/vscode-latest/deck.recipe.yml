@@ -1,104 +1,150 @@
 # deck.recipe.yml — VS Code Latest talk guidance
 #
-# VERDICT: The six candidate sections collapse to four because autopilot, parallel execution,
-# and the companion app share one autonomous-execution thesis that splinters if isolated.
-# S4's Security + Chat UX pairing holds because both answer the same developer objection —
-# "is this safe to run unsupervised, and pleasant enough to use every day?"
+# COUNCIL VERDICT (3-agent collaborative council, May 13 2026):
+# The six candidate sections collapse to four. Core problem: sections 1 and 2 split
+# one platform story by abstraction level (control model vs. session types); Claude as
+# a standalone section treats a model configuration option as a product category.
+# The novel synthesis is Section 3 — security + OpenTelemetry + token economics answer
+# one enterprise adoption question ("can my org deploy this?"), not three concerns.
+# Peak engagement lands in Section 1 (Agents Window capstone) and Section 3 (billing
+# moment as OTel payoff). Billing lands as Section 3 climax, not a talk opener.
+# Commit attribution revert opens Section 4 as the "VS Code listens" humanizing beat.
 
 version: 1
 
 deck:
   title: "What's New in Copilot for VS Code"
-  subtitle: "v1.108 – v1.115: Eight Releases of AI Innovation"
-  tagline: "From assistant to autonomous agent team"
-  arcToc: "Sessions & Orchestration → Customization → Claude Integration → Security & UX"
+  subtitle: "v1.110 – v1.120: The Agent Platform Goes Mainstream"
+  tagline: "From one AI you chat with to a fleet of autonomous agents you orchestrate"
+
+  # arcToc: ≤80 chars — becomes TocSlide subtitle
+  arcToc: "Agent Platform → Your Models, Your Rules → Responsible Scale → In Your Workflow"
+
   arcNarrative: >
-    The talk traces a single architectural shift across eight VS Code releases: Copilot
-    evolving from a conversational assistant into an orchestrated fleet of specialized agents.
-    S1 establishes the paradigm — four agent types, Autopilot mode, Git-worktree parallelism,
-    and the VS Code Agents companion app as the capstone showing fleet-scale execution across
-    repos; this is where peak engagement lands because the "leave the room" moment and the
-    companion app demo are viscerally concrete. S2 shifts register from marvel to ownership:
-    Skills GA, Plugins, org-level instructions, and the Chat Customizations editor give
-    organizations precise control over the fleet S1 introduced — this ordering means every
-    customization feature lands on an audience already sold on why they need it. S3 adds a
-    power-user tier for teams willing to trade latency for reasoning depth — configurable
-    thinking effort and nested subagents are credible only after S2 has established that
-    Copilot is already customizable. S4 closes the trust loop: sandboxing and auto-approval
-    rules answer the implied objection before anyone voices it, and Chat UX polish ensures
-    the final image is ergonomic confidence, not security anxiety. The arc lands as:
-    assistant → autonomous agent → customized fleet → trusted at scale.
+    The talk traces one architectural shift across ten weekly VS Code releases: Copilot
+    evolving from a conversational assistant into a coordinated fleet of autonomous agents.
+    Section 1 establishes the new platform — four session types, Autopilot mode, Git-worktree
+    parallelism, and the Agents Window moving to Stable preview as the capstone that signals
+    mainstream readiness; peak engagement lands here on the "leave the room" moment where the
+    audience recalibrates what "using Copilot" means. Section 2 answers the immediate follow-
+    up: the platform is powerful, but can it know my models, my rules, my team's conventions?
+    BYOK and custom instructions answer the same ownership question at different layers, and
+    Claude's thinking tokens land here as a configurable reasoning dial, not a separate product.
+    Section 3 is the enterprise unlock — security, OTel tracing, and token economics together
+    answer "can my org say yes to this?"; the 93% prompt cache hit rate is the Section 3
+    climax, revealed after OTel traces show exactly what the agent consumed, making the billing
+    context a payoff rather than an opener. Section 4 grounds everything in daily developer
+    texture: the commit attribution revert opens (humanizing the arc after governance-heavy
+    Section 3), browser tab sharing and inline diffs are the new everyday capabilities, and
+    Copilot Memory closes on the warmest beat — it gets smarter the longer you use it.
 
   sectionOrder:
-    - "Agent Sessions & Orchestration"
-    - "Agent Customization"
-    - "Claude & Anthropic Integration"
-    - "Security & UX"
+    - "The Agent Platform"
+    - "Your Models, Your Rules"
+    - "Responsible Scale"
+    - "In Your Workflow"
 
   sectionModes:
-    "Agent Sessions & Orchestration":
+    "The Agent Platform":
+      # high = 4–5 content slides
+      # Draws from README: "Autopilot & Agent Autonomy" + "Agent Sessions & Orchestration"
+      # + Claude-as-session-type only from "Claude & Anthropic Integration"
       emphasis: high
       note: >
-        The paradigm-shift section — earn the audience's full attention before anything else.
-        Open with the four agent types (Local, Background, Cloud, Claude) as a taxonomy slide
-        that reframes what "Copilot" means. Follow immediately with Background agents plus Git
-        worktree isolation as the proof point for true parallel autonomous execution — show
-        two simultaneous sessions, not just describe them. Land Autopilot mode (v1.111) as the
-        "whoa" moment: auto-approve tool calls, auto-retry errors, continue until task_complete;
-        the phrase "leave the room" must appear on slide. Add the Explore subagent (read-only,
-        reduces Plan agent context contamination) and session forking as operational depth
-        without letting them steal the spotlight. Close the section with the VS Code Agents
-        companion app (v1.115) as the section capstone: parallelize tasks across multiple repos,
-        monitor all sessions from one dashboard, carry every customization forward — this is
-        fleet-scale execution made visible. Cut any slide that doesn't serve either the mental
-        model, Autopilot, or the companion app.
-    "Agent Customization":
-      emphasis: medium-high
-      note: >
-        The ownership section — practitioners leave knowing exactly how to extend the fleet.
-        Lead with Agent Skills reaching GA (v1.109): the GA label is the signal that says
-        "build this for your team today." Follow with Agent Plugins (v1.110) as the richer
-        tool-surface option, then /create-* commands and /init for scaffolding custom
-        workflows quickly. Org-level instructions and custom agent controls are the enterprise
-        hook — show the YAML, not just describe it. The Chat Customizations editor (v1.113)
-        is the accessible on-ramp; monorepo customizations (v1.112) close with the message
-        that this scales from solo developer to org without friction. The "whoa" moment is
-        demonstrating that a team-wide agent skill requires no central infra — it ships as a
-        file. Cut implementation-detail slides; keep every slide answerable with "when would
-        I use this?"
-    "Claude & Anthropic Integration":
-      emphasis: medium-high
-      note: >
-        The depth-unlock section — position as the power-user tier for reasoning-heavy tasks.
-        Open by explaining thinking tokens in one slide: what they are, why a variable
-        reasoning budget changes output quality on hard problems. Configurable thinking effort
-        (v1.113) is the section's "whoa" moment: show the slider, name the cost-vs-depth
-        tradeoff, give a concrete before/after on a multi-file refactor. The Claude Agent SDK
-        preview (v1.109) is the composability story — Claude as a first-class agent
-        participant, not a model swap. Nested subagents (v1.113) and Copilot Memory close as
-        advanced orchestration capabilities for teams who've absorbed the rest. Keep the
-        section grounded with one live reasoning-heavy demo or screenshot comparison; abstract
-        capability claims without evidence will not land after S1's concrete demonstrations.
-    "Security & UX":
+        The platform claim must land first — give this section full time. Open with the four
+        session types (Local, Background, Cloud, Claude) as a visual taxonomy: what each one
+        is for, when to use it. Treat Claude as one harness choice in the list, not a marquee
+        feature. Lead into Autopilot mode and the permission levels dial (Default → Bypass →
+        Full Autopilot); the phrase "the agent works while you switch context" must appear.
+        Cover background agents and Git-worktree isolation in 90 seconds — the "your workspace
+        is untouched" reassurance matters, the details do not. Include nested subagents and
+        Explore subagent as the parallelism architecture in one slide. Remote Copilot CLI
+        (v1.118) and session management (fork, sort, compact) as fleet-management affordances.
+        CAPSTONE: Agents Window moving from Insiders-only to Stable preview in v1.120 — frame
+        as the structural signal that this platform is production-ready, not experimental. The
+        demo beat: dispatch a task under Full Autopilot, context-switch, return to the Agents
+        Window tracking two parallel background sessions with completed diffs. Skip OpenTelemetry
+        here — it belongs in Section 3. Cut any slide that does not serve the session type
+        taxonomy, Autopilot, or the Agents Window capstone.
+
+    "Your Models, Your Rules":
+      # medium = 2–3 content slides
+      # Draws from README: "Agent Customization" + thinking tokens/effort from "Claude & Anthropic Integration"
       emphasis: medium
       note: >
-        The trust-close section — answer the implicit objection ("agents sound powerful but
-        risky") before it becomes vocal, then pivot to daily ergonomics. Lead with terminal
-        sandboxing (v1.109) and MCP server sandboxing (v1.112) as deliberate safety rails —
-        name the threat they block, not just the feature name. Auto-approval rules are the
-        developer-controlled dial between safety and speed; show the config. Agentic browser
-        tools with security context (v1.110/v1.112) extend the trust model visibly to the
-        browser. Then pivot cleanly to Chat UX: video in chat (v1.114), Copy Final Response,
-        /troubleshoot previous sessions, and context compaction are the polish that makes
-        eight releases feel coherent rather than sprawling. The section merge holds because
-        "safe to run" and "pleasant to use" are the same production-readiness question asked
-        at different layers. Close the talk on ergonomic confidence, not a security checklist.
+        BYOK (v1.117) and custom instructions answer the same ownership question at different
+        layers — model choice and behavioral constraints — present them together as one theme.
+        Demo the BYOK flow in 90 seconds: model picker → Manage Models → add Anthropic or
+        Azure OpenAI key → models appear instantly → select thinking effort (Low/Medium/High).
+        Thinking effort is a configurable dial, not a Claude-only concept; v1.120 extended it
+        to all BYOK models — frame as "one picker controls all your models." Chat Customizations
+        editor is the unified management surface: tabs for instructions, agents, skills, plugins.
+        Agent Skills GA is the team knowledge story — one SKILL.md, automatically applied, now
+        with isolated execution contexts (v1.118). Agent Plugins as the marketplace story.
+        Org-wide instructions + enterprise org restrictions (v1.118) as the governance layer.
+        Close with /init and /create-* as the bootstrap affordances. Do not give Claude its own
+        slide. Monorepo customization discovery, agent-scoped hooks, and the debug panel are
+        one bullet each — no dedicated slides. Move fast; this section builds ownership, not
+        revelation.
 
+    "Responsible Scale":
+      # medium = 2–3 content slides (individual-contributors audience — compressed path)
+      # Draws from README: "Security & Trust" + OpenTelemetry from "Agent Sessions & Orchestration"
+      # + token efficiency/prompt caching from "Chat UX & Productivity"
+      emphasis: medium
+      note: >
+        COMPRESSED PATH (individual-contributors audience): 8 minutes, OTel + billing story
+        only — skip sandbox config details and the Grafana/Jaeger deep-dive. Open with one
+        slide: trust architecture in 60 seconds — MCP sandboxing, terminal sandboxing, and
+        command risk assessment (v1.120) as a bullet list with one sentence each; name what
+        each prevents, move on. YOLO mode and auto-approval in a single sentence: "the override
+        path exists; scope it carefully." Then OpenTelemetry (v1.119) in one slide: what it
+        emits, why it matters ("the org can see what the agent consumed"). CLIMAX: billing
+        moment as the OTel payoff. Stat: "93% prompt cache hit rate. Shipped in the same
+        release cycle as June 2026 usage-based billing. They built your cost controls before
+        they built the meter." Terminal output compression (v1.120) as one bullet — cost-
+        control infrastructure, no dedicated slide. Reduced trust interruptions (v1.119) as
+        the closing signal. Do not linger; the audience is individual contributors — the
+        framing is "this is safe and affordable" not "here's how to govern your org's fleet."
+
+    "In Your Workflow":
+      # medium-high = 3–4 content slides (expanded — individual-contributors audience gets more time here)
+      # Draws from README: "Chat UX & Productivity" — curated
+      # (token efficiency already used in S3; terminal compression in S3 — do not repeat)
+      emphasis: medium-high
+      note: >
+        EXPANDED PATH (individual-contributors audience): time recovered from compressed S3
+        goes here. OPEN with the commit attribution revert story (v1.118 added, v1.119 reverted
+        after community pushback). Spend 90 seconds on the story, not the feature: "They added
+        it, the community said no, they reverted in seven days. That's the relationship." This
+        humanizes the arc after Section 3 and resets the tone. Then the highest-impact everyday
+        features: agent-browser tab sharing (v1.119) is the demo priority — the agent requests
+        access to your live browser tab, you approve, it reads the DOM, applies a CSS fix,
+        confirms the result without you alt-tabbing; this is the most cinematic new behavior
+        in the release window. Inline diffs in chat (v1.119) and Markdown diff preview (v1.120)
+        as review-without-leaving-chat beats. Incremental chat rendering (v1.117), simplified
+        #codebase semantic search (v1.114), /troubleshoot previous sessions, Copy Final
+        Response as one quick-wins slide with bullets only. CLOSE: two-beat Copilot Memory
+        sequence — first beat: return to a project, Memory surfaces yesterday's context
+        without a prompt; second beat (live demo): open a new project cold, let Memory surface
+        context the audience has never explicitly set, show that it inferred from prior sessions.
+        Zero setup. This is the warmest beat in the talk: it gets smarter the longer you use
+        it. Give it a full two minutes. Let it land quietly and do not follow it with a slide.
+
+  preamble: []
+  appendix: []
+
+  # 3–5 high-signal moments the generator must surface
+  # (BeforeAfterSlide items, ThankYouSlide cards, WhatYouCanDoTodaySlide actions)
   highlightMoments:
-    - "Autopilot mode (v1.111): auto-approve tool calls, retry errors, continue until task_complete — the 'leave the room' feature"
-    - "Background agents with Git worktree isolation enable multiple simultaneous autonomous sessions across repos"
-    - "VS Code Agents companion app (v1.115): monitor and parallelize sessions across multiple repos from a single dashboard"
-    - "Agent Skills reach GA (v1.109) and Agent Plugins launch (v1.110) — the full customization stack is production-ready"
-    - "Configurable thinking effort (v1.113): the first Copilot control that exposes cost-vs-reasoning-depth as a developer dial"
+    - "Agents Window stable preview (v1.120): dispatch a task under Full Autopilot, context-switch, return to two parallel background sessions with completed diffs — VS Code worked while you were gone"
+    - "BYOK live: add Anthropic or Azure OpenAI key in the model picker, select thinking effort (Low/Medium/High) from the same UI for all models — including BYOK models in v1.120"
+    - "93% prompt cache hit rate shipped in the same release cycle as June 2026 usage-based billing: open an OTel trace, see exactly what the agent consumed, then see how caching cut that cost by ~40%"
+    - "Agent-browser tab sharing (v1.119): agent requests access to your live Chrome tab, you approve, it reads the DOM and fixes a CSS error — no alt-tab, no copy-paste, confirmed in the chat thread"
+    - "Commit attribution revert: v1.118 added Co-authored-by: Copilot to all commits by default; community pushed back; v1.119 reverted to opt-in within seven days — the team ships fast and listens faster"
 
-# OPEN DECISION: none
+# DECISION (resolved): Individual-contributors audience.
+# Section 3 runs compressed (~8 min): OTel + billing story only; sandbox config omitted.
+# Section 4 runs expanded: second Copilot Memory live demo added as the closing beat.
+# If audience composition changes, flip Responsible Scale back to emphasis: high,
+# revert In Your Workflow to emphasis: medium, and restore the full S3 note above.

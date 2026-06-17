@@ -14,7 +14,7 @@ Use `copilot plugin marketplace browse <name>` to discover available plugins,
 or install directly from any GitHub repository.
 
 For more information, see:
-https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-cli-plugins
+https://docs.github.com/copilot/concepts/agents/copilot-cli/about-cli-plugins
 
 Options:
   -h, --help                  display help for command
@@ -24,4 +24,4 @@ Commands:
   list [options]              List installed plugins
   marketplace                 Manage plugin marketplaces
   uninstall [options] <name>  Uninstall a plugin
-  update [options] <name>     Update a plugin
+  update [options] [name]     Update a plugin
